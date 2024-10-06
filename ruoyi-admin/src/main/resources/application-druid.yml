@@ -6,9 +6,9 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:dm://192.168.130.1:5236
+                url: jdbc:dm://8.148.23.176:15236
                 username: SYSDBA
-                password: 123456789
+                password: SYSDBA
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭
