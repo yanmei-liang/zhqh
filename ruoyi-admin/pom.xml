@@ -68,6 +68,13 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
+        <!-- 达梦数据库8驱动包 -->
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>DmJdbcDriver18</artifactId>
+            <version>8.1.1.193</version>
+        </dependency>
+
     </dependencies>
 
     <build>
