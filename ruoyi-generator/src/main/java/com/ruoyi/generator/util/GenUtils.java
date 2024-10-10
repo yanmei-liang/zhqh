@@ -60,14 +60,30 @@ public class GenUtils
         {
             column.setHtmlType(GenConstants.HTML_INPUT);
 
-            // 如果是浮点型 统一用BigDecimal
-            String[] str = StringUtils.split(StringUtils.substringBetween(column.getColumnType(), "(", ")"), ",");
-            if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0)
+//            // 如果是浮点型 统一用BigDecimal
+//            String[] str = StringUtils.split(StringUtils.substringBetween(column.getColumnType(), "(", ")"), ",");
+//            if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0)
+//            {
+//                column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
+//            }
+//            // 如果是整形
+//            else if (str != null && str.length == 1 && Integer.parseInt(str[0]) <= 10)
+//            {
+//                column.setJavaType(GenConstants.TYPE_INTEGER);
+//            }
+//            // 长整形
+//            else
+//            {
+//                column.setJavaType(GenConstants.TYPE_LONG);
+//            }
+            /** 修改后的代码 */
+            // 如果是浮点型 统一用Double
+            if (arraysContains(GenConstants.COLUMNTYPE_NUMBER_DOUBLE, dataType))
             {
-                column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
+                column.setJavaType(GenConstants.TYPE_DOUBLE);
             }
             // 如果是整形
-            else if (str != null && str.length == 1 && Integer.parseInt(str[0]) <= 10)
+            else if (arraysContains(GenConstants.COLUMNTYPE_NUMBER_INTEGER, dataType))
             {
                 column.setJavaType(GenConstants.TYPE_INTEGER);
             }
@@ -76,6 +92,7 @@ public class GenUtils
             {
                 column.setJavaType(GenConstants.TYPE_LONG);
             }
+
         }
 
         // 插入字段（默认所有字段都需要插入）

@@ -114,4 +114,12 @@ public class GenConstants
 
     /** 需要 */
     public static final String REQUIRE = "1";
+
+    /** 浮点数 */
+    public static final String[] COLUMNTYPE_NUMBER_DOUBLE = {  "number", "float", "double", "decimal" };
+
+    /** 整型 */
+    public static final String[] COLUMNTYPE_NUMBER_INTEGER = { "tinyint", "smallint", "mediumint", "int", "integer",
+            "bit" };
+
 }
