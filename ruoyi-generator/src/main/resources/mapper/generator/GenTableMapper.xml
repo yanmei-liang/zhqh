@@ -77,23 +77,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectDbTableList" parameterType="GenTable" resultMap="GenTableResult">
-		select table_name, table_comment, create_time, update_time from information_schema.tables
-		where table_schema = (select database())
-		AND table_name NOT LIKE 'qrtz\_%' AND table_name NOT LIKE 'gen\_%'
-		AND table_name NOT IN (select table_name from gen_table)
+		select so.NAME table_name, st.COMMENT$ table_comment, so.CRTDATE create_time from SYS.SYSOBJECTS so left join SYS.SYSTABLECOMMENTS st on so.NAME = st.TVNAME and st.TABLE_TYPE = 'TABLE' and st.SCHNAME = (select CURR_SCH from V$SESSIONS LIMIT 1)
+		where so.TYPE$='SCHOBJ' and so.SUBTYPE$='UTAB' and so.PID = -1 and INSTR(so.NAME,'##') = 0 and so.SCHID = (select ID from SYS.SYSOBJECTS where TYPE$='SCH' and NAME= (select CURR_SCH from V$SESSIONS LIMIT 1)) and so.NAME NOT LIKE 'QRTZ_%' AND so.NAME NOT LIKE 'gen_%'
+		and so.NAME NOT IN (select table_name from gen_table)
 		<if test="tableName != null and tableName != ''">
-			AND lower(table_name) like lower(concat('%', #{tableName}, '%'))
+			and lower(so.NAME) like lower(concat('%', #{tableName}, '%'))
 		</if>
 		<if test="tableComment != null and tableComment != ''">
-			AND lower(table_comment) like lower(concat('%', #{tableComment}, '%'))
+			and lower(st.COMMENT$) like lower(concat('%', #{tableComment}, '%'))
 		</if>
-		<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-			AND date_format(create_time,'%Y%m%d') &gt;= date_format(#{params.beginTime},'%Y%m%d')
-		</if>
-		<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-			AND date_format(create_time,'%Y%m%d') &lt;= date_format(#{params.endTime},'%Y%m%d')
-		</if>
-        order by create_time desc
+<!--		<if test="params.beginTime != null and params.beginTime != ''">&lt;!&ndash; 开始时间检索 &ndash;&gt;-->
+<!--			AND date_format(create_time,'%Y%m%d') &gt;= date_format(#{params.beginTime},'%Y%m%d')-->
+<!--		</if>-->
+<!--		<if test="params.endTime != null and params.endTime != ''">&lt;!&ndash; 结束时间检索 &ndash;&gt;-->
+<!--			AND date_format(create_time,'%Y%m%d') &lt;= date_format(#{params.endTime},'%Y%m%d')-->
+<!--		</if>-->
+		order by so.CRTDATE desc
 	</select>
 	
 	<select id="selectDbTableListByNames" resultMap="GenTableResult">
