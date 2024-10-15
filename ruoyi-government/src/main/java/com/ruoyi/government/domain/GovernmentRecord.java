@@ -249,7 +249,7 @@ public class GovernmentRecord extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
-            .append("REMARK", getREMARK())
+            .append("REMARK", getRemark())
             .toString();
     }
 }
