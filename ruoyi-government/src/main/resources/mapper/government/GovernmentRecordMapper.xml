@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.GovernmentRecordMapper">
+    
+    <resultMap type="GovernmentRecord" id="GovernmentRecordResult">
+        <result property="recordId"    column="RECORD_ID"    />
+        <result property="declareId"    column="DECLARE_ID"    />
+        <result property="recordCode"    column="RECORD_CODE"    />
+        <result property="recordName"    column="RECORD_NAME"    />
+        <result property="approvalNumber"    column="APPROVAL_NUMBER"    />
+        <result property="approvalTime"    column="APPROVAL_TIME"    />
+        <result property="approvalDepa"    column="APPROVAL_DEPA"    />
+        <result property="recordReport"    column="RECORD_REPORT"    />
+        <result property="approvalDocument"    column="APPROVAL_DOCUMENT"    />
+        <result property="APPLICATION"    column="APPLICATION"    />
+        <result property="ATTACHMENT"    column="ATTACHMENT"    />
+        <result property="STATUS"    column="STATUS"    />
+        <result property="longitudeLatitude"    column="LONGITUDE_LATITUDE"    />
+        <result property="recordStatus"    column="RECORD_STATUS"    />
+        <result property="AFFICHE"    column="AFFICHE"    />
+        <result property="vectorPlaceName"    column="VECTOR_PLACE_NAME"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="REMARK"    column="REMARK"    />
+    </resultMap>
+
+    <sql id="selectGovernmentRecordVo">
+        select RECORD_ID, DECLARE_ID, RECORD_CODE, RECORD_NAME, APPROVAL_NUMBER, APPROVAL_TIME, APPROVAL_DEPA, RECORD_REPORT, APPROVAL_DOCUMENT, APPLICATION, ATTACHMENT, STATUS, LONGITUDE_LATITUDE, RECORD_STATUS, AFFICHE, VECTOR_PLACE_NAME, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, REMARK from GOVERNMENT_RECORD
+    </sql>
+
+    <select id="selectGovernmentRecordList" parameterType="GovernmentRecord" resultMap="GovernmentRecordResult">
+        <include refid="selectGovernmentRecordVo"/>
+        <where>  
+            <if test="declareId != null "> and DECLARE_ID = #{declareId}</if>
+            <if test="recordCode != null  and recordCode != ''"> and RECORD_CODE = #{recordCode}</if>
+            <if test="recordName != null  and recordName != ''"> and RECORD_NAME like concat('%', #{recordName}, '%')</if>
+            <if test="approvalNumber != null  and approvalNumber != ''"> and APPROVAL_NUMBER = #{approvalNumber}</if>
+            <if test="approvalTime != null "> and APPROVAL_TIME = #{approvalTime}</if>
+            <if test="approvalDepa != null  and approvalDepa != ''"> and APPROVAL_DEPA = #{approvalDepa}</if>
+            <if test="recordReport != null  and recordReport != ''"> and RECORD_REPORT = #{recordReport}</if>
+            <if test="approvalDocument != null  and approvalDocument != ''"> and APPROVAL_DOCUMENT = #{approvalDocument}</if>
+            <if test="APPLICATION != null  and APPLICATION != ''"> and APPLICATION = #{APPLICATION}</if>
+            <if test="ATTACHMENT != null  and ATTACHMENT != ''"> and ATTACHMENT = #{ATTACHMENT}</if>
+            <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
+            <if test="longitudeLatitude != null  and longitudeLatitude != ''"> and LONGITUDE_LATITUDE = #{longitudeLatitude}</if>
+            <if test="recordStatus != null  and recordStatus != ''"> and RECORD_STATUS = #{recordStatus}</if>
+            <if test="AFFICHE != null  and AFFICHE != ''"> and AFFICHE = #{AFFICHE}</if>
+            <if test="vectorPlaceName != null  and vectorPlaceName != ''"> and VECTOR_PLACE_NAME like concat('%', #{vectorPlaceName}, '%')</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="REMARK != null  and REMARK != ''"> and REMARK = #{REMARK}</if>
+        </where>
+    </select>
+    
+    <select id="selectGovernmentRecordByRecordId" parameterType="Long" resultMap="GovernmentRecordResult">
+        <include refid="selectGovernmentRecordVo"/>
+        where RECORD_ID = #{recordId}
+    </select>
+
+    <insert id="insertGovernmentRecord" parameterType="GovernmentRecord" useGeneratedKeys="true" keyProperty="recordId">
+        insert into GOVERNMENT_RECORD
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="declareId != null">DECLARE_ID,</if>
+            <if test="recordCode != null">RECORD_CODE,</if>
+            <if test="recordName != null">RECORD_NAME,</if>
+            <if test="approvalNumber != null">APPROVAL_NUMBER,</if>
+            <if test="approvalTime != null">APPROVAL_TIME,</if>
+            <if test="approvalDepa != null">APPROVAL_DEPA,</if>
+            <if test="recordReport != null">RECORD_REPORT,</if>
+            <if test="approvalDocument != null">APPROVAL_DOCUMENT,</if>
+            <if test="APPLICATION != null">APPLICATION,</if>
+            <if test="ATTACHMENT != null">ATTACHMENT,</if>
+            <if test="STATUS != null">STATUS,</if>
+            <if test="longitudeLatitude != null">LONGITUDE_LATITUDE,</if>
+            <if test="recordStatus != null">RECORD_STATUS,</if>
+            <if test="AFFICHE != null">AFFICHE,</if>
+            <if test="vectorPlaceName != null">VECTOR_PLACE_NAME,</if>
+            <if test="createBy != null">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+            <if test="updateBy != null">UPDATE_BY,</if>
+            <if test="updateTime != null">UPDATE_TIME,</if>
+            <if test="REMARK != null">REMARK,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="declareId != null">#{declareId},</if>
+            <if test="recordCode != null">#{recordCode},</if>
+            <if test="recordName != null">#{recordName},</if>
+            <if test="approvalNumber != null">#{approvalNumber},</if>
+            <if test="approvalTime != null">#{approvalTime},</if>
+            <if test="approvalDepa != null">#{approvalDepa},</if>
+            <if test="recordReport != null">#{recordReport},</if>
+            <if test="approvalDocument != null">#{approvalDocument},</if>
+            <if test="APPLICATION != null">#{APPLICATION},</if>
+            <if test="ATTACHMENT != null">#{ATTACHMENT},</if>
+            <if test="STATUS != null">#{STATUS},</if>
+            <if test="longitudeLatitude != null">#{longitudeLatitude},</if>
+            <if test="recordStatus != null">#{recordStatus},</if>
+            <if test="AFFICHE != null">#{AFFICHE},</if>
+            <if test="vectorPlaceName != null">#{vectorPlaceName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="REMARK != null">#{REMARK},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGovernmentRecord" parameterType="GovernmentRecord">
+        update GOVERNMENT_RECORD
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="declareId != null">DECLARE_ID = #{declareId},</if>
+            <if test="recordCode != null">RECORD_CODE = #{recordCode},</if>
+            <if test="recordName != null">RECORD_NAME = #{recordName},</if>
+            <if test="approvalNumber != null">APPROVAL_NUMBER = #{approvalNumber},</if>
+            <if test="approvalTime != null">APPROVAL_TIME = #{approvalTime},</if>
+            <if test="approvalDepa != null">APPROVAL_DEPA = #{approvalDepa},</if>
+            <if test="recordReport != null">RECORD_REPORT = #{recordReport},</if>
+            <if test="approvalDocument != null">APPROVAL_DOCUMENT = #{approvalDocument},</if>
+            <if test="APPLICATION != null">APPLICATION = #{APPLICATION},</if>
+            <if test="ATTACHMENT != null">ATTACHMENT = #{ATTACHMENT},</if>
+            <if test="STATUS != null">STATUS = #{STATUS},</if>
+            <if test="longitudeLatitude != null">LONGITUDE_LATITUDE = #{longitudeLatitude},</if>
+            <if test="recordStatus != null">RECORD_STATUS = #{recordStatus},</if>
+            <if test="AFFICHE != null">AFFICHE = #{AFFICHE},</if>
+            <if test="vectorPlaceName != null">VECTOR_PLACE_NAME = #{vectorPlaceName},</if>
+            <if test="createBy != null">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+            <if test="REMARK != null">REMARK = #{REMARK},</if>
+        </trim>
+        where RECORD_ID = #{recordId}
+    </update>
+
+    <delete id="deleteGovernmentRecordByRecordId" parameterType="Long">
+        delete from GOVERNMENT_RECORD where RECORD_ID = #{recordId}
+    </delete>
+
+    <delete id="deleteGovernmentRecordByRecordIds" parameterType="String">
+        delete from GOVERNMENT_RECORD where RECORD_ID in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

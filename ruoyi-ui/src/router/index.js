@@ -20,12 +20,12 @@ import Layout from '@/layout'
  * roles: ['admin', 'common']       // 访问路由的角色权限
  * permissions: ['a:a:a', 'b:b:b']  // 访问路由的菜单权限
  * meta : {
-    noCache: true                   // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
-    title: 'title'                  // 设置该路由在侧边栏和面包屑中展示的名字
-    icon: 'svg-name'                // 设置该路由的图标，对应路径src/assets/icons/svg
-    breadcrumb: false               // 如果设置为false，则不会在breadcrumb面包屑中显示
-    activeMenu: '/system/user'      // 当路由设置了该属性，则会高亮相对应的侧边栏。
-  }
+ noCache: true                   // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
+ title: 'title'                  // 设置该路由在侧边栏和面包屑中展示的名字
+ icon: 'svg-name'                // 设置该路由的图标，对应路径src/assets/icons/svg
+ breadcrumb: false               // 如果设置为false，则不会在breadcrumb面包屑中显示
+ activeMenu: '/system/user'      // 当路由设置了该属性，则会高亮相对应的侧边栏。
+ }
  */
 
 // 公共路由
@@ -87,7 +87,98 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
-  }
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'definition/model/',
+        component: () => import('@/views/flowable/definition/model'),
+        name: 'Model',
+        meta: { title: '流程设计', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'task/finished/detail/index',
+        component: () => import('@/views/flowable/task/finished/detail/index'),
+        name: 'FinishedRecord',
+        meta: { title: '流程详情', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'task/myProcess/detail/index',
+        component: () => import('@/views/flowable/task/myProcess/detail/index'),
+        name: 'MyProcessRecord',
+        meta: { title: '流程详情', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'task/myProcess/send/index',
+        component: () => import('@/views/flowable/task/myProcess/send/index'),
+        name: 'SendRecord',
+        meta: { title: '流程发起', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'task/todo/detail/index',
+        component: () => import('@/views/flowable/task/todo/detail/index'),
+        name: 'TodoRecord',
+        meta: { title: '流程处理', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'task/flowForm/index',
+        component: () => import('@/views/flowable/task/flowForm/index'),
+        name: 'FlowForm',
+        meta: { title: '流程表单', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/tool',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'build/index',
+        component: () => import('@/views/tool/build/index'),
+        name: 'FormBuild',
+        meta: { title: '表单配置', icon: '' }
+      }
+    ]
+  },
 ]
 
 // 动态路由，基于用户权限动态去加载

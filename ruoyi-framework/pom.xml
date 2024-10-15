@@ -59,11 +59,11 @@
             <artifactId>ruoyi-system</artifactId>
         </dependency>
 
-        <!-- 政务管理系统-->
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-government</artifactId>
         </dependency>
+
 
     </dependencies>
 

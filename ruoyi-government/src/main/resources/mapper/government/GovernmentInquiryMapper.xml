@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.GovernmentInquiryMapper">
+    
+    <resultMap type="GovernmentInquiry" id="GovernmentInquiryResult">
+        <result property="inquiryId"    column="INQUIRY_ID"    />
+        <result property="TOPONYM"    column="TOPONYM"    />
+        <result property="submitDepa"    column="SUBMIT_DEPA"    />
+        <result property="CONTACTS"    column="CONTACTS"    />
+        <result property="contactsPhone"    column="CONTACTS_PHONE"    />
+        <result property="APPLICATION"    column="APPLICATION"    />
+        <result property="ATTACHMENT"    column="ATTACHMENT"    />
+        <result property="inquiryRemark"    column="INQUIRY_REMARK"    />
+        <result property="STATUS"    column="STATUS"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="REMARK"    column="REMARK"    />
+        <result property="inquiryStatus"    column="INQUIRY_STATUS"    />
+        <result property="CODE"    column="CODE"    />
+        <result property="toponymSign"    column="TOPONYM_SIGN"    />
+        <result property="submitTime"    column="SUBMIT_TIME"    />
+        <result property="applyIme"    column="APPLY_IME"    />
+        <result property="projectName"    column="PROJECT_NAME"    />
+        <result property="projectPlace"    column="PROJECT_PLACE"    />
+        <result property="projectType"    column="PROJECT_TYPE"    />
+        <result property="areaStructure"    column="AREA_STRUCTURE"    />
+        <result property="constructionDescribe"    column="CONSTRUCTION_DESCRIBE"    />
+        <result property="toponymType"    column="TOPONYM_TYPE"    />
+        <result property="longitudeLatitude"    column="LONGITUDE_LATITUDE"    />
+    </resultMap>
+
+    <sql id="selectGovernmentInquiryVo">
+        select INQUIRY_ID, TOPONYM, SUBMIT_DEPA, CONTACTS, CONTACTS_PHONE, APPLICATION, ATTACHMENT, INQUIRY_REMARK, STATUS, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, REMARK, INQUIRY_STATUS, CODE, TOPONYM_SIGN, SUBMIT_TIME, APPLY_IME, PROJECT_NAME, PROJECT_PLACE, PROJECT_TYPE, AREA_STRUCTURE, CONSTRUCTION_DESCRIBE, TOPONYM_TYPE, LONGITUDE_LATITUDE from GOVERNMENT_INQUIRY
+    </sql>
+
+    <select id="selectGovernmentInquiryList" parameterType="GovernmentInquiry" resultMap="GovernmentInquiryResult">
+        <include refid="selectGovernmentInquiryVo"/>
+        <where>  
+            <if test="TOPONYM != null  and TOPONYM != ''"> and TOPONYM = #{TOPONYM}</if>
+            <if test="submitDepa != null  and submitDepa != ''"> and SUBMIT_DEPA = #{submitDepa}</if>
+            <if test="CONTACTS != null  and CONTACTS != ''"> and CONTACTS = #{CONTACTS}</if>
+            <if test="contactsPhone != null  and contactsPhone != ''"> and CONTACTS_PHONE = #{contactsPhone}</if>
+            <if test="APPLICATION != null  and APPLICATION != ''"> and APPLICATION = #{APPLICATION}</if>
+            <if test="ATTACHMENT != null  and ATTACHMENT != ''"> and ATTACHMENT = #{ATTACHMENT}</if>
+            <if test="inquiryRemark != null  and inquiryRemark != ''"> and INQUIRY_REMARK = #{inquiryRemark}</if>
+            <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="REMARK != null  and REMARK != ''"> and REMARK = #{REMARK}</if>
+            <if test="inquiryStatus != null  and inquiryStatus != ''"> and INQUIRY_STATUS = #{inquiryStatus}</if>
+            <if test="CODE != null  and CODE != ''"> and CODE = #{CODE}</if>
+            <if test="toponymSign != null  and toponymSign != ''"> and TOPONYM_SIGN = #{toponymSign}</if>
+            <if test="submitTime != null "> and SUBMIT_TIME = #{submitTime}</if>
+            <if test="applyIme != null "> and APPLY_IME = #{applyIme}</if>
+            <if test="projectName != null  and projectName != ''"> and PROJECT_NAME like concat('%', #{projectName}, '%')</if>
+            <if test="projectPlace != null  and projectPlace != ''"> and PROJECT_PLACE = #{projectPlace}</if>
+            <if test="projectType != null  and projectType != ''"> and PROJECT_TYPE = #{projectType}</if>
+            <if test="areaStructure != null "> and AREA_STRUCTURE = #{areaStructure}</if>
+            <if test="constructionDescribe != null  and constructionDescribe != ''"> and CONSTRUCTION_DESCRIBE = #{constructionDescribe}</if>
+            <if test="toponymType != null  and toponymType != ''"> and TOPONYM_TYPE = #{toponymType}</if>
+            <if test="longitudeLatitude != null  and longitudeLatitude != ''"> and LONGITUDE_LATITUDE = #{longitudeLatitude}</if>
+        </where>
+    </select>
+    
+    <select id="selectGovernmentInquiryByInquiryId" parameterType="Long" resultMap="GovernmentInquiryResult">
+        <include refid="selectGovernmentInquiryVo"/>
+        where INQUIRY_ID = #{inquiryId}
+    </select>
+
+    <insert id="insertGovernmentInquiry" parameterType="GovernmentInquiry" useGeneratedKeys="true" keyProperty="inquiryId">
+        insert into GOVERNMENT_INQUIRY
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="TOPONYM != null">TOPONYM,</if>
+            <if test="submitDepa != null">SUBMIT_DEPA,</if>
+            <if test="CONTACTS != null">CONTACTS,</if>
+            <if test="contactsPhone != null">CONTACTS_PHONE,</if>
+            <if test="APPLICATION != null">APPLICATION,</if>
+            <if test="ATTACHMENT != null">ATTACHMENT,</if>
+            <if test="inquiryRemark != null">INQUIRY_REMARK,</if>
+            <if test="STATUS != null">STATUS,</if>
+            <if test="createBy != null">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+            <if test="updateBy != null">UPDATE_BY,</if>
+            <if test="updateTime != null">UPDATE_TIME,</if>
+            <if test="REMARK != null">REMARK,</if>
+            <if test="inquiryStatus != null">INQUIRY_STATUS,</if>
+            <if test="CODE != null">CODE,</if>
+            <if test="toponymSign != null">TOPONYM_SIGN,</if>
+            <if test="submitTime != null">SUBMIT_TIME,</if>
+            <if test="applyIme != null">APPLY_IME,</if>
+            <if test="projectName != null">PROJECT_NAME,</if>
+            <if test="projectPlace != null">PROJECT_PLACE,</if>
+            <if test="projectType != null">PROJECT_TYPE,</if>
+            <if test="areaStructure != null">AREA_STRUCTURE,</if>
+            <if test="constructionDescribe != null">CONSTRUCTION_DESCRIBE,</if>
+            <if test="toponymType != null">TOPONYM_TYPE,</if>
+            <if test="longitudeLatitude != null">LONGITUDE_LATITUDE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="TOPONYM != null">#{TOPONYM},</if>
+            <if test="submitDepa != null">#{submitDepa},</if>
+            <if test="CONTACTS != null">#{CONTACTS},</if>
+            <if test="contactsPhone != null">#{contactsPhone},</if>
+            <if test="APPLICATION != null">#{APPLICATION},</if>
+            <if test="ATTACHMENT != null">#{ATTACHMENT},</if>
+            <if test="inquiryRemark != null">#{inquiryRemark},</if>
+            <if test="STATUS != null">#{STATUS},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="REMARK != null">#{REMARK},</if>
+            <if test="inquiryStatus != null">#{inquiryStatus},</if>
+            <if test="CODE != null">#{CODE},</if>
+            <if test="toponymSign != null">#{toponymSign},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+            <if test="applyIme != null">#{applyIme},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="projectPlace != null">#{projectPlace},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="areaStructure != null">#{areaStructure},</if>
+            <if test="constructionDescribe != null">#{constructionDescribe},</if>
+            <if test="toponymType != null">#{toponymType},</if>
+            <if test="longitudeLatitude != null">#{longitudeLatitude},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGovernmentInquiry" parameterType="GovernmentInquiry">
+        update GOVERNMENT_INQUIRY
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="TOPONYM != null">TOPONYM = #{TOPONYM},</if>
+            <if test="submitDepa != null">SUBMIT_DEPA = #{submitDepa},</if>
+            <if test="CONTACTS != null">CONTACTS = #{CONTACTS},</if>
+            <if test="contactsPhone != null">CONTACTS_PHONE = #{contactsPhone},</if>
+            <if test="APPLICATION != null">APPLICATION = #{APPLICATION},</if>
+            <if test="ATTACHMENT != null">ATTACHMENT = #{ATTACHMENT},</if>
+            <if test="inquiryRemark != null">INQUIRY_REMARK = #{inquiryRemark},</if>
+            <if test="STATUS != null">STATUS = #{STATUS},</if>
+            <if test="createBy != null">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+            <if test="REMARK != null">REMARK = #{REMARK},</if>
+            <if test="inquiryStatus != null">INQUIRY_STATUS = #{inquiryStatus},</if>
+            <if test="CODE != null">CODE = #{CODE},</if>
+            <if test="toponymSign != null">TOPONYM_SIGN = #{toponymSign},</if>
+            <if test="submitTime != null">SUBMIT_TIME = #{submitTime},</if>
+            <if test="applyIme != null">APPLY_IME = #{applyIme},</if>
+            <if test="projectName != null">PROJECT_NAME = #{projectName},</if>
+            <if test="projectPlace != null">PROJECT_PLACE = #{projectPlace},</if>
+            <if test="projectType != null">PROJECT_TYPE = #{projectType},</if>
+            <if test="areaStructure != null">AREA_STRUCTURE = #{areaStructure},</if>
+            <if test="constructionDescribe != null">CONSTRUCTION_DESCRIBE = #{constructionDescribe},</if>
+            <if test="toponymType != null">TOPONYM_TYPE = #{toponymType},</if>
+            <if test="longitudeLatitude != null">LONGITUDE_LATITUDE = #{longitudeLatitude},</if>
+        </trim>
+        where INQUIRY_ID = #{inquiryId}
+    </update>
+
+    <delete id="deleteGovernmentInquiryByInquiryId" parameterType="Long">
+        delete from GOVERNMENT_INQUIRY where INQUIRY_ID = #{inquiryId}
+    </delete>
+
+    <delete id="deleteGovernmentInquiryByInquiryIds" parameterType="String">
+        delete from GOVERNMENT_INQUIRY where INQUIRY_ID in 
+        <foreach item="inquiryId" collection="array" open="(" separator="," close=")">
+            #{inquiryId}
+        </foreach>
+    </delete>
+</mapper>
