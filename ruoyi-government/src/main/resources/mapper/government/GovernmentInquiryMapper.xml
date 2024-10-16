@@ -12,13 +12,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="contactsPhone"    column="CONTACTS_PHONE"    />
         <result property="APPLICATION"    column="APPLICATION"    />
         <result property="ATTACHMENT"    column="ATTACHMENT"    />
-        <result property="inquiryRemark"    column="INQUIRY_REMARK"    />
+        <result property="inquiryRemark"    column="INQUIRY_remark"    />
         <result property="STATUS"    column="STATUS"    />
         <result property="createBy"    column="CREATE_BY"    />
         <result property="createTime"    column="CREATE_TIME"    />
         <result property="updateBy"    column="UPDATE_BY"    />
         <result property="updateTime"    column="UPDATE_TIME"    />
-        <result property="REMARK"    column="REMARK"    />
+        <result property="remark"    column="remark"    />
         <result property="inquiryStatus"    column="INQUIRY_STATUS"    />
         <result property="CODE"    column="CODE"    />
         <result property="toponymSign"    column="TOPONYM_SIGN"    />
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectGovernmentInquiryVo">
-        select INQUIRY_ID, TOPONYM, SUBMIT_DEPA, CONTACTS, CONTACTS_PHONE, APPLICATION, ATTACHMENT, INQUIRY_REMARK, STATUS, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, REMARK, INQUIRY_STATUS, CODE, TOPONYM_SIGN, SUBMIT_TIME, APPLY_IME, PROJECT_NAME, PROJECT_PLACE, PROJECT_TYPE, AREA_STRUCTURE, CONSTRUCTION_DESCRIBE, TOPONYM_TYPE, LONGITUDE_LATITUDE from GOVERNMENT_INQUIRY
+        select INQUIRY_ID, TOPONYM, SUBMIT_DEPA, CONTACTS, CONTACTS_PHONE, APPLICATION, ATTACHMENT, INQUIRY_remark, STATUS, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark, INQUIRY_STATUS, CODE, TOPONYM_SIGN, SUBMIT_TIME, APPLY_IME, PROJECT_NAME, PROJECT_PLACE, PROJECT_TYPE, AREA_STRUCTURE, CONSTRUCTION_DESCRIBE, TOPONYM_TYPE, LONGITUDE_LATITUDE from GOVERNMENT_INQUIRY
     </sql>
 
     <select id="selectGovernmentInquiryList" parameterType="GovernmentInquiry" resultMap="GovernmentInquiryResult">
@@ -46,13 +46,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="contactsPhone != null  and contactsPhone != ''"> and CONTACTS_PHONE = #{contactsPhone}</if>
             <if test="APPLICATION != null  and APPLICATION != ''"> and APPLICATION = #{APPLICATION}</if>
             <if test="ATTACHMENT != null  and ATTACHMENT != ''"> and ATTACHMENT = #{ATTACHMENT}</if>
-            <if test="inquiryRemark != null  and inquiryRemark != ''"> and INQUIRY_REMARK = #{inquiryRemark}</if>
+            <if test="inquiryRemark != null  and inquiryRemark != ''"> and INQUIRY_remark = #{inquiryRemark}</if>
             <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
             <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
             <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
-            <if test="REMARK != null  and REMARK != ''"> and REMARK = #{REMARK}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
             <if test="inquiryStatus != null  and inquiryStatus != ''"> and INQUIRY_STATUS = #{inquiryStatus}</if>
             <if test="CODE != null  and CODE != ''"> and CODE = #{CODE}</if>
             <if test="toponymSign != null  and toponymSign != ''"> and TOPONYM_SIGN = #{toponymSign}</if>
@@ -82,13 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="contactsPhone != null">CONTACTS_PHONE,</if>
             <if test="APPLICATION != null">APPLICATION,</if>
             <if test="ATTACHMENT != null">ATTACHMENT,</if>
-            <if test="inquiryRemark != null">INQUIRY_REMARK,</if>
+            <if test="inquiryRemark != null">INQUIRY_remark,</if>
             <if test="STATUS != null">STATUS,</if>
             <if test="createBy != null">CREATE_BY,</if>
             <if test="createTime != null">CREATE_TIME,</if>
             <if test="updateBy != null">UPDATE_BY,</if>
             <if test="updateTime != null">UPDATE_TIME,</if>
-            <if test="REMARK != null">REMARK,</if>
+            <if test="remark != null">remark,</if>
             <if test="inquiryStatus != null">INQUIRY_STATUS,</if>
             <if test="CODE != null">CODE,</if>
             <if test="toponymSign != null">TOPONYM_SIGN,</if>
@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="REMARK != null">#{REMARK},</if>
+            <if test="remark != null">#{remark},</if>
             <if test="inquiryStatus != null">#{inquiryStatus},</if>
             <if test="CODE != null">#{CODE},</if>
             <if test="toponymSign != null">#{toponymSign},</if>
@@ -140,13 +140,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="contactsPhone != null">CONTACTS_PHONE = #{contactsPhone},</if>
             <if test="APPLICATION != null">APPLICATION = #{APPLICATION},</if>
             <if test="ATTACHMENT != null">ATTACHMENT = #{ATTACHMENT},</if>
-            <if test="inquiryRemark != null">INQUIRY_REMARK = #{inquiryRemark},</if>
+            <if test="inquiryRemark != null">INQUIRY_remark = #{inquiryRemark},</if>
             <if test="STATUS != null">STATUS = #{STATUS},</if>
             <if test="createBy != null">CREATE_BY = #{createBy},</if>
             <if test="createTime != null">CREATE_TIME = #{createTime},</if>
             <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
             <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
-            <if test="REMARK != null">REMARK = #{REMARK},</if>
+            <if test="remark != null">remark = #{remark},</if>
             <if test="inquiryStatus != null">INQUIRY_STATUS = #{inquiryStatus},</if>
             <if test="CODE != null">CODE = #{CODE},</if>
             <if test="toponymSign != null">TOPONYM_SIGN = #{toponymSign},</if>

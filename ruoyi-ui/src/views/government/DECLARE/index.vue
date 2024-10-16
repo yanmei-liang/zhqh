@@ -33,9 +33,9 @@
           placeholder="请选择更新时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="备注" prop="REMARK">
+      <el-form-item label="备注" prop="remark">
         <el-input
-          v-model="queryParams.REMARK"
+          v-model="queryParams.remark"
           placeholder="请输入备注"
           clearable
           @keyup.enter.native="handleQuery"
@@ -148,7 +148,7 @@
           <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="REMARK" />
+      <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="状态" align="center" prop="STATUS" />
       <el-table-column label="申报状态" align="center" prop="declareStatus" />
       <el-table-column label="地名名称" align="center" prop="TOPONYM" />
@@ -176,7 +176,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -188,8 +188,8 @@
     <!-- 添加或修改地名申报对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="备注" prop="REMARK">
-          <el-input v-model="form.REMARK" placeholder="请输入备注" />
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
         <el-form-item label="地名名称" prop="TOPONYM">
           <el-input v-model="form.TOPONYM" placeholder="请输入地名名称" />
@@ -248,7 +248,7 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null,
-        REMARK: null,
+        remark: null,
         STATUS: null,
         declareStatus: null,
         TOPONYM: null,
@@ -294,7 +294,7 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null,
-        REMARK: null,
+        remark: null,
         STATUS: null,
         declareStatus: null,
         TOPONYM: null,
