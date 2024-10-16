@@ -23,7 +23,7 @@ public class GovernmentDeclare extends BaseEntity
     private String STATUS;
 
     /** 申报状态（待提交，已提交，审批中，已完成） */
-    @Excel(name = "申报状态", readConverterExp = "待=提交，已提交，审批中，已完成")
+    @Excel(name = "申报状态", readConverterExp = "待提交，已提交，审批中，已完成")
     private String declareStatus;
 
     /** 地名名称 */

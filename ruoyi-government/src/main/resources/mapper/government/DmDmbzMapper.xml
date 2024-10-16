@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.DmDmbzMapper">
+    
+    <resultMap type="com.ruoyi.government.domain.DmDmbz" id="DmDmbzResult">
+        <result property="dmbzId"    column="DMBZ_ID"    />
+        <result property="standardName"    column="STANDARD_NAME"    />
+        <result property="setUnit"    column="SET_UNIT"    />
+        <result property="establishmentYear"    column="ESTABLISHMENT_YEAR"    />
+        <result property="dataSource"    column="DATA_SOURCE"    />
+        <result property="flagCode"    column="FLAG_CODE"    />
+        <result property="kjCode"    column="KJ_CODE"    />
+        <result property="dmbzCode"    column="DMBZ_CODE"    />
+        <result property="TMLMZMPX"    column="TMLMZMPX"    />
+        <result property="xzqhName"    column="XZQH_NAME"    />
+        <result property="xzqhCode"    column="XZQH_CODE"    />
+        <result property="nationalScript"    column="NATIONAL_SCRIPT"    />
+        <result property="szkxzqhName"    column="SZKXZQH_NAME"    />
+        <result property="eastLongitude"    column="EAST_LONGITUDE"    />
+        <result property="northLatitude"    column="NORTH_LATITUDE"    />
+        <result property="setTime"    column="SET_TIME"    />
+        <result property="MANUFACTURER"    column="MANUFACTURER"    />
+        <result property="MATERIAL"    column="MATERIAL"    />
+        <result property="SPECIFICATION"    column="SPECIFICATION"    />
+        <result property="fileName"    column="FILE_NAME"    />
+        <result property="signinTime"    column="SIGNIN_TIME"    />
+        <result property="REGISTRANT"    column="REGISTRANT"    />
+        <result property="registrationUnit"    column="REGISTRATION_UNIT"    />
+        <result property="AUDITOR"    column="AUDITOR"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="REMARK"    />
+    </resultMap>
+
+    <sql id="selectDmDmbzVo">
+        select DMBZ_ID, STANDARD_NAME, SET_UNIT, ESTABLISHMENT_YEAR, DATA_SOURCE, FLAG_CODE, KJ_CODE, DMBZ_CODE, TMLMZMPX, XZQH_NAME, XZQH_CODE, NATIONAL_SCRIPT, SZKXZQH_NAME, EAST_LONGITUDE, NORTH_LATITUDE, SET_TIME, MANUFACTURER, MATERIAL, SPECIFICATION, FILE_NAME, SIGNIN_TIME, REGISTRANT, REGISTRATION_UNIT, AUDITOR, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark from DM_DMBZ
+    </sql>
+
+    <select id="selectDmDmbzList" parameterType="com.ruoyi.government.domain.DmDmbz" resultMap="DmDmbzResult">
+        <include refid="selectDmDmbzVo"/>
+        <where>  
+            <if test="standardName != null  and standardName != ''"> and STANDARD_NAME like concat('%', #{standardName}, '%')</if>
+            <if test="setUnit != null  and setUnit != ''"> and SET_UNIT = #{setUnit}</if>
+            <if test="establishmentYear != null  and establishmentYear != ''"> and ESTABLISHMENT_YEAR = #{establishmentYear}</if>
+            <if test="dataSource != null  and dataSource != ''"> and DATA_SOURCE = #{dataSource}</if>
+            <if test="flagCode != null  and flagCode != ''"> and FLAG_CODE = #{flagCode}</if>
+            <if test="kjCode != null  and kjCode != ''"> and KJ_CODE = #{kjCode}</if>
+            <if test="dmbzCode != null  and dmbzCode != ''"> and DMBZ_CODE = #{dmbzCode}</if>
+            <if test="TMLMZMPX != null  and TMLMZMPX != ''"> and TMLMZMPX = #{TMLMZMPX}</if>
+            <if test="xzqhName != null  and xzqhName != ''"> and XZQH_NAME like concat('%', #{xzqhName}, '%')</if>
+            <if test="xzqhCode != null  and xzqhCode != ''"> and XZQH_CODE = #{xzqhCode}</if>
+            <if test="nationalScript != null  and nationalScript != ''"> and NATIONAL_SCRIPT = #{nationalScript}</if>
+            <if test="szkxzqhName != null  and szkxzqhName != ''"> and SZKXZQH_NAME like concat('%', #{szkxzqhName}, '%')</if>
+            <if test="eastLongitude != null  and eastLongitude != ''"> and EAST_LONGITUDE = #{eastLongitude}</if>
+            <if test="northLatitude != null  and northLatitude != ''"> and NORTH_LATITUDE = #{northLatitude}</if>
+            <if test="setTime != null  and setTime != ''"> and SET_TIME = #{setTime}</if>
+            <if test="MANUFACTURER != null  and MANUFACTURER != ''"> and MANUFACTURER = #{MANUFACTURER}</if>
+            <if test="MATERIAL != null  and MATERIAL != ''"> and MATERIAL = #{MATERIAL}</if>
+            <if test="SPECIFICATION != null  and SPECIFICATION != ''"> and SPECIFICATION = #{SPECIFICATION}</if>
+            <if test="fileName != null  and fileName != ''"> and FILE_NAME like concat('%', #{fileName}, '%')</if>
+            <if test="signinTime != null  and signinTime != ''"> and SIGNIN_TIME = #{signinTime}</if>
+            <if test="REGISTRANT != null  and REGISTRANT != ''"> and REGISTRANT = #{REGISTRANT}</if>
+            <if test="registrationUnit != null  and registrationUnit != ''"> and REGISTRATION_UNIT = #{registrationUnit}</if>
+            <if test="AUDITOR != null  and AUDITOR != ''"> and AUDITOR = #{AUDITOR}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+        </where>
+    </select>
+    
+    <select id="selectDmDmbzByDmbzId" parameterType="Long" resultMap="DmDmbzResult">
+        <include refid="selectDmDmbzVo"/>
+        where DMBZ_ID = #{dmbzId}
+    </select>
+
+    <insert id="insertDmDmbz" parameterType="com.ruoyi.government.domain.DmDmbz" useGeneratedKeys="true" keyProperty="dmbzId">
+        insert into DM_DMBZ
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="standardName != null and standardName != ''">STANDARD_NAME,</if>
+            <if test="setUnit != null">SET_UNIT,</if>
+            <if test="establishmentYear != null">ESTABLISHMENT_YEAR,</if>
+            <if test="dataSource != null">DATA_SOURCE,</if>
+            <if test="flagCode != null">FLAG_CODE,</if>
+            <if test="kjCode != null">KJ_CODE,</if>
+            <if test="dmbzCode != null">DMBZ_CODE,</if>
+            <if test="TMLMZMPX != null">TMLMZMPX,</if>
+            <if test="xzqhName != null">XZQH_NAME,</if>
+            <if test="xzqhCode != null">XZQH_CODE,</if>
+            <if test="nationalScript != null">NATIONAL_SCRIPT,</if>
+            <if test="szkxzqhName != null">SZKXZQH_NAME,</if>
+            <if test="eastLongitude != null">EAST_LONGITUDE,</if>
+            <if test="northLatitude != null">NORTH_LATITUDE,</if>
+            <if test="setTime != null">SET_TIME,</if>
+            <if test="MANUFACTURER != null">MANUFACTURER,</if>
+            <if test="MATERIAL != null">MATERIAL,</if>
+            <if test="SPECIFICATION != null">SPECIFICATION,</if>
+            <if test="fileName != null">FILE_NAME,</if>
+            <if test="signinTime != null">SIGNIN_TIME,</if>
+            <if test="REGISTRANT != null">REGISTRANT,</if>
+            <if test="registrationUnit != null">REGISTRATION_UNIT,</if>
+            <if test="AUDITOR != null">AUDITOR,</if>
+            <if test="createBy != null">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+            <if test="updateBy != null">UPDATE_BY,</if>
+            <if test="updateTime != null">UPDATE_TIME,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="standardName != null and standardName != ''">#{standardName},</if>
+            <if test="setUnit != null">#{setUnit},</if>
+            <if test="establishmentYear != null">#{establishmentYear},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="flagCode != null">#{flagCode},</if>
+            <if test="kjCode != null">#{kjCode},</if>
+            <if test="dmbzCode != null">#{dmbzCode},</if>
+            <if test="TMLMZMPX != null">#{TMLMZMPX},</if>
+            <if test="xzqhName != null">#{xzqhName},</if>
+            <if test="xzqhCode != null">#{xzqhCode},</if>
+            <if test="nationalScript != null">#{nationalScript},</if>
+            <if test="szkxzqhName != null">#{szkxzqhName},</if>
+            <if test="eastLongitude != null">#{eastLongitude},</if>
+            <if test="northLatitude != null">#{northLatitude},</if>
+            <if test="setTime != null">#{setTime},</if>
+            <if test="MANUFACTURER != null">#{MANUFACTURER},</if>
+            <if test="MATERIAL != null">#{MATERIAL},</if>
+            <if test="SPECIFICATION != null">#{SPECIFICATION},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="signinTime != null">#{signinTime},</if>
+            <if test="REGISTRANT != null">#{REGISTRANT},</if>
+            <if test="registrationUnit != null">#{registrationUnit},</if>
+            <if test="AUDITOR != null">#{AUDITOR},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmDmbz" parameterType="com.ruoyi.government.domain.DmDmbz">
+        update DM_DMBZ
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="standardName != null and standardName != ''">STANDARD_NAME = #{standardName},</if>
+            <if test="setUnit != null">SET_UNIT = #{setUnit},</if>
+            <if test="establishmentYear != null">ESTABLISHMENT_YEAR = #{establishmentYear},</if>
+            <if test="dataSource != null">DATA_SOURCE = #{dataSource},</if>
+            <if test="flagCode != null">FLAG_CODE = #{flagCode},</if>
+            <if test="kjCode != null">KJ_CODE = #{kjCode},</if>
+            <if test="dmbzCode != null">DMBZ_CODE = #{dmbzCode},</if>
+            <if test="TMLMZMPX != null">TMLMZMPX = #{TMLMZMPX},</if>
+            <if test="xzqhName != null">XZQH_NAME = #{xzqhName},</if>
+            <if test="xzqhCode != null">XZQH_CODE = #{xzqhCode},</if>
+            <if test="nationalScript != null">NATIONAL_SCRIPT = #{nationalScript},</if>
+            <if test="szkxzqhName != null">SZKXZQH_NAME = #{szkxzqhName},</if>
+            <if test="eastLongitude != null">EAST_LONGITUDE = #{eastLongitude},</if>
+            <if test="northLatitude != null">NORTH_LATITUDE = #{northLatitude},</if>
+            <if test="setTime != null">SET_TIME = #{setTime},</if>
+            <if test="MANUFACTURER != null">MANUFACTURER = #{MANUFACTURER},</if>
+            <if test="MATERIAL != null">MATERIAL = #{MATERIAL},</if>
+            <if test="SPECIFICATION != null">SPECIFICATION = #{SPECIFICATION},</if>
+            <if test="fileName != null">FILE_NAME = #{fileName},</if>
+            <if test="signinTime != null">SIGNIN_TIME = #{signinTime},</if>
+            <if test="REGISTRANT != null">REGISTRANT = #{REGISTRANT},</if>
+            <if test="registrationUnit != null">REGISTRATION_UNIT = #{registrationUnit},</if>
+            <if test="AUDITOR != null">AUDITOR = #{AUDITOR},</if>
+            <if test="createBy != null">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where DMBZ_ID = #{dmbzId}
+    </update>
+
+    <delete id="deleteDmDmbzByDmbzId" parameterType="Long">
+        delete from DM_DMBZ where DMBZ_ID = #{dmbzId}
+    </delete>
+
+    <delete id="deleteDmDmbzByDmbzIds" parameterType="String">
+        delete from DM_DMBZ where DMBZ_ID in 
+        <foreach item="dmbzId" collection="array" open="(" separator="," close=")">
+            #{dmbzId}
+        </foreach>
+    </delete>
+</mapper>

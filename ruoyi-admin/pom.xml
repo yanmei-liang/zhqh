@@ -69,10 +69,10 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
-        <dependency>
+ <!--       <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-flowable</artifactId>
-        </dependency>
+        </dependency>-->
 
 
         <!-- 达梦数据库8驱动包 -->
