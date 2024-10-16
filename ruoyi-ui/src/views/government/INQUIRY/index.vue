@@ -81,9 +81,9 @@
           placeholder="请选择更新时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="备注" prop="REMARK">
+      <el-form-item label="备注" prop="remark">
         <el-input
-          v-model="queryParams.REMARK"
+          v-model="queryParams.remark"
           placeholder="请输入备注"
           clearable
           @keyup.enter.native="handleQuery"
@@ -228,7 +228,7 @@
           <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="REMARK" />
+      <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="预审状态" align="center" prop="inquiryStatus" />
       <el-table-column label="地名编码" align="center" prop="CODE" />
       <el-table-column label="地名标志" align="center" prop="toponymSign" />
@@ -268,7 +268,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -298,8 +298,8 @@
         <el-form-item label="附件" prop="ATTACHMENT">
           <el-input v-model="form.ATTACHMENT" placeholder="请输入附件" />
         </el-form-item>
-        <el-form-item label="备注" prop="REMARK">
-          <el-input v-model="form.REMARK" placeholder="请输入备注" />
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
         <el-form-item label="地名编码" prop="CODE">
           <el-input v-model="form.CODE" placeholder="请输入地名编码" />
@@ -385,7 +385,7 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null,
-        REMARK: null,
+        remark: null,
         inquiryStatus: null,
         CODE: null,
         toponymSign: null,
@@ -443,7 +443,7 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null,
-        REMARK: null,
+        remark: null,
         inquiryStatus: null,
         CODE: null,
         toponymSign: null,
