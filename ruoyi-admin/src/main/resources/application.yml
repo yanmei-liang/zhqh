@@ -89,7 +89,7 @@ spring:
         max-wait: -1ms
   liquibase:
     # 启用liquibase
-    enabled: false
+    enabled: true
     # 存储变化的文件（changelog）位置。默认：classpath:/db/changelog/db.changelog-master.xml
     change-log: classpath:/db/changelog.xml
 

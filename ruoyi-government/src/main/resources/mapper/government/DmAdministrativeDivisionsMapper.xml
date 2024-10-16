@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.DmAdministrativeDivisionsMapper">
+    
+    <resultMap type="com.ruoyi.government.domain.DmAdministrativeDivisions" id="DmAdministrativeDivisionsResult">
+        <result property="ID"    column="ID"    />
+        <result property="administrativeDivisionName"    column="ADMINISTRATIVE_DIVISION_NAME"    />
+        <result property="administrativeDivisionCode"    column="ADMINISTRATIVE_DIVISION_CODE"    />
+        <result property="ADDRESS"    column="ADDRESS"    />
+        <result property="AREA"    column="AREA"    />
+        <result property="postalCode"    column="POSTAL_CODE"    />
+        <result property="administrativeLevel"    column="ADMINISTRATIVE_LEVEL"    />
+        <result property="superiorsName"    column="SUPERIORS_NAME"    />
+        <result property="superiorsCode"    column="SUPERIORS_CODE"    />
+        <result property="unitWebsite"    column="UNIT_WEBSITE"    />
+        <result property="contactNumber"    column="CONTACT_NUMBER"    />
+        <result property="ATTACHMENTS"    column="ATTACHMENTS"    />
+        <result property="multimediaVideo"    column="MULTIMEDIA_VIDEO"    />
+        <result property="originalPronunciation"    column="ORIGINAL_PRONUNCIATION"    />
+        <result property="otherAccessories"    column="OTHER_ACCESSORIES"    />
+        <result property="geographicalpositionMsg"    column="GEOGRAPHICALPOSITION_MSG"    />
+        <result property="remark"    column="REMARK"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+    </resultMap>
+
+    <sql id="selectDmAdministrativeDivisionsVo">
+        select ID, ADMINISTRATIVE_DIVISION_NAME, ADMINISTRATIVE_DIVISION_CODE, ADDRESS, AREA, POSTAL_CODE, ADMINISTRATIVE_LEVEL, SUPERIORS_NAME, SUPERIORS_CODE, UNIT_WEBSITE, CONTACT_NUMBER, ATTACHMENTS, MULTIMEDIA_VIDEO, ORIGINAL_PRONUNCIATION, OTHER_ACCESSORIES, GEOGRAPHICALPOSITION_MSG, remark, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME from DM_ADMINISTRATIVE_DIVISIONS
+    </sql>
+
+    <!-- 返回行政级别下拉框 -->
+    <select id="selectDmAdministrativeByAdministrativeLevel"  resultType="java.lang.String">
+        SELECT DISTINCT ADMINISTRATIVE_LEVEL FROM DM_ADMINISTRATIVE_DIVISIONS
+    </select>
+
+    <select id="selectDmAdministrativeDivisionsList" parameterType="com.ruoyi.government.domain.DmAdministrativeDivisions" resultMap="DmAdministrativeDivisionsResult">
+        <include refid="selectDmAdministrativeDivisionsVo"/>
+        <where>  
+            <if test="administrativeDivisionName != null  and administrativeDivisionName != ''"> and ADMINISTRATIVE_DIVISION_NAME like concat('%', #{administrativeDivisionName}, '%')</if>
+            <if test="administrativeDivisionCode != null  and administrativeDivisionCode != ''"> and ADMINISTRATIVE_DIVISION_CODE = #{administrativeDivisionCode}</if>
+            <if test="ADDRESS != null  and ADDRESS != ''"> and ADDRESS = #{ADDRESS}</if>
+            <if test="AREA != null "> and AREA = #{AREA}</if>
+            <if test="postalCode != null  and postalCode != ''"> and POSTAL_CODE = #{postalCode}</if>
+            <if test="administrativeLevel != null  and administrativeLevel != ''"> and ADMINISTRATIVE_LEVEL = #{administrativeLevel}</if>
+            <if test="superiorsName != null  and superiorsName != ''"> and SUPERIORS_NAME like concat('%', #{superiorsName}, '%')</if>
+            <if test="superiorsCode != null  and superiorsCode != ''"> and SUPERIORS_CODE = #{superiorsCode}</if>
+            <if test="unitWebsite != null  and unitWebsite != ''"> and UNIT_WEBSITE = #{unitWebsite}</if>
+            <if test="contactNumber != null  and contactNumber != ''"> and CONTACT_NUMBER = #{contactNumber}</if>
+            <if test="ATTACHMENTS != null  and ATTACHMENTS != ''"> and ATTACHMENTS = #{ATTACHMENTS}</if>
+            <if test="multimediaVideo != null  and multimediaVideo != ''"> and MULTIMEDIA_VIDEO = #{multimediaVideo}</if>
+            <if test="originalPronunciation != null  and originalPronunciation != ''"> and ORIGINAL_PRONUNCIATION = #{originalPronunciation}</if>
+            <if test="otherAccessories != null  and otherAccessories != ''"> and OTHER_ACCESSORIES = #{otherAccessories}</if>
+            <if test="geographicalpositionMsg != null  and geographicalpositionMsg != ''"> and GEOGRAPHICALPOSITION_MSG = #{geographicalpositionMsg}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectDmAdministrativeDivisionsByID" parameterType="Long" resultMap="DmAdministrativeDivisionsResult">
+        <include refid="selectDmAdministrativeDivisionsVo"/>
+        where ID = #{ID}
+    </select>
+
+    <insert id="insertDmAdministrativeDivisions" parameterType="com.ruoyi.government.domain.DmAdministrativeDivisions" useGeneratedKeys="true" keyProperty="ID">
+        insert into DM_ADMINISTRATIVE_DIVISIONS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="administrativeDivisionName != null">ADMINISTRATIVE_DIVISION_NAME,</if>
+            <if test="administrativeDivisionCode != null">ADMINISTRATIVE_DIVISION_CODE,</if>
+            <if test="ADDRESS != null">ADDRESS,</if>
+            <if test="AREA != null">AREA,</if>
+            <if test="postalCode != null">POSTAL_CODE,</if>
+            <if test="administrativeLevel != null">ADMINISTRATIVE_LEVEL,</if>
+            <if test="superiorsName != null">SUPERIORS_NAME,</if>
+            <if test="superiorsCode != null">SUPERIORS_CODE,</if>
+            <if test="unitWebsite != null">UNIT_WEBSITE,</if>
+            <if test="contactNumber != null">CONTACT_NUMBER,</if>
+            <if test="ATTACHMENTS != null">ATTACHMENTS,</if>
+            <if test="multimediaVideo != null">MULTIMEDIA_VIDEO,</if>
+            <if test="originalPronunciation != null">ORIGINAL_PRONUNCIATION,</if>
+            <if test="otherAccessories != null">OTHER_ACCESSORIES,</if>
+            <if test="geographicalpositionMsg != null">GEOGRAPHICALPOSITION_MSG,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+            <if test="updateBy != null">UPDATE_BY,</if>
+            <if test="updateTime != null">UPDATE_TIME,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="administrativeDivisionName != null">#{administrativeDivisionName},</if>
+            <if test="administrativeDivisionCode != null">#{administrativeDivisionCode},</if>
+            <if test="ADDRESS != null">#{ADDRESS},</if>
+            <if test="AREA != null">#{AREA},</if>
+            <if test="postalCode != null">#{postalCode},</if>
+            <if test="administrativeLevel != null">#{administrativeLevel},</if>
+            <if test="superiorsName != null">#{superiorsName},</if>
+            <if test="superiorsCode != null">#{superiorsCode},</if>
+            <if test="unitWebsite != null">#{unitWebsite},</if>
+            <if test="contactNumber != null">#{contactNumber},</if>
+            <if test="ATTACHMENTS != null">#{ATTACHMENTS},</if>
+            <if test="multimediaVideo != null">#{multimediaVideo},</if>
+            <if test="originalPronunciation != null">#{originalPronunciation},</if>
+            <if test="otherAccessories != null">#{otherAccessories},</if>
+            <if test="geographicalpositionMsg != null">#{geographicalpositionMsg},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmAdministrativeDivisions" parameterType="com.ruoyi.government.domain.DmAdministrativeDivisions">
+        update DM_ADMINISTRATIVE_DIVISIONS
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="administrativeDivisionName != null">ADMINISTRATIVE_DIVISION_NAME = #{administrativeDivisionName},</if>
+            <if test="administrativeDivisionCode != null">ADMINISTRATIVE_DIVISION_CODE = #{administrativeDivisionCode},</if>
+            <if test="ADDRESS != null">ADDRESS = #{ADDRESS},</if>
+            <if test="AREA != null">AREA = #{AREA},</if>
+            <if test="postalCode != null">POSTAL_CODE = #{postalCode},</if>
+            <if test="administrativeLevel != null">ADMINISTRATIVE_LEVEL = #{administrativeLevel},</if>
+            <if test="superiorsName != null">SUPERIORS_NAME = #{superiorsName},</if>
+            <if test="superiorsCode != null">SUPERIORS_CODE = #{superiorsCode},</if>
+            <if test="unitWebsite != null">UNIT_WEBSITE = #{unitWebsite},</if>
+            <if test="contactNumber != null">CONTACT_NUMBER = #{contactNumber},</if>
+            <if test="ATTACHMENTS != null">ATTACHMENTS = #{ATTACHMENTS},</if>
+            <if test="multimediaVideo != null">MULTIMEDIA_VIDEO = #{multimediaVideo},</if>
+            <if test="originalPronunciation != null">ORIGINAL_PRONUNCIATION = #{originalPronunciation},</if>
+            <if test="otherAccessories != null">OTHER_ACCESSORIES = #{otherAccessories},</if>
+            <if test="geographicalpositionMsg != null">GEOGRAPHICALPOSITION_MSG = #{geographicalpositionMsg},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteDmAdministrativeDivisionsByID" parameterType="Long">
+        delete from DM_ADMINISTRATIVE_DIVISIONS where ID = #{ID}
+    </delete>
+
+    <delete id="deleteDmAdministrativeDivisionsByIDs" parameterType="String">
+        delete from DM_ADMINISTRATIVE_DIVISIONS where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+</mapper>

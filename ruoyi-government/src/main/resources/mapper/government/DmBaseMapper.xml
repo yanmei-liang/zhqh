@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.DmBaseMapper">
+    
+    <resultMap type="com.ruoyi.government.domain.DmBase" id="DmBaseResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="name"    column="name"    />
+        <result property="alias"    column="alias"    />
+        <result property="simpleName"    column="simple_name"    />
+        <result property="historyName"    column="history_name"    />
+        <result property="chineseName"    column="chinese_name"    />
+        <result property="ssmzyy"    column="ssmzyy"    />
+        <result property="dmydy"    column="dmydy"    />
+        <result property="hypthdy"    column="hypthdy"    />
+        <result property="lmzmpx"    column="lmzmpx"    />
+        <result property="dmyz"    column="dmyz"    />
+        <result property="dmlb"    column="dmlb"    />
+        <result property="eastLongitude"    column="east_longitude"    />
+        <result property="toEastLongitude"    column="to_east_longitude"    />
+        <result property="northLatitude"    column="north_latitude"    />
+        <result property="toNorthLatitude"    column="to_north_latitude"    />
+        <result property="dmpczt"    column="dmpczt"    />
+        <result property="ytmc"    column="ytmc"    />
+        <result property="th"    column="th"    />
+        <result property="scale"    column="scale"    />
+        <result property="useTime"    column="use_time"    />
+        <result property="dmll"    column="dmll"    />
+        <result property="dmhy"    column="dmhy"    />
+        <result property="dmlsyg"    column="dmlsyg"    />
+        <result property="dmdg"    column="dmdg"    />
+        <result property="mj"    column="mj"    />
+        <result property="zbx"    column="zbx"    />
+        <result property="clff"    column="clff"    />
+        <result property="dlstgk"    column="dlstgk"    />
+        <result property="zlly"    column="zlly"    />
+        <result property="remark"    column="remark"    />
+        <result property="registerDate"    column="register_date"    />
+        <result property="registerName"    column="register_name"    />
+        <result property="registerUnit"    column="register_unit"    />
+        <result property="tmlmzmpx"    column="tmlmzmpx"    />
+        <result property="slnf"    column="slnf"    />
+        <result property="fznf"    column="fznf"    />
+        <result property="sfgk"    column="sfgk"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="dmtxx"    column="dmtxx"    />
+        <result property="xzqh"    column="xzqh"    />
+        <result property="mmsj"    column="mmsj"    />
+    </resultMap>
+
+    <sql id="selectDmBaseVo">
+        select id, code, name, alias, simple_name, history_name, chinese_name, ssmzyy, dmydy, hypthdy, lmzmpx, dmyz, dmlb, east_longitude, to_east_longitude, north_latitude, to_north_latitude, dmpczt, ytmc, th, scale, use_time, dmll, dmhy, dmlsyg, dmdg, mj, zbx, clff, dlstgk, zlly, remark, register_date, register_name, register_unit, tmlmzmpx, slnf, fznf, sfgk, create_by, create_time, update_by, update_time, dmtxx, xzqh, mmsj from DM_BASE
+    </sql>
+
+    <select id="selectDmBaseList" parameterType="com.ruoyi.government.domain.DmBase" resultMap="DmBaseResult">
+        <include refid="selectDmBaseVo"/>
+        <where>  
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="alias != null  and alias != ''"> and alias = #{alias}</if>
+            <if test="simpleName != null  and simpleName != ''"> and simple_name like concat('%', #{simpleName}, '%')</if>
+            <if test="historyName != null  and historyName != ''"> and history_name like concat('%', #{historyName}, '%')</if>
+            <if test="chineseName != null  and chineseName != ''"> and chinese_name like concat('%', #{chineseName}, '%')</if>
+            <if test="ssmzyy != null  and ssmzyy != ''"> and ssmzyy = #{ssmzyy}</if>
+            <if test="dmydy != null  and dmydy != ''"> and dmydy = #{dmydy}</if>
+            <if test="hypthdy != null  and hypthdy != ''"> and hypthdy = #{hypthdy}</if>
+            <if test="lmzmpx != null  and lmzmpx != ''"> and lmzmpx = #{lmzmpx}</if>
+            <if test="dmyz != null  and dmyz != ''"> and dmyz = #{dmyz}</if>
+            <if test="dmlb != null  and dmlb != ''"> and dmlb = #{dmlb}</if>
+            <if test="eastLongitude != null  and eastLongitude != ''"> and east_longitude = #{eastLongitude}</if>
+            <if test="toEastLongitude != null  and toEastLongitude != ''"> and to_east_longitude = #{toEastLongitude}</if>
+            <if test="northLatitude != null  and northLatitude != ''"> and north_latitude = #{northLatitude}</if>
+            <if test="toNorthLatitude != null  and toNorthLatitude != ''"> and to_north_latitude = #{toNorthLatitude}</if>
+            <if test="dmpczt != null  and dmpczt != ''"> and dmpczt = #{dmpczt}</if>
+            <if test="ytmc != null  and ytmc != ''"> and ytmc = #{ytmc}</if>
+            <if test="th != null  and th != ''"> and th = #{th}</if>
+            <if test="scale != null  and scale != ''"> and scale = #{scale}</if>
+            <if test="useTime != null  and useTime != ''"> and use_time = #{useTime}</if>
+            <if test="dmll != null  and dmll != ''"> and dmll = #{dmll}</if>
+            <if test="dmhy != null  and dmhy != ''"> and dmhy = #{dmhy}</if>
+            <if test="dmlsyg != null  and dmlsyg != ''"> and dmlsyg = #{dmlsyg}</if>
+            <if test="dmdg != null  and dmdg != ''"> and dmdg = #{dmdg}</if>
+            <if test="mj != null  and mj != ''"> and mj = #{mj}</if>
+            <if test="zbx != null  and zbx != ''"> and zbx = #{zbx}</if>
+            <if test="clff != null  and clff != ''"> and clff = #{clff}</if>
+            <if test="dlstgk != null  and dlstgk != ''"> and dlstgk = #{dlstgk}</if>
+            <if test="zlly != null  and zlly != ''"> and zlly = #{zlly}</if>
+            <if test="registerDate != null "> and register_date = #{registerDate}</if>
+            <if test="registerName != null  and registerName != ''"> and register_name like concat('%', #{registerName}, '%')</if>
+            <if test="registerUnit != null  and registerUnit != ''"> and register_unit = #{registerUnit}</if>
+            <if test="tmlmzmpx != null  and tmlmzmpx != ''"> and tmlmzmpx = #{tmlmzmpx}</if>
+            <if test="slnf != null  and slnf != ''"> and slnf = #{slnf}</if>
+            <if test="fznf != null  and fznf != ''"> and fznf = #{fznf}</if>
+            <if test="sfgk != null  and sfgk != ''"> and sfgk = #{sfgk}</if>
+            <if test="dmtxx != null  and dmtxx != ''"> and dmtxx = #{dmtxx}</if>
+            <if test="xzqh != null  and xzqh != ''"> and xzqh = #{xzqh}</if>
+            <if test="mmsj != null "> and mmsj = #{mmsj}</if>
+        </where>
+    </select>
+    
+    <select id="selectDmBaseById" parameterType="String" resultMap="DmBaseResult">
+        <include refid="selectDmBaseVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDmBase" parameterType="com.ruoyi.government.domain.DmBase">
+        insert into DM_BASE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="alias != null">alias,</if>
+            <if test="simpleName != null">simple_name,</if>
+            <if test="historyName != null">history_name,</if>
+            <if test="chineseName != null">chinese_name,</if>
+            <if test="ssmzyy != null">ssmzyy,</if>
+            <if test="dmydy != null">dmydy,</if>
+            <if test="hypthdy != null">hypthdy,</if>
+            <if test="lmzmpx != null">lmzmpx,</if>
+            <if test="dmyz != null">dmyz,</if>
+            <if test="dmlb != null and dmlb != ''">dmlb,</if>
+            <if test="eastLongitude != null and eastLongitude != ''">east_longitude,</if>
+            <if test="toEastLongitude != null">to_east_longitude,</if>
+            <if test="northLatitude != null and northLatitude != ''">north_latitude,</if>
+            <if test="toNorthLatitude != null">to_north_latitude,</if>
+            <if test="dmpczt != null">dmpczt,</if>
+            <if test="ytmc != null">ytmc,</if>
+            <if test="th != null">th,</if>
+            <if test="scale != null">scale,</if>
+            <if test="useTime != null and useTime != ''">use_time,</if>
+            <if test="dmll != null and dmll != ''">dmll,</if>
+            <if test="dmhy != null and dmhy != ''">dmhy,</if>
+            <if test="dmlsyg != null and dmlsyg != ''">dmlsyg,</if>
+            <if test="dmdg != null">dmdg,</if>
+            <if test="mj != null">mj,</if>
+            <if test="zbx != null">zbx,</if>
+            <if test="clff != null">clff,</if>
+            <if test="dlstgk != null">dlstgk,</if>
+            <if test="zlly != null">zlly,</if>
+            <if test="remark != null">remark,</if>
+            <if test="registerDate != null">register_date,</if>
+            <if test="registerName != null">register_name,</if>
+            <if test="registerUnit != null">register_unit,</if>
+            <if test="tmlmzmpx != null">tmlmzmpx,</if>
+            <if test="slnf != null">slnf,</if>
+            <if test="fznf != null">fznf,</if>
+            <if test="sfgk != null">sfgk,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="dmtxx != null">dmtxx,</if>
+            <if test="xzqh != null">xzqh,</if>
+            <if test="mmsj != null">mmsj,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="alias != null">#{alias},</if>
+            <if test="simpleName != null">#{simpleName},</if>
+            <if test="historyName != null">#{historyName},</if>
+            <if test="chineseName != null">#{chineseName},</if>
+            <if test="ssmzyy != null">#{ssmzyy},</if>
+            <if test="dmydy != null">#{dmydy},</if>
+            <if test="hypthdy != null">#{hypthdy},</if>
+            <if test="lmzmpx != null">#{lmzmpx},</if>
+            <if test="dmyz != null">#{dmyz},</if>
+            <if test="dmlb != null and dmlb != ''">#{dmlb},</if>
+            <if test="eastLongitude != null and eastLongitude != ''">#{eastLongitude},</if>
+            <if test="toEastLongitude != null">#{toEastLongitude},</if>
+            <if test="northLatitude != null and northLatitude != ''">#{northLatitude},</if>
+            <if test="toNorthLatitude != null">#{toNorthLatitude},</if>
+            <if test="dmpczt != null">#{dmpczt},</if>
+            <if test="ytmc != null">#{ytmc},</if>
+            <if test="th != null">#{th},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="useTime != null and useTime != ''">#{useTime},</if>
+            <if test="dmll != null and dmll != ''">#{dmll},</if>
+            <if test="dmhy != null and dmhy != ''">#{dmhy},</if>
+            <if test="dmlsyg != null and dmlsyg != ''">#{dmlsyg},</if>
+            <if test="dmdg != null">#{dmdg},</if>
+            <if test="mj != null">#{mj},</if>
+            <if test="zbx != null">#{zbx},</if>
+            <if test="clff != null">#{clff},</if>
+            <if test="dlstgk != null">#{dlstgk},</if>
+            <if test="zlly != null">#{zlly},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="registerDate != null">#{registerDate},</if>
+            <if test="registerName != null">#{registerName},</if>
+            <if test="registerUnit != null">#{registerUnit},</if>
+            <if test="tmlmzmpx != null">#{tmlmzmpx},</if>
+            <if test="slnf != null">#{slnf},</if>
+            <if test="fznf != null">#{fznf},</if>
+            <if test="sfgk != null">#{sfgk},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="dmtxx != null">#{dmtxx},</if>
+            <if test="xzqh != null">#{xzqh},</if>
+            <if test="mmsj != null">#{mmsj},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmBase" parameterType="com.ruoyi.government.domain.DmBase">
+        update DM_BASE
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="alias != null">alias = #{alias},</if>
+            <if test="simpleName != null">simple_name = #{simpleName},</if>
+            <if test="historyName != null">history_name = #{historyName},</if>
+            <if test="chineseName != null">chinese_name = #{chineseName},</if>
+            <if test="ssmzyy != null">ssmzyy = #{ssmzyy},</if>
+            <if test="dmydy != null">dmydy = #{dmydy},</if>
+            <if test="hypthdy != null">hypthdy = #{hypthdy},</if>
+            <if test="lmzmpx != null">lmzmpx = #{lmzmpx},</if>
+            <if test="dmyz != null">dmyz = #{dmyz},</if>
+            <if test="dmlb != null and dmlb != ''">dmlb = #{dmlb},</if>
+            <if test="eastLongitude != null and eastLongitude != ''">east_longitude = #{eastLongitude},</if>
+            <if test="toEastLongitude != null">to_east_longitude = #{toEastLongitude},</if>
+            <if test="northLatitude != null and northLatitude != ''">north_latitude = #{northLatitude},</if>
+            <if test="toNorthLatitude != null">to_north_latitude = #{toNorthLatitude},</if>
+            <if test="dmpczt != null">dmpczt = #{dmpczt},</if>
+            <if test="ytmc != null">ytmc = #{ytmc},</if>
+            <if test="th != null">th = #{th},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="useTime != null and useTime != ''">use_time = #{useTime},</if>
+            <if test="dmll != null and dmll != ''">dmll = #{dmll},</if>
+            <if test="dmhy != null and dmhy != ''">dmhy = #{dmhy},</if>
+            <if test="dmlsyg != null and dmlsyg != ''">dmlsyg = #{dmlsyg},</if>
+            <if test="dmdg != null">dmdg = #{dmdg},</if>
+            <if test="mj != null">mj = #{mj},</if>
+            <if test="zbx != null">zbx = #{zbx},</if>
+            <if test="clff != null">clff = #{clff},</if>
+            <if test="dlstgk != null">dlstgk = #{dlstgk},</if>
+            <if test="zlly != null">zlly = #{zlly},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="registerDate != null">register_date = #{registerDate},</if>
+            <if test="registerName != null">register_name = #{registerName},</if>
+            <if test="registerUnit != null">register_unit = #{registerUnit},</if>
+            <if test="tmlmzmpx != null">tmlmzmpx = #{tmlmzmpx},</if>
+            <if test="slnf != null">slnf = #{slnf},</if>
+            <if test="fznf != null">fznf = #{fznf},</if>
+            <if test="sfgk != null">sfgk = #{sfgk},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="dmtxx != null">dmtxx = #{dmtxx},</if>
+            <if test="xzqh != null">xzqh = #{xzqh},</if>
+            <if test="mmsj != null">mmsj = #{mmsj},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDmBaseById" parameterType="String">
+        delete from DM_BASE where id = #{id}
+    </delete>
+
+    <delete id="deleteDmBaseByIds" parameterType="String">
+        delete from DM_BASE where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

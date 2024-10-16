@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.utils.uuid.IdUtils;
+import com.ruoyi.system.domain.SysFileInfo;
+import com.ruoyi.system.service.SysFileInfoService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +28,11 @@ import com.ruoyi.framework.config.ServerConfig;
 
 /**
  * 通用请求处理
- * 
+ *
  * @author ruoyi
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/common")
 public class CommonController
 {
@@ -35,11 +41,13 @@ public class CommonController
     @Autowired
     private ServerConfig serverConfig;
 
+    private final SysFileInfoService sysFileInfoService;
+
     private static final String FILE_DELIMETER = ",";
 
     /**
      * 通用下载请求
-     * 
+     *
      * @param fileName 文件名称
      * @param delete 是否删除
      */
@@ -87,6 +95,9 @@ public class CommonController
             ajax.put("fileName", fileName);
             ajax.put("newFileName", FileUtils.getName(fileName));
             ajax.put("originalFilename", file.getOriginalFilename());
+            String fileId = IdUtils.randomUUID();
+            SysFileInfo info = new SysFileInfo(fileId, fileName, url,file.getContentType(), file.getOriginalFilename());
+            sysFileInfoService.save(info);
             return ajax;
         }
         catch (Exception e)
@@ -109,6 +120,7 @@ public class CommonController
             List<String> fileNames = new ArrayList<String>();
             List<String> newFileNames = new ArrayList<String>();
             List<String> originalFilenames = new ArrayList<String>();
+            List<SysFileInfo> sysFileInfoList = new ArrayList<>();
             for (MultipartFile file : files)
             {
                 // 上传并返回新文件名称
@@ -118,7 +130,10 @@ public class CommonController
                 fileNames.add(fileName);
                 newFileNames.add(FileUtils.getName(fileName));
                 originalFilenames.add(file.getOriginalFilename());
+                SysFileInfo fileInfo = new SysFileInfo(IdUtils.randomUUID(), fileName, url , file.getContentType(), file.getOriginalFilename());
+                sysFileInfoList.add(fileInfo);
             }
+            sysFileInfoService.saveBatch(sysFileInfoList);
             AjaxResult ajax = AjaxResult.success();
             ajax.put("urls", StringUtils.join(urls, FILE_DELIMETER));
             ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMETER));
