@@ -56,13 +56,16 @@
             <el-button type="primary" @click="dialogVisible = true"
               >新增</el-button
             >
-            <el-button type="danger">删除</el-button>
+            <el-button type="danger" @click="handleAllDelete">删除</el-button>
             <el-button type="info">导入</el-button>
           </div>
           <el-divider></el-divider>
           <!-- 表格 -->
           <div>
-            <Table :tableData="tableList">
+            <Table :tableData="tableList" @selection-change="handleSelectionChange">
+              <template #selection>
+                <el-table-column type="selection" width="55"> </el-table-column>
+              </template>
               <template>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
@@ -127,13 +130,13 @@
     >
       <p>核心信息</p>
       <el-divider></el-divider>
-      <From :model="formData" :rules="rules">
+      <Form :model="formData" :rules="rules">
         <template #left>
           <el-form-item label="行政区划名称:" prop="name">
             <el-input v-model="formData.name" placeholder="" />
           </el-form-item>
-          <el-form-item label="驻地地址:" prop="addres">
-            <el-input v-model="formData.addres" placeholder="" />
+          <el-form-item label="驻地地址:" prop="address">
+            <el-input v-model="formData.address" placeholder="" />
           </el-form-item>
           <el-form-item label="邮政编码:" prop="code">
             <el-input v-model="formData.code" placeholder="" />
@@ -175,24 +178,29 @@
             <el-input v-model="formData.phoneNum" placeholder="" />
           </el-form-item>
         </template>
-      </From>
+      </Form>
       <p>相关附件</p>
       <el-divider></el-divider>
     </el-dialog>
+    <DialogDelete :data="dialogData" />
   </div>
 </template>
 <script>
 import Table from "@/components/Table/index.vue";
-import From from "@/components/from/index.vue";
+import Form from "@/components/form/index.vue";
+import DialogDelete from "@/components/DialogDelete/index.vue";
 import * as echarts from "echarts";
 export default {
-  components: { Table, From },
+  components: { Table, Form, DialogDelete },
   data() {
     return {
+      dialogData: {
+        dialogVisible: false,
+      },
       formData: {
         name: "",
         nameNum: "",
-        addres: "",
+        address: "",
         code: "",
         previous: "",
         area: "",
@@ -280,11 +288,26 @@ export default {
     this.SetChart("main22");
   },
   methods: {
+    handleSelectionChange(val){
+      console.log(val)
+    },
     handleEdit(index, row) {
       console.log(index, row);
     },
     handleDelete(index, row) {
-      console.log(index, row);
+      this.dialogData = {
+        title: "删除确认",
+        content: "是否确认删除当前项？",
+        dialogVisible: true,
+      };
+      console.log(this.dialogData);
+    },
+    handleAllDelete() {
+      this.dialogData = {
+        title: "批量删除",
+        content: "是否确认删除已选中项？",
+        dialogVisible: true,
+      };
     },
     SetChart(value) {
       var chartDom = document.getElementById(value);
@@ -360,7 +383,7 @@ span {
   margin: 20px 0;
 }
 .el-tabs__item.is-active {
-    color: #ffffff;
-    background-color: rgba(22, 31, 112, 1);
+  color: #ffffff;
+  background-color: rgba(22, 31, 112, 1);
 }
 </style>

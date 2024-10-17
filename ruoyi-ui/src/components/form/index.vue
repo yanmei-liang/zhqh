@@ -5,7 +5,7 @@
     :rules="rules"
     label-width="120px"
   >
-    <slot></slot>
+ 
     <div class="form-top">
       <div class="form-top--left">
         <slot name="left"></slot>
@@ -14,6 +14,7 @@
         <slot name="right"></slot>
       </div>
     </div>
+       <slot></slot>
     <!-- <div class="form-bottom" v-if="slot.bottom">
       <slot name="bottom"></slot>
     </div> -->
