@@ -2,6 +2,11 @@ package com.ruoyi.web.controller.tool;
 
 import java.util.*;
 
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.flowable.domain.vo.FlowTaskVo;
+import com.ruoyi.flowable.service.IFlowDefinitionService;
+import com.ruoyi.flowable.service.IFlowTaskService;
+import com.ruoyi.government.service.GFlowableService;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
@@ -53,10 +58,33 @@ public class TestController extends BaseController
     @Resource
     private HistoryService historyService;
 
+    @Resource
+    private IFlowTaskService flowTaskService;
+
+    @Resource
+    private IFlowDefinitionService flowDefinitionService;
+
+    @Resource
+    private GFlowableService gFlowableService;
+
 
     @ApiOperation("测试")
     @GetMapping("/test")
-    public void testFlow() {
+    public AjaxResult testFlow() {
+//        FlowTaskVo flowTaskVo = new FlowTaskVo();
+//        flowTaskVo.setDeploymentId("10041");
+//        flowTaskService.getNextFlowNodeByStart(flowTaskVo);
+//
+//        Map map = new HashMap();
+//        AjaxResult ajaxResult = flowDefinitionService.startProcessInstanceById("toponym_inquiry:1:10044", map);
+        AjaxResult ajaxResult = gFlowableService.flowTaskStart();
+        return ajaxResult;
+    }
+
+
+
+
+    public void testFlow1() {
         // 发起请假
         Map<String, Object> map = new HashMap<>();
         map.put("day", 2);
