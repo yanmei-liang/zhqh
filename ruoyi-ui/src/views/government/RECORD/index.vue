@@ -389,13 +389,19 @@
           <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
       </el-form> -->
-      <Form :model="model">
+      <Form :model="model" ref="model" :rules="rules">
         <template #left>
-          <el-form-item label="备案标题:">
-            <el-input v-model="model.name"></el-input>
+          <el-form-item label="备案标题:" prop="name11">
+            <el-input v-model="model.name11"></el-input>
           </el-form-item>
           <el-form-item label="批准机关">
             <el-input v-model="model.name"></el-input>
+          </el-form-item>
+          <el-form-item label="备案报告"> 
+            <FileUpload/>
+          </el-form-item>
+          <el-form-item label="命更名申请书"> 
+            <FileUpload/>
           </el-form-item>
         </template>
         <template #right>
@@ -405,12 +411,20 @@
           <el-form-item label="批准日期">
             <el-input v-model="model.name"></el-input>
           </el-form-item>
+           <el-form-item label="批复文件"> 
+            <FileUpload/>
+          </el-form-item>
+           <el-form-item label="其他文件"> 
+            <FileUpload/>
+          </el-form-item>
         </template>
       </Form>
       <div style="display: flex; justify-content: space-between">
         <div><p>新增矢量地名</p></div>
         <div>
-          <el-button size="mini" @click="innerVisible=true">关联选择</el-button>
+          <el-button size="mini" @click="innerVisible = true"
+            >关联选择</el-button
+          >
           <el-button size="mini">删除</el-button>
         </div>
       </div>
@@ -434,17 +448,17 @@
         </el-col>
       </el-row>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button type="primary" @click="submitForm">提 交</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
 
-
-    <el-dialog
-      width="30%"
-      title="内层 Dialog"
-      :visible.sync="innerVisible"
-      append-to-body>
-    </el-dialog>
+      <el-dialog
+        width="30%"
+        title="内层 Dialog"
+        :visible.sync="innerVisible"
+        append-to-body
+      >
+      </el-dialog>
     </el-dialog>
   </div>
 </template>
@@ -459,12 +473,15 @@ import {
 } from "@/api/government/RECORD";
 import Form from "@/components/form";
 import Table from "@/components/Table";
+import FileUpload from "@/components/FileUpload/index.vue";
 export default {
-  components: { Form, Table },
+  components: { Form, Table ,FileUpload},
   name: "RECORD",
   data() {
     return {
-      innerVisible:false,
+      textarea:'',
+      innerVisible: false,
+      rules:[{}],
       tableList: {
         data: [
           {
@@ -571,6 +588,9 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        name11:[{
+          required:true,message: "备案标题不能为空",
+        }],
         recordId: [
           { required: true, message: "主键备案ID不能为空", trigger: "blur" },
         ],

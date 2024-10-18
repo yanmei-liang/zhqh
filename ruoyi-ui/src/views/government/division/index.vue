@@ -62,7 +62,10 @@
           <el-divider></el-divider>
           <!-- 表格 -->
           <div>
-            <Table :tableData="tableList" @selection-change="handleSelectionChange">
+            <Table
+              :tableData="tableList"
+              @selection-change="handleSelectionChange"
+            >
               <template #selection>
                 <el-table-column type="selection" width="55"> </el-table-column>
               </template>
@@ -99,26 +102,29 @@
           </el-tabs>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col :span="11" :offset="1">
-          <div id="main" style="width: 600px; height: 400px"></div>
-          <el-button
-            type="warning"
-            icon="el-icon-download"
-            size="mini"
-            @click="handleExport"
-            >导出</el-button
-          >
+      <el-row style="height: 300px;margin-top:20px">
+        <el-col :span="12" style="position: relative; height: 100%">
+          <!-- <div style="height: 100%;width:100%">
+            <div class="flex">
+              <div class="line"></div>
+              <p>按级别统计</p>
+            </div>
+            <div id="main"></div>
+            <el-button
+              class="btn_chart"
+              type="warning"
+              icon="el-icon-download"
+              size="mini"
+              @click="handleExport"
+              >导出</el-button
+            >
+          </div> -->
+          <LeftTop :data="LeftTop">
+            
+          </LeftTop>
         </el-col>
-        <el-col :span="11">
-          <div id="main22" style="width: 600px; height: 400px"></div>
-          <el-button
-            type="warning"
-            icon="el-icon-download"
-            size="mini"
-            @click="handleExport"
-            >导出</el-button
-          >
+        <el-col :span="12" style="position: relative; height: 100%">
+         <RightTop :data="RightTop"></RightTop>
         </el-col>
       </el-row>
     </div>
@@ -186,14 +192,22 @@
   </div>
 </template>
 <script>
+import LeftTop from "@/components/ManageLayout/LeftTop.vue"
+import RightTop from "@/components/ManageLayout/RightTop.vue"
 import Table from "@/components/Table/index.vue";
 import Form from "@/components/form/index.vue";
 import DialogDelete from "@/components/DialogDelete/index.vue";
 import * as echarts from "echarts";
 export default {
-  components: { Table, Form, DialogDelete },
+  components: { Table, Form, DialogDelete ,LeftTop,RightTop},
   data() {
     return {
+      LeftTop:{
+        title:'按级别统计'
+      },
+      RightTop:{
+        title:'按面积统计'
+      },
       dialogData: {
         dialogVisible: false,
       },
@@ -288,8 +302,8 @@ export default {
     this.SetChart("main22");
   },
   methods: {
-    handleSelectionChange(val){
-      console.log(val)
+    handleSelectionChange(val) {
+      console.log(val);
     },
     handleEdit(index, row) {
       console.log(index, row);
@@ -355,6 +369,11 @@ export default {
 };
 </script>
 <style scoped>
+.btn_chart {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 .container {
   width: 100%;
 }
@@ -372,9 +391,11 @@ span {
 .block {
   display: block;
 }
-#main {
+#main,
+#main22 {
   width: 100%;
-  height: 300px;
+  height: 95%;
+  margin: 0 auto;
 }
 .el-tabs__nav-scroll {
   width: 100%;
@@ -385,5 +406,15 @@ span {
 .el-tabs__item.is-active {
   color: #ffffff;
   background-color: rgba(22, 31, 112, 1);
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.line {
+  width: 5px;
+  height: 20px;
+  background-color: blue;
+  margin: 0 10px;
 }
 </style>
