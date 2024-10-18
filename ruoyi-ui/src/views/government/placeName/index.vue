@@ -1,132 +1,94 @@
 <template>
   <div class="container">
-    <div>
-      <el-row>
-        <el-col :span="11" :offset="1">
-          <div id="main" style="width: 600px; height: 400px"></div>
-          <el-button
-            type="warning"
-            icon="el-icon-download"
-            size="mini"
-            @click="handleExport"
-            >导出</el-button
-          >
-        </el-col>
-        <el-col :span="11">
-          <div id="main22" style="width: 600px; height: 400px"></div>
-          <el-button
-            type="warning"
-            icon="el-icon-download"
-            size="mini"
-            @click="handleExport"
-            >导出</el-button
-          >
-        </el-col>
-      </el-row>
-      <el-row>
-        <!-- top-left -->
-        <el-col class="block" :span="17" :offset="1">
-          <!-- 搜索组 -->
-          <el-row class="row">
-            <el-col :span="6">
-              <span>区划名称</span>
-              <el-input
-                v-model="input"
-                placeholder="请输入内容"
-                size="small"
-              ></el-input>
-            </el-col>
-
-            <el-col :span="7">
-              <span>行政级别</span>
-              <el-select
-                v-model="selectVal"
-                size="small"
-                clearable
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-col>
-
-            <el-col :span="7">
-              <span>更新时间</span>
-              <el-date-picker
-                size="small"
-                v-model="value1"
-                type="datetime"
-                placeholder="选择日期时间"
-              >
-              </el-date-picker>
-            </el-col>
-
-            <el-col :span="2">
-              <el-button type="primary" size="small">查询</el-button>
-            </el-col>
-            <el-col :span="2">
-              <el-button type="primary" size="small">重置</el-button>
-            </el-col>
-          </el-row>
-          <!-- 按钮组 -->
-          <div>
-            <el-button type="primary">新增</el-button>
-            <el-button type="danger">删除</el-button>
-            <el-button type="info">导入</el-button>
-          </div>
-          <el-divider></el-divider>
-          <!-- 表格 -->
-          <div>
-            <!-- <el-table
-              size="small"
-              ref="multipleTable"
-              :data="tableData"
-              tooltip-effect="dark"
-              style="width: 100%"
+    <ManageLayout  :data="dataList"  @handleAdd="handleAdd">
+      <template #LeftBottom>
+        <el-form
+          style="width: 95%"
+          :inline="true"
+          :model="formInline"
+          class="demo-form-inline"
+          size="mini"
+        >
+          <el-form-item label="标准地名">
+            <el-input v-model="formInline.user" placeholder="请输入"></el-input>
+          </el-form-item>
+          <el-form-item label="地名类别">
+            <el-select v-model="formInline.region" placeholder="">
+              <el-option label="全部" value="a"></el-option>
+              <el-option label="企业" value="b"></el-option>
+              <el-option label="旅游景点" value="c"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="使用时间">
+            <el-select v-model="formInline.setDate" placeholder="">
+              <el-option label="全部" value="a"></el-option>
+              <el-option label="现今地名" value="b"></el-option>
+              <el-option label="历史地名" value="b"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="数据来源">
+            <el-select v-model="formInline.setDate" placeholder="">
+              <el-option label="全部" value="a"></el-option>
+              <el-option label="平台录入" value="b"></el-option>
+              <el-option label="市级推送" value="b"></el-option>
+              <el-option label="县级推送" value="b"></el-option>
+              <el-option label="其他" value="b"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="更新时间">
+            <el-date-picker
+              size="mini"
+              v-model="formInline.value1"
+              type="datetimerange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
             >
-              <el-table-column type="selection" width="55"> </el-table-column>
-              <el-table-column label="日期" width="120">
-                <template slot-scope="scope">{{ scope.row.date }}</template>
-              </el-table-column>
-              <el-table-column prop="name" label="姓名" width="120">
-              </el-table-column>
-              <el-table-column
-                prop="address"
-                label="地址"
-                show-overflow-tooltip
-              >
-              </el-table-column>
-            </el-table> -->
-            <Table :tableData="tableList" />
-          </div>
-        </el-col>
-        <!-- top-right -->
-        <el-col :span="6">
-          <el-tabs
-            v-model="activeName"
-            type="card"
-            :stretch="true"
-            style="width: 100%"
-          >
-            <el-tab-pane label="核心属性" name="first">核心属性</el-tab-pane>
-            <el-tab-pane label="基本属性" name="second">基本属性</el-tab-pane>
-            <el-tab-pane label="相关附件" name="second">相关附件</el-tab-pane>
-          </el-tabs>
-        </el-col>
-      </el-row>
-    </div>
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary">查询</el-button>
+            <el-button>重置</el-button>
+          </el-form-item>
+        </el-form>
+      </template>
+      <template #RightBottom>
+        <el-tabs
+          v-model="activeName"
+          type="card"
+          :stretch="true"
+          style="width: 100%"
+        >
+          <el-tab-pane label="核心属性" name="first">
+            <p>标志代码：4203021002351300003202</p>
+            <p>地名代码：42030211300003202</p>
+            <p>标准地名：中心街</p>
+            <p>罗马字母拼写：Zhōngxīn Jiē</p>
+            <p>行政区划：十堰市/张湾区</p>
+            <p>设置单位：十堰市张湾区民政局</p>
+            <p>设立年份 ：2023</p>
+            <p>东经：38517094.4549</p>
+            <p>北纬：31.8000673</p>
+            <p>生产厂家：河南省项城市中浩电力设备有限公司</p>
+            <p>规格：1350mm*450*300mm</p>
+            <p>所在（跨）行政区：</p>
+            <p>是否可公开：是</p>
+          </el-tab-pane>
+          <el-tab-pane label="相关附件" name="second">
+            <p>多媒体照片</p>
+            <p>多媒体视频</p>
+            <p>原读音</p>
+            <p>其他附件</p>
+          </el-tab-pane>
+        </el-tabs>
+      </template>
+    </ManageLayout>
   </div>
 </template>
 <script>
-import Table from "@/components/Table/index.vue";
-import * as echarts from "echarts";
+import ManageLayout from "@/components/ManageLayout";
 export default {
-  components: { Table },
+  components: { ManageLayout },
   data() {
     return {
       input: "",
@@ -188,39 +150,33 @@ export default {
           },
         ],
       },
-
+      formInline: {
+        user: "",
+        date: "",
+        region: "a",
+        value1: "",
+        setDate: "",
+      },
       activeName: "first",
       value1: "",
       options: "",
+      dataList: {
+        LeftTop: {
+          title: "按界线标志类别统计",
+          data: [],
+        },
+        RightTop: {
+          title: "按界线标志区划统计",
+        },
+      },
     };
   },
   mounted() {
-    this.SetChart("main");
-    this.SetChart("main22");
   },
   methods: {
-    SetChart(value) {
-      var chartDom = document.getElementById(value);
-      var myChart = echarts.init(chartDom);
-      var option;
-      option = {
-        xAxis: {
-          type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        },
-        yAxis: {
-          type: "value",
-        },
-        series: [
-          {
-            data: [120, 200, 150, 80, 70, 110, 130],
-            type: "bar",
-          },
-        ],
-      };
-
-      myChart.setOption(option);
-    },
+     handleAdd(){
+      // alert(1111)
+    }
   },
 };
 </script>
@@ -236,8 +192,10 @@ export default {
 span {
   font-size: 12px;
 }
-.el-input {
-  width: 70%;
+.el-input,
+.el-input__inner,
+.el-select {
+  width: 50%;
 }
 .block {
   display: block;
@@ -251,5 +209,8 @@ span {
 }
 .row {
   margin: 20px 0;
+}
+.el-form-item {
+  margin-right: -80px;
 }
 </style>
