@@ -77,7 +77,8 @@ public class GovernmentInquiryController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody GovernmentInquiry governmentInquiry)
     {
-        return toAjax(governmentInquiryService.insertGovernmentInquiry(governmentInquiry));
+        governmentInquiry.setCreateBy(getUsername());
+        return governmentInquiryService.insertGovernmentInquiry(governmentInquiry);
     }
 
     /**
@@ -88,6 +89,7 @@ public class GovernmentInquiryController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody GovernmentInquiry governmentInquiry)
     {
+        governmentInquiry.setUpdateBy(getUsername());
         return toAjax(governmentInquiryService.updateGovernmentInquiry(governmentInquiry));
     }
 

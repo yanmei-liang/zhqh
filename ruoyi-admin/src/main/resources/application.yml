@@ -64,7 +64,7 @@ spring:
   devtools:
     restart:
       # 热部署开关
-      enabled: true
+      enabled: false
   # redis 配置
   redis:
     # 地址
@@ -89,7 +89,7 @@ spring:
         max-wait: -1ms
   liquibase:
     # 启用liquibase
-    enabled: true
+    enabled: false
     # 存储变化的文件（changelog）位置。默认：classpath:/db/changelog/db.changelog-master.xml
     change-log: classpath:/db/changelog.xml
 

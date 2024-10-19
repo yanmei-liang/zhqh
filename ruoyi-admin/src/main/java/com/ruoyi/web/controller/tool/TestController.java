@@ -1,9 +1,18 @@
 package com.ruoyi.web.controller.tool;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.flowable.domain.vo.FlowTaskVo;
+import com.ruoyi.flowable.service.IFlowDefinitionService;
+import com.ruoyi.flowable.service.IFlowTaskService;
+import com.ruoyi.government.service.GFlowableService;
+import org.flowable.engine.HistoryService;
+import org.flowable.engine.RuntimeService;
+import org.flowable.engine.TaskService;
+import org.flowable.engine.history.HistoricActivityInstance;
+import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.task.api.Task;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +31,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 
+import javax.annotation.Resource;
+
 /**
  * swagger 用户测试方法
  * 
@@ -36,6 +47,86 @@ public class TestController extends BaseController
     {
         users.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
         users.put(2, new UserEntity(2, "ry", "admin123", "15666666666"));
+    }
+
+    @Resource
+    private RuntimeService runtimeService;
+
+    @Resource
+    private TaskService taskService;
+
+    @Resource
+    private HistoryService historyService;
+
+    @Resource
+    private IFlowTaskService flowTaskService;
+
+    @Resource
+    private IFlowDefinitionService flowDefinitionService;
+
+    @Resource
+    private GFlowableService gFlowableService;
+
+
+    @ApiOperation("测试")
+    @GetMapping("/test")
+    public AjaxResult testFlow() {
+//        FlowTaskVo flowTaskVo = new FlowTaskVo();
+//        flowTaskVo.setDeploymentId("10041");
+//        flowTaskService.getNextFlowNodeByStart(flowTaskVo);
+//
+//        Map map = new HashMap();
+//        AjaxResult ajaxResult = flowDefinitionService.startProcessInstanceById("toponym_inquiry:1:10044", map);
+        AjaxResult ajaxResult = gFlowableService.flowTaskStart();
+        return ajaxResult;
+    }
+
+
+
+
+    public void testFlow1() {
+        // 发起请假
+        Map<String, Object> map = new HashMap<>();
+        map.put("day", 2);
+        map.put("studentUser", "小明");
+        ProcessInstance studentLeave = runtimeService.startProcessInstanceByKey("StudentLeave", map);
+        Task task = taskService.createTaskQuery().processInstanceId(studentLeave.getId()).singleResult();
+        taskService.complete(task.getId());
+
+        // 老师审批
+        List<Task> teacherTaskList = taskService.createTaskQuery().taskCandidateGroup("teacher").list();
+        Map<String, Object> teacherMap = new HashMap<>();
+        teacherMap.put("outcome", "通过");
+        for (Task teacherTask : teacherTaskList) {
+            taskService.complete(teacherTask.getId(), teacherMap);
+        }
+
+        // 校长审批
+        List<Task> principalTaskList = taskService.createTaskQuery().taskCandidateGroup("principal").list();
+        Map<String, Object> principalMap = new HashMap<>();
+        principalMap.put("outcome", "通过");
+        for (Task principalTask : principalTaskList) {
+            taskService.complete(principalTask.getId(), principalMap);
+        }
+
+        // 查看历史
+        List<HistoricActivityInstance> activities = historyService.createHistoricActivityInstanceQuery()
+                .processInstanceId(studentLeave.getId()).finished()
+                .orderByHistoricActivityInstanceEndTime().asc().list();
+        for (HistoricActivityInstance activity : activities) {
+            System.out.println(activity.getActivityName());
+        }
+        /*
+        开始
+        流程开始
+        请假申请
+        申请流程
+        老师审批
+        通过
+        判断是否大于2天
+        小于2天
+        结束
+        */
     }
 
     @ApiOperation("获取用户列表")

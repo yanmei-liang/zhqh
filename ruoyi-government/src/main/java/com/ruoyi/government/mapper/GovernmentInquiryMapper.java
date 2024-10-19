@@ -1,7 +1,10 @@
 package com.ruoyi.government.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ruoyi.government.domain.GovernmentInquiry;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 地名预审格Mapper接口
@@ -9,7 +12,8 @@ import com.ruoyi.government.domain.GovernmentInquiry;
  * @author ruoyi
  * @date 2024-10-15
  */
-public interface GovernmentInquiryMapper 
+@Mapper
+public interface GovernmentInquiryMapper
 {
     /**
      * 查询地名预审格
@@ -18,6 +22,16 @@ public interface GovernmentInquiryMapper
      * @return 地名预审格
      */
     public GovernmentInquiry selectGovernmentInquiryByInquiryId(Long inquiryId);
+
+    /**
+     * 查询地名预审格
+     *
+     * @param procInsId 流程实例ID
+     * @return 地名预审格
+     */
+    public GovernmentInquiry selectGovernmentInquiryByProcInsId(String procInsId);
+
+
 
     /**
      * 查询地名预审格列表
@@ -33,7 +47,7 @@ public interface GovernmentInquiryMapper
      * @param governmentInquiry 地名预审格
      * @return 结果
      */
-    public int insertGovernmentInquiry(GovernmentInquiry governmentInquiry);
+    public GovernmentInquiry insertGovernmentInquiry(GovernmentInquiry governmentInquiry);
 
     /**
      * 修改地名预审格

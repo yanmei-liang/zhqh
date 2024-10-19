@@ -1,6 +1,8 @@
 package com.ruoyi.government.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.government.domain.GovernmentInquiry;
 
 /**
@@ -20,6 +22,14 @@ public interface IGovernmentInquiryService
     public GovernmentInquiry selectGovernmentInquiryByInquiryId(Long inquiryId);
 
     /**
+     * 查询地名预审格
+     *
+     * @param procInsId 流程实例ID
+     * @return 地名预审格
+     */
+    public GovernmentInquiry selectGovernmentInquiryByProcInsId(String procInsId);
+
+    /**
      * 查询地名预审格列表
      * 
      * @param governmentInquiry 地名预审格
@@ -33,7 +43,7 @@ public interface IGovernmentInquiryService
      * @param governmentInquiry 地名预审格
      * @return 结果
      */
-    public int insertGovernmentInquiry(GovernmentInquiry governmentInquiry);
+    public AjaxResult insertGovernmentInquiry(GovernmentInquiry governmentInquiry);
 
     /**
      * 修改地名预审格

@@ -24,10 +24,6 @@
 			<groupId>com.ruoyi</groupId>
 			<artifactId>ruoyi-common</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.ruoyi</groupId>
-			<artifactId>ruoyi-government</artifactId>
-		</dependency>
 
 		<!--常用工具类 -->
 		<dependency>
@@ -85,12 +81,6 @@
 			<version>${db-migration-dm.version}</version>
 		</dependency>
 
-		<!--liquibase 的版本一般不需要指定（会使用 spring boot 默认的版本），如果兼容 spring boot 2.1 至 2.5 版本，则需要明确指定为 4.5.0 版本。-->
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<version>4.5.0</version>
-		</dependency>
 
 		<dependency>
 			<!-- websocket -->

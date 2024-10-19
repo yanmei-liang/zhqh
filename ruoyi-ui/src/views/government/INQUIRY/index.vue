@@ -15,7 +15,7 @@
       v-show="showSearch"
       label-width="68px"
     >
-      <el-form-item label="预审编号" prop="TOPONYM">
+      <el-form-item label="预审编号" prop="toponym">
         <el-input
           v-model="queryParams.TOPONYM"
           placeholder="请输入预审地名名称"
@@ -31,7 +31,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="提交人" prop="CONTACTS">
+      <el-form-item label="联系人" prop="contacts">
         <el-input
           v-model="queryParams.CONTACTS"
           placeholder="请输入联系人"
@@ -49,7 +49,7 @@
         >
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="审批状态" prop="APPLICATION">
+      <el-form-item label="审批状态" prop="application">
         <el-select v-model="value" placeholder="请选择">
           <el-option
             v-for="item in options"
@@ -146,18 +146,13 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="主键预审ID" align="center" prop="inquiryId" />
       <el-table-column label="预审地名名称" align="center" prop="TOPONYM" />
-      <el-table-column label="报送单位" align="center" prop="submitDepa">
-        <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <a style="margin-left: 10px">{{ scope.row.submitDepa }}</a>
-        </template>
-      </el-table-column>
+      <el-table-column label="报送单位" align="center" prop="submitDepa" />
       <el-table-column label="联系人" align="center" prop="CONTACTS" />
       <el-table-column label="联系人电话" align="center" prop="contactsPhone" />
-      <el-table-column label="申请书" align="center" prop="APPLICATION" />
-      <el-table-column label="附件" align="center" prop="ATTACHMENT" />
+      <el-table-column label="申请书" align="center" prop="application" />
+      <el-table-column label="附件" align="center" prop="attachment" />
       <el-table-column label="预审备注" align="center" prop="inquiryRemark" />
-      <el-table-column label="状态" align="center" prop="STATUS" />
+      <el-table-column label="状态" align="center" prop="status" />
       <el-table-column label="创建者" align="center" prop="createBy" />
       <el-table-column
         label="创建时间"
@@ -182,7 +177,7 @@
       </el-table-column>
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="预审状态" align="center" prop="inquiryStatus" />
-      <el-table-column label="地名编码" align="center" prop="CODE" />
+      <el-table-column label="地名编码" align="center" prop="code" />
       <el-table-column label="地名标志" align="center" prop="toponymSign" />
       <el-table-column
         label="报送时间"
@@ -270,13 +265,13 @@
     <el-dialog :title="title" class="add_form" :visible.sync="open" width="40%" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="预审地名名称" prop="TOPONYM">
-          <el-input v-model="form.TOPONYM" placeholder="请输入预审地名名称" />
+          <el-input v-model="form.toponym" placeholder="请输入预审地名名称" />
         </el-form-item>
         <el-form-item label="报送单位" prop="submitDepa">
           <el-input v-model="form.submitDepa" placeholder="请输入报送单位" />
         </el-form-item>
         <el-form-item label="联系人" prop="CONTACTS">
-          <el-input v-model="form.CONTACTS" placeholder="请输入联系人" />
+          <el-input v-model="form.contacts" placeholder="请输入联系人" />
         </el-form-item>
         <el-form-item label="联系人电话" prop="contactsPhone">
           <el-input
@@ -287,7 +282,10 @@
         <el-form-item label="申请书" prop="APPLICATION">
           <!-- <el-input v-model="form.APPLICATION" placeholder="请输入申请书" /> -->
           <FileUpload/>
+          <el-input v-model="form.application" placeholder="请输入申请书" />
         </el-form-item>
+        <el-form-item label="附件" prop="attachment">
+          <el-input v-model="form.attachment" placeholder="请输入附件" />
         <el-form-item label="其他附件" prop="ATTACHMENT">
           <!-- <el-input v-model="form.ATTACHMENT" placeholder="请输入附件" /> -->
           <FileUpload/>
@@ -297,6 +295,8 @@
         </el-form-item>
         <!-- <el-form-item label="地名编码" prop="CODE">
           <el-input v-model="form.CODE" placeholder="请输入地名编码" />
+        <el-form-item label="地名编码" prop="CODE">
+          <el-input v-model="form.code" placeholder="请输入地名编码" />
         </el-form-item>
         <el-form-item label="地名标志" prop="toponymSign">
           <el-input v-model="form.toponymSign" placeholder="请输入地名标志" />
@@ -406,23 +406,23 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        TOPONYM: null,
-        SubmitDate: null,
-        ApprovalDate: null,
+        toponym: null,
         submitDepa: null,
         CONTACTS: null,
         contactsPhone: null,
         APPLICATION: null,
         ATTACHMENT: null,
+        application: null,
+        attachment: null,
         inquiryRemark: null,
-        STATUS: null,
+        status: null,
         createBy: null,
         createTime: null,
         updateBy: null,
         updateTime: null,
         remark: null,
         inquiryStatus: null,
-        CODE: null,
+        code: null,
         toponymSign: null,
         submitTime: null,
         applyIme: null,
@@ -485,21 +485,21 @@ export default {
     reset() {
       this.form = {
         inquiryId: null,
-        TOPONYM: null,
+        toponym: null,
         submitDepa: null,
-        CONTACTS: null,
+        contacts: null,
         contactsPhone: null,
-        APPLICATION: null,
-        ATTACHMENT: null,
+        application: null,
+        attachment: null,
         inquiryRemark: null,
-        STATUS: null,
+        status: null,
         createBy: null,
         createTime: null,
         updateBy: null,
         updateTime: null,
         remark: null,
         inquiryStatus: null,
-        CODE: null,
+        code: null,
         toponymSign: null,
         submitTime: null,
         applyIme: null,

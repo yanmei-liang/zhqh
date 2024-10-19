@@ -140,7 +140,7 @@ public class GovernmentDeclare extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
-            .append("REMARK", getRemark())
+            .append("remark", getRemark())
             .append("STATUS", getSTATUS())
             .append("declareStatus", getDeclareStatus())
             .append("TOPONYM", getTOPONYM())
