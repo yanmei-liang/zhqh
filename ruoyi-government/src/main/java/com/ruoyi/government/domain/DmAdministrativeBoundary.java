@@ -2,6 +2,7 @@ package com.ruoyi.government.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -25,15 +26,18 @@ public class DmAdministrativeBoundary extends BaseEntity
     private String spatialdataCode;
 
     /** 界限名称 */
+    @Schema(description="界限名称",example="name")
     @Excel(name = "界限名称")
     private String boundarylineName;
 
     /** 界限代码 */
     @Excel(name = "界限代码")
+    @Schema(description="界限代码",example="1")
     private String boundarylineCode;
 
     /** 界限等级 */
     @Excel(name = "界限等级")
+    @Schema(description="界限等级",example="乡级")
     private String boundarylineLv;
 
     /** 界线区划编码 */
@@ -188,6 +192,32 @@ public class DmAdministrativeBoundary extends BaseEntity
     /** 年检联检成果 */
     @Excel(name = "年检联检成果")
     private String annualinspectionResult;
+
+    /** 开始时间yyyy-MM-dd */
+    @Schema(description="开始时间yyyy-MM-dd",example="2020-10-01")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date beginDate;
+
+    /** 结束时间yyyy-MM-dd */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="结束时间yyyy-MM-dd",example="2020-10-30")
+    private Date endDate;
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public void setBoundaryId(Long boundaryId) 
     {

@@ -2,6 +2,7 @@ package com.ruoyi.government.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -26,6 +27,7 @@ public class DmBase extends BaseEntity
 
     /** 标准名称 */
     @Excel(name = "标准名称")
+    @Schema(description="标准名称",example="string")
     private String name;
 
     /** 别名 */
@@ -66,6 +68,7 @@ public class DmBase extends BaseEntity
 
     /** 地名类别 */
     @Excel(name = "地名类别")
+    @Schema(description="标准名称",example="string")
     private String dmlb;
 
     /** 东经(格式：_°_′_″ 第三段“秒”预留两位小数) */
@@ -181,6 +184,32 @@ public class DmBase extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "命名时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date mmsj;
+
+    /** 开始时间yyyy-MM-dd */
+    @Schema(description="开始时间yyyy-MM-dd",example="2020-10-01")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date beginDate;
+
+    /** 结束时间yyyy-MM-dd */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="结束时间yyyy-MM-dd",example="2020-10-30")
+    private Date endDate;
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public void setId(String id) 
     {

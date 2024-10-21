@@ -2,6 +2,7 @@ package com.ruoyi.government.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.government.domain.vo.ExportFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.government.mapper.DmBaseMapper;
@@ -19,6 +20,30 @@ public class DmBaseServiceImpl implements IDmBaseService
 {
     @Autowired
     private DmBaseMapper dmBaseMapper;
+
+    /**
+     * 地名标志类别统计
+     */
+    @Override
+    public List<ExportFile> selectDmBaseByDmStatistics() {
+        return dmBaseMapper.selectDmBaseByDmStatistics();
+    }
+
+    /**
+     * 按地名标志区划统计
+     * */
+    @Override
+    public List<ExportFile> selectDmBaseDivisionStatistics(){
+        return dmBaseMapper.selectDmBaseDivisionStatistics();
+    }
+
+    /**
+     * 查询总条数
+     * */
+    @Override
+    public Integer selectDmBaseCount(DmBase dmBase){
+        return dmBaseMapper.selectDmBaseCount(dmBase);
+    }
 
     /**
      * 查询标准地名

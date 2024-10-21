@@ -1,8 +1,11 @@
 package com.ruoyi.web.controller.Dm;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.government.domain.vo.ExportFileDmAdministrativeBoundary;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +33,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author ruoyi
  * @date 2024-10-14
  */
+@Api(tags = "行政界线")
 @RestController
 @RequestMapping("/government/BOUNDARY")
 public class DmAdministrativeBoundaryController extends BaseController
@@ -40,12 +44,21 @@ public class DmAdministrativeBoundaryController extends BaseController
     /**
      * 查询行政界线列表
      */
+    @ApiOperation("获取数据列表")
     @PreAuthorize("@ss.hasPermi('government:BOUNDARY:list')")
     @GetMapping("/list")
-    public TableDataInfo list(DmAdministrativeBoundary dmAdministrativeBoundary)
+    public TableDataInfo list(@RequestBody(required = false) DmAdministrativeBoundary dmAdministrativeBoundary)
     {
+        Map<String,Object> map=new HashMap<>();
         startPage();
         List<DmAdministrativeBoundary> list = dmAdministrativeBoundaryService.selectDmAdministrativeBoundaryList(dmAdministrativeBoundary);
+        List<ExportFileDmAdministrativeBoundary> RankStatistics = dmAdministrativeBoundaryService.selectRankStatistics();
+        List<ExportFileDmAdministrativeBoundary> DivisionStatistics = dmAdministrativeBoundaryService.selectDivisionStatistics();
+        Integer count = dmAdministrativeBoundaryService.selectDmAdministrativeBoundaryCount(dmAdministrativeBoundary);
+        map.put("total",count);
+        map.put("list",list);
+        map.put("RankStatistics",RankStatistics);
+        map.put("DivisionStatistics",DivisionStatistics);
         return getDataTable(list);
     }
 
@@ -66,7 +79,7 @@ public class DmAdministrativeBoundaryController extends BaseController
      * 获取行政界线详细信息
      */
     @PreAuthorize("@ss.hasPermi('government:BOUNDARY:query')")
-    @GetMapping(value = "/{boundaryId}")
+    @GetMapping(value = "/getInfo/{boundaryId}")
     public AjaxResult getInfo(@PathVariable("boundaryId") Long boundaryId)
     {
         return success(dmAdministrativeBoundaryService.selectDmAdministrativeBoundaryByBoundaryId(boundaryId));
@@ -77,7 +90,7 @@ public class DmAdministrativeBoundaryController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('government:BOUNDARY:add')")
     @Log(title = "行政界线", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping("/addAdministrativeBoundary")
     public AjaxResult add(@RequestBody DmAdministrativeBoundary dmAdministrativeBoundary)
     {
         return toAjax(dmAdministrativeBoundaryService.insertDmAdministrativeBoundary(dmAdministrativeBoundary));
@@ -88,7 +101,7 @@ public class DmAdministrativeBoundaryController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('government:BOUNDARY:edit')")
     @Log(title = "行政界线", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @PutMapping("/editAdministrativeBoundary")
     public AjaxResult edit(@RequestBody DmAdministrativeBoundary dmAdministrativeBoundary)
     {
         return toAjax(dmAdministrativeBoundaryService.updateDmAdministrativeBoundary(dmAdministrativeBoundary));
@@ -97,9 +110,10 @@ public class DmAdministrativeBoundaryController extends BaseController
     /**
      * 删除行政界线
      */
+    @ApiOperation("删除行政界线")
     @PreAuthorize("@ss.hasPermi('government:BOUNDARY:remove')")
     @Log(title = "行政界线", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{boundaryIds}")
+	@DeleteMapping("/remove/{boundaryIds}")
     public AjaxResult remove(@PathVariable Long[] boundaryIds)
     {
         return toAjax(dmAdministrativeBoundaryService.deleteDmAdministrativeBoundaryByBoundaryIds(boundaryIds));

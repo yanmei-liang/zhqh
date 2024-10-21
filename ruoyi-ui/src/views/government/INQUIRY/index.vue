@@ -291,7 +291,7 @@
           <!-- <el-input v-model="form.ATTACHMENT" placeholder="请输入附件" /> -->
           <FileUpload/>
         </el-form-item>
-        <el-form-item label="备注" prop="remark">
+        <el-form-item label="备注" prop="remark">e
           <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
         <!-- <el-form-item label="地名编码" prop="CODE">

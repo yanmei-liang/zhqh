@@ -1,9 +1,13 @@
 package com.ruoyi.government.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.util.Date;
 
 /**
  * 地名标志对象 DM_DMBZ
@@ -20,6 +24,7 @@ public class DmDmbz extends BaseEntity
 
     /** 标准名称 */
     @Excel(name = "标准名称")
+    @Schema(description="标准名称",example="string")
     private String standardName;
 
     /** 设置单位 */
@@ -28,6 +33,7 @@ public class DmDmbz extends BaseEntity
 
     /** 设立年份 */
     @Excel(name = "设立年份")
+    @Schema(description="设置年份",example="2020-01-01")
     private String establishmentYear;
 
     /** 数据来源：字典；平台录入、市级推送、县级推送、其他 */
@@ -109,6 +115,33 @@ public class DmDmbz extends BaseEntity
     /** 审核人 */
     @Excel(name = "审核人")
     private String AUDITOR;
+
+
+    /** 开始时间yyyy-MM-dd */
+    @Schema(description="开始时间yyyy-MM-dd",example="2020-10-01")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date beginDate;
+
+    /** 结束时间yyyy-MM-dd */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="结束时间yyyy-MM-dd",example="2020-10-30")
+    private Date endDate;
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public void setDmbzId(Long dmbzId) 
     {
@@ -245,16 +278,16 @@ public class DmDmbz extends BaseEntity
     {
         return northLatitude;
     }
-    public void setSetTime(String setTime) 
+    public void setSetTime(String setTime)
     {
         this.setTime = setTime;
     }
 
-    public String getSetTime() 
+    public String getSetTime()
     {
         return setTime;
     }
-    public void setMANUFACTURER(String MANUFACTURER) 
+    public void setMANUFACTURER(String MANUFACTURER)
     {
         this.MANUFACTURER = MANUFACTURER;
     }

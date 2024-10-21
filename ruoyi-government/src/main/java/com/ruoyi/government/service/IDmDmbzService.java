@@ -2,6 +2,7 @@ package com.ruoyi.government.service;
 
 import java.util.List;
 import com.ruoyi.government.domain.DmDmbz;
+import com.ruoyi.government.domain.vo.ExportFile;
 
 /**
  * 地名标志Service接口
@@ -11,6 +12,24 @@ import com.ruoyi.government.domain.DmDmbz;
  */
 public interface IDmDmbzService 
 {
+
+    /**
+     * 按地名标志区划统计
+     *
+     */
+    public List<ExportFile> selectDmDmbzDivisionStatistics();
+
+    /**
+     * 按地名标志类别统计
+     *
+     */
+    public List<ExportFile> selectDmDmbzCategoryStatistics();
+
+    /**
+     * 查询总条数
+     * */
+    public Integer selectDmDmbzCount(DmDmbz dmDmbz);
+
     /**
      * 查询地名标志
      * 

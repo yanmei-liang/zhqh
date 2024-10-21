@@ -1,7 +1,10 @@
 package com.ruoyi.government.mapper;
 
 import java.util.List;
+
+import com.ruoyi.government.domain.DmBase;
 import com.ruoyi.government.domain.DmDmbz;
+import com.ruoyi.government.domain.vo.ExportFile;
 
 /**
  * 地名标志Mapper接口
@@ -11,6 +14,25 @@ import com.ruoyi.government.domain.DmDmbz;
  */
 public interface DmDmbzMapper 
 {
+
+    /**
+     * 按地名标志类别统计
+     *
+     */
+    public List<ExportFile> selectDmDmbzCategoryStatistics();
+
+
+    /**
+     * 按地名标志区划统计
+     *
+     */
+    public List<ExportFile> selectDmDmbzDivisionStatistics();
+
+    /**
+     * 查询总条数
+     * */
+    public Integer selectDmDmbzCount(DmDmbz dmDmbz);
+
     /**
      * 查询地名标志
      * 

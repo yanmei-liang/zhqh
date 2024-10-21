@@ -1,7 +1,10 @@
 package com.ruoyi.government.service.impl;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.government.domain.vo.ExportFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.government.mapper.DmAdministrativeDivisionsMapper;
@@ -19,6 +22,51 @@ public class DmAdministrativeDivisionsServiceImpl implements IDmAdministrativeDi
 {
     @Autowired
     private DmAdministrativeDivisionsMapper dmAdministrativeDivisionsMapper;
+
+    /**
+     * 导出类别
+     *
+     */
+    @Override
+    public List<ExportFile> exportSelStatisticallevel(String superiorsCode){
+        return dmAdministrativeDivisionsMapper.exportSelStatisticallevel(superiorsCode);
+    }
+
+    /**
+     * 导出面积统计
+     *
+     */
+    @Override
+    public List<ExportFile> exportselAreaRadius(String superiorsCode){
+        return dmAdministrativeDivisionsMapper.exportselAreaRadius(superiorsCode);
+    }
+
+    /**
+     * 查询总条数
+     *
+     */
+    @Override
+    public Integer selectDmAdministrativeCount(DmAdministrativeDivisions dmAdministrativeDivisions) {
+        return dmAdministrativeDivisionsMapper.selectDmAdministrativeCount(dmAdministrativeDivisions);
+    }
+
+    /**
+     * 范围筛选数据
+     *
+     */
+    @Override
+    public List<Map<String,Integer>> selAreaRadius(String superiorsCode){
+        return dmAdministrativeDivisionsMapper.selAreaRadius(superiorsCode);
+    }
+
+    /**
+     * 统计级别
+     *
+     */
+    @Override
+    public List<Map<String,Integer>> selStatisticallevel(String superiorsCode){
+        return dmAdministrativeDivisionsMapper.selStatisticallevel(superiorsCode);
+    }
 
     /**
      * 返回行政级别下拉框
