@@ -104,7 +104,7 @@ public class GovernmentInquiry extends BaseEntity
     @Excel(name = "地图经纬度集合")
     private String longitudeLatitude;
 
-    /** 地图经纬度集合 */
+    /** 流程实例ID */
     @Excel(name = "流程实例ID")
     private String procInsId;
 

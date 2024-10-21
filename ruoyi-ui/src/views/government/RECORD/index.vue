@@ -90,25 +90,25 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="命名申请书" prop="APPLICATION">
+      <el-form-item label="命名申请书" prop="application">
         <el-input
-          v-model="queryParams.APPLICATION"
+          v-model="queryParams.application"
           placeholder="请输入命名申请书"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="附件" prop="ATTACHMENT">
+      <el-form-item label="附件" prop="attachment">
         <el-input
-          v-model="queryParams.ATTACHMENT"
+          v-model="queryParams.attachment"
           placeholder="请输入附件"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="是否公告" prop="AFFICHE">
+      <el-form-item label="是否公告" prop="affiche">
         <el-input
-          v-model="queryParams.AFFICHE"
+          v-model="queryParams.affiche"
           placeholder="请输入是否公告"
           clearable
           @keyup.enter.native="handleQuery"
@@ -261,16 +261,16 @@
         align="center"
         prop="approvalDocument"
       />
-      <el-table-column label="命名申请书" align="center" prop="APPLICATION" />
-      <el-table-column label="附件" align="center" prop="ATTACHMENT" />
-      <el-table-column label="状态" align="center" prop="STATUS" />
+      <el-table-column label="命名申请书" align="center" prop="application" />
+      <el-table-column label="附件" align="center" prop="attachment" />
+      <el-table-column label="状态" align="center" prop="status" />
       <el-table-column
         label="地图经纬度集合"
         align="center"
         prop="longitudeLatitude"
       />
       <el-table-column label="备案状态" align="center" prop="recordStatus" />
-      <el-table-column label="是否公告" align="center" prop="AFFICHE" />
+      <el-table-column label="是否公告" align="center" prop="affiche" />
       <el-table-column
         label="新增矢量地名"
         align="center"
@@ -335,7 +335,7 @@
 
     <!-- 添加或修改地名备案对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="70%" append-to-body>
-      <!-- <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="申报ID" prop="declareId">
           <el-input v-model="form.declareId" placeholder="请输入申报ID" />
         </el-form-item>
@@ -370,14 +370,14 @@
             placeholder="请输入批复文件"
           />
         </el-form-item>
-        <el-form-item label="命名申请书" prop="APPLICATION">
-          <el-input v-model="form.APPLICATION" placeholder="请输入命名申请书" />
+        <el-form-item label="命名申请书" prop="application">
+          <el-input v-model="form.application" placeholder="请输入命名申请书" />
         </el-form-item>
-        <el-form-item label="附件" prop="ATTACHMENT">
-          <el-input v-model="form.ATTACHMENT" placeholder="请输入附件" />
+        <el-form-item label="附件" prop="attachment">
+          <el-input v-model="form.attachment" placeholder="请输入附件" />
         </el-form-item>
-        <el-form-item label="是否公告" prop="AFFICHE">
-          <el-input v-model="form.AFFICHE" placeholder="请输入是否公告" />
+        <el-form-item label="是否公告" prop="affiche">
+          <el-input v-model="form.affiche" placeholder="请输入是否公告" />
         </el-form-item>
         <el-form-item label="新增矢量地名" prop="vectorPlaceName">
           <el-input
@@ -388,8 +388,8 @@
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
-      </el-form> -->
-      <Form :model="model">
+      </el-form>
+<!--      <Form :model="model">
         <template #left>
           <el-form-item label="备案标题:">
             <el-input v-model="model.name"></el-input>
@@ -432,7 +432,7 @@
           >
           </el-input>
         </el-col>
-      </el-row>
+      </el-row>-->
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
@@ -554,12 +554,12 @@ export default {
         approvalDepa: null,
         recordReport: null,
         approvalDocument: null,
-        APPLICATION: null,
-        ATTACHMENT: null,
-        STATUS: null,
+        application: null,
+        attachment: null,
+        status: null,
         longitudeLatitude: null,
         recordStatus: null,
-        AFFICHE: null,
+        affiche: null,
         vectorPlaceName: null,
         createBy: null,
         createTime: null,
@@ -626,12 +626,12 @@ export default {
         approvalDepa: null,
         recordReport: null,
         approvalDocument: null,
-        APPLICATION: null,
-        ATTACHMENT: null,
-        STATUS: null,
+        application: null,
+        attachment: null,
+        status: null,
         longitudeLatitude: null,
         recordStatus: null,
-        AFFICHE: null,
+        affiche: null,
         vectorPlaceName: null,
         createBy: null,
         createTime: null,

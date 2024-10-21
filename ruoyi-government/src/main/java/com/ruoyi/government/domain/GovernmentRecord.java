@@ -55,15 +55,15 @@ public class GovernmentRecord extends BaseEntity
 
     /** 命名申请书 */
     @Excel(name = "命名申请书")
-    private String APPLICATION;
+    private String application;
 
     /** 附件 */
     @Excel(name = "附件")
-    private String ATTACHMENT;
+    private String attachment;
 
     /** 状态（0正常 1停用） */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
-    private String STATUS;
+    private String status;
 
     /** 地图经纬度集合 */
     @Excel(name = "地图经纬度集合")
@@ -75,13 +75,25 @@ public class GovernmentRecord extends BaseEntity
 
     /** 是否公告 */
     @Excel(name = "是否公告")
-    private String AFFICHE;
+    private String affiche;
 
     /** 新增矢量地名 */
     @Excel(name = "新增矢量地名")
     private String vectorPlaceName;
 
-    public void setRecordId(Long recordId) 
+    /** 流程实例ID */
+    @Excel(name = "流程实例ID")
+    private String procInsId;
+
+    public String getProcInsId() {
+        return procInsId;
+    }
+
+    public void setProcInsId(String procInsId) {
+        this.procInsId = procInsId;
+    }
+
+    public void setRecordId(Long recordId)
     {
         this.recordId = recordId;
     }
@@ -162,32 +174,32 @@ public class GovernmentRecord extends BaseEntity
     {
         return approvalDocument;
     }
-    public void setAPPLICATION(String APPLICATION) 
+    public void setApplication(String application) 
     {
-        this.APPLICATION = APPLICATION;
+        this.application = application;
     }
 
-    public String getAPPLICATION() 
+    public String getApplication() 
     {
-        return APPLICATION;
+        return application;
     }
-    public void setATTACHMENT(String ATTACHMENT) 
+    public void setAttachment(String attachment) 
     {
-        this.ATTACHMENT = ATTACHMENT;
-    }
-
-    public String getATTACHMENT() 
-    {
-        return ATTACHMENT;
-    }
-    public void setSTATUS(String STATUS) 
-    {
-        this.STATUS = STATUS;
+        this.attachment = attachment;
     }
 
-    public String getSTATUS() 
+    public String getAttachment() 
     {
-        return STATUS;
+        return attachment;
+    }
+    public void setStatus(String status) 
+    {
+        this.status = status;
+    }
+
+    public String getStatus() 
+    {
+        return status;
     }
     public void setLongitudeLatitude(String longitudeLatitude) 
     {
@@ -207,14 +219,14 @@ public class GovernmentRecord extends BaseEntity
     {
         return recordStatus;
     }
-    public void setAFFICHE(String AFFICHE) 
+    public void setAffiche(String affiche) 
     {
-        this.AFFICHE = AFFICHE;
+        this.affiche = affiche;
     }
 
-    public String getAFFICHE() 
+    public String getAffiche() 
     {
-        return AFFICHE;
+        return affiche;
     }
     public void setVectorPlaceName(String vectorPlaceName) 
     {
@@ -238,18 +250,19 @@ public class GovernmentRecord extends BaseEntity
             .append("approvalDepa", getApprovalDepa())
             .append("recordReport", getRecordReport())
             .append("approvalDocument", getApprovalDocument())
-            .append("APPLICATION", getAPPLICATION())
-            .append("ATTACHMENT", getATTACHMENT())
-            .append("STATUS", getSTATUS())
+            .append("application", getApplication())
+            .append("attachment", getAttachment())
+            .append("status", getStatus())
             .append("longitudeLatitude", getLongitudeLatitude())
             .append("recordStatus", getRecordStatus())
-            .append("AFFICHE", getAFFICHE())
+            .append("affiche", getAffiche())
             .append("vectorPlaceName", getVectorPlaceName())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("remark", getRemark())
+            .append("procInsId", getProcInsId())
             .toString();
     }
 }

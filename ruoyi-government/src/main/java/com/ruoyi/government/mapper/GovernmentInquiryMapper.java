@@ -47,7 +47,7 @@ public interface GovernmentInquiryMapper
      * @param governmentInquiry 地名预审格
      * @return 结果
      */
-    public GovernmentInquiry insertGovernmentInquiry(GovernmentInquiry governmentInquiry);
+    public int insertGovernmentInquiry(GovernmentInquiry governmentInquiry);
 
     /**
      * 修改地名预审格

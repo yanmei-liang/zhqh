@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="constructionDescribe"    column="CONSTRUCTION_DESCRIBE"    />
         <result property="toponymType"    column="TOPONYM_TYPE"    />
         <result property="longitudeLatitude"    column="LONGITUDE_LATITUDE"    />
+        <result property="procInsId"    column="PROC_INS_ID"    />
     </resultMap>
 
     <sql id="selectGovernmentInquiryVo">

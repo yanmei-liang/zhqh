@@ -1,12 +1,19 @@
 package com.ruoyi.government.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.FlowableStatus;
 import com.ruoyi.common.utils.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.government.mapper.GovernmentRecordMapper;
 import com.ruoyi.government.domain.GovernmentRecord;
 import com.ruoyi.government.service.IGovernmentRecordService;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+
+import static com.ruoyi.common.core.domain.AjaxResult.DATA_TAG;
 
 /**
  * 地名备案Service业务层处理
@@ -17,8 +24,11 @@ import com.ruoyi.government.service.IGovernmentRecordService;
 @Service
 public class GovernmentRecordServiceImpl implements IGovernmentRecordService 
 {
-    @Autowired
+    @Resource
     private GovernmentRecordMapper governmentRecordMapper;
+
+    @Resource
+    private GFlowableServiceImpl gFlowableService;
 
     /**
      * 查询地名备案
@@ -30,6 +40,18 @@ public class GovernmentRecordServiceImpl implements IGovernmentRecordService
     public GovernmentRecord selectGovernmentRecordByRecordId(Long recordId)
     {
         return governmentRecordMapper.selectGovernmentRecordByRecordId(recordId);
+    }
+
+    /**
+     * 查询地名备案
+     *
+     * @param procInsId 流程实例ID
+     * @return 地名备案
+     */
+    @Override
+    public GovernmentRecord selectGovernmentRecordByProcInsId(String procInsId)
+    {
+        return governmentRecordMapper.selectGovernmentRecordByProcInsId(procInsId);
     }
 
     /**
@@ -50,11 +72,18 @@ public class GovernmentRecordServiceImpl implements IGovernmentRecordService
      * @param governmentRecord 地名备案
      * @return 结果
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public int insertGovernmentRecord(GovernmentRecord governmentRecord)
+    public AjaxResult insertGovernmentRecord(GovernmentRecord governmentRecord)
     {
+        AjaxResult ajaxResult = gFlowableService.flowTaskStartRecord(governmentRecord.getRecordName());
         governmentRecord.setCreateTime(DateUtils.getNowDate());
-        return governmentRecordMapper.insertGovernmentRecord(governmentRecord);
+        String procInsId = ajaxResult.get(DATA_TAG).toString();
+        governmentRecord.setProcInsId(procInsId);
+        governmentRecord.setRecordStatus(FlowableStatus.AWAIT.getInfo());
+        Integer insertId =  governmentRecordMapper.insertGovernmentRecord(governmentRecord);
+        governmentRecord.setCreateTime(DateUtils.getNowDate());
+        return insertId > 0 ? AjaxResult.success() : AjaxResult.error();
     }
 
     /**

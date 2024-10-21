@@ -36,6 +36,7 @@ logging:
   level:
     com.ruoyi: debug
     org.springframework: warn
+    com.ruoyi.government.mapper: debug
 
 # 用户配置
 user:
@@ -127,6 +128,7 @@ swagger:
   # 请求前缀
   pathMapping:
 
+
 # 防止XSS攻击
 xss:
   # 过滤开关
@@ -144,3 +146,18 @@ flowable:
   async-executor-activate: false
   # 一般和 spring.datasource.username 的值一样。
   database-schema: SYSDBA
+
+#flowable自定义属性
+myFlowable:
+  #预审
+  inquiry:
+    procDefKey: toponym_inquiry
+  #备案
+  record:
+    procDefKey: toponym_record
+  #申报
+  declare:
+    procDefKey: toponym_declare
+
+government:
+  statusType: 待审核,已通过,已驳回

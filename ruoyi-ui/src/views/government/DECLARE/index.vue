@@ -41,9 +41,9 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="地名名称" prop="TOPONYM">
+      <el-form-item label="地名名称" prop="toponym">
         <el-input
-          v-model="queryParams.TOPONYM"
+          v-model="queryParams.toponym"
           placeholder="请输入地名名称"
           clearable
           @keyup.enter.native="handleQuery"
@@ -57,9 +57,9 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="地名编码" prop="CODE">
+      <el-form-item label="地名编码" prop="code">
         <el-input
-          v-model="queryParams.CODE"
+          v-model="queryParams.code"
           placeholder="请输入地名编码"
           clearable
           @keyup.enter.native="handleQuery"
@@ -149,11 +149,11 @@
         </template>
       </el-table-column>
       <el-table-column label="备注" align="center" prop="remark" />
-      <el-table-column label="状态" align="center" prop="STATUS" />
+      <el-table-column label="状态" align="center" prop="status" />
       <el-table-column label="申报状态" align="center" prop="declareStatus" />
-      <el-table-column label="地名名称" align="center" prop="TOPONYM" />
+      <el-table-column label="地名名称" align="center" prop="toponym" />
       <el-table-column label="地名标志" align="center" prop="toponymSign" />
-      <el-table-column label="地名编码" align="center" prop="CODE" />
+      <el-table-column label="地名编码" align="center" prop="code" />
       <el-table-column label="地名预审ID" align="center" prop="inquiryId" />
       <el-table-column label="地图经纬度集合" align="center" prop="longitudeLatitude" />
       <el-table-column label="申报编号" align="center" prop="declareCode" />
@@ -191,14 +191,14 @@
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
-        <el-form-item label="地名名称" prop="TOPONYM">
-          <el-input v-model="form.TOPONYM" placeholder="请输入地名名称" />
+        <el-form-item label="地名名称" prop="toponym">
+          <el-input v-model="form.toponym" placeholder="请输入地名名称" />
         </el-form-item>
         <el-form-item label="地名标志" prop="toponymSign">
           <el-input v-model="form.toponymSign" placeholder="请输入地名标志" />
         </el-form-item>
-        <el-form-item label="地名编码" prop="CODE">
-          <el-input v-model="form.CODE" placeholder="请输入地名编码" />
+        <el-form-item label="地名编码" prop="code">
+          <el-input v-model="form.code" placeholder="请输入地名编码" />
         </el-form-item>
         <el-form-item label="地名预审ID" prop="inquiryId">
           <el-input v-model="form.inquiryId" placeholder="请输入地名预审ID" />
@@ -249,11 +249,11 @@ export default {
         updateBy: null,
         updateTime: null,
         remark: null,
-        STATUS: null,
+        status: null,
         declareStatus: null,
-        TOPONYM: null,
+        toponym: null,
         toponymSign: null,
-        CODE: null,
+        code: null,
         inquiryId: null,
         longitudeLatitude: null,
         declareCode: null
@@ -295,11 +295,11 @@ export default {
         updateBy: null,
         updateTime: null,
         remark: null,
-        STATUS: null,
+        status: null,
         declareStatus: null,
-        TOPONYM: null,
+        toponym: null,
         toponymSign: null,
-        CODE: null,
+        code: null,
         inquiryId: null,
         longitudeLatitude: null,
         declareCode: null

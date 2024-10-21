@@ -14,22 +14,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="approvalDepa"    column="APPROVAL_DEPA"    />
         <result property="recordReport"    column="RECORD_REPORT"    />
         <result property="approvalDocument"    column="APPROVAL_DOCUMENT"    />
-        <result property="APPLICATION"    column="APPLICATION"    />
-        <result property="ATTACHMENT"    column="ATTACHMENT"    />
-        <result property="STATUS"    column="STATUS"    />
+        <result property="application"    column="application"    />
+        <result property="attachment"    column="attachment"    />
+        <result property="status"    column="status"    />
         <result property="longitudeLatitude"    column="LONGITUDE_LATITUDE"    />
         <result property="recordStatus"    column="RECORD_STATUS"    />
-        <result property="AFFICHE"    column="AFFICHE"    />
+        <result property="affiche"    column="affiche"    />
         <result property="vectorPlaceName"    column="VECTOR_PLACE_NAME"    />
         <result property="createBy"    column="CREATE_BY"    />
         <result property="createTime"    column="CREATE_TIME"    />
         <result property="updateBy"    column="UPDATE_BY"    />
         <result property="updateTime"    column="UPDATE_TIME"    />
         <result property="remark"    column="remark"    />
+        <result property="procInsId"    column="PROC_INS_ID"    />
     </resultMap>
 
     <sql id="selectGovernmentRecordVo">
-        select RECORD_ID, DECLARE_ID, RECORD_CODE, RECORD_NAME, APPROVAL_NUMBER, APPROVAL_TIME, APPROVAL_DEPA, RECORD_REPORT, APPROVAL_DOCUMENT, APPLICATION, ATTACHMENT, STATUS, LONGITUDE_LATITUDE, RECORD_STATUS, AFFICHE, VECTOR_PLACE_NAME, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark from GOVERNMENT_RECORD
+        select RECORD_ID, DECLARE_ID, RECORD_CODE, RECORD_NAME, APPROVAL_NUMBER, APPROVAL_TIME, APPROVAL_DEPA, RECORD_REPORT, APPROVAL_DOCUMENT, application, attachment, status, LONGITUDE_LATITUDE, RECORD_STATUS, affiche, VECTOR_PLACE_NAME, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark, PROC_INS_ID from GOVERNMENT_RECORD
     </sql>
 
     <select id="selectGovernmentRecordList" parameterType="GovernmentRecord" resultMap="GovernmentRecordResult">
@@ -43,24 +44,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="approvalDepa != null  and approvalDepa != ''"> and APPROVAL_DEPA = #{approvalDepa}</if>
             <if test="recordReport != null  and recordReport != ''"> and RECORD_REPORT = #{recordReport}</if>
             <if test="approvalDocument != null  and approvalDocument != ''"> and APPROVAL_DOCUMENT = #{approvalDocument}</if>
-            <if test="APPLICATION != null  and APPLICATION != ''"> and APPLICATION = #{APPLICATION}</if>
-            <if test="ATTACHMENT != null  and ATTACHMENT != ''"> and ATTACHMENT = #{ATTACHMENT}</if>
-            <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
+            <if test="application != null  and application != ''"> and application = #{application}</if>
+            <if test="attachment != null  and attachment != ''"> and attachment = #{attachment}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="longitudeLatitude != null  and longitudeLatitude != ''"> and LONGITUDE_LATITUDE = #{longitudeLatitude}</if>
             <if test="recordStatus != null  and recordStatus != ''"> and RECORD_STATUS = #{recordStatus}</if>
-            <if test="AFFICHE != null  and AFFICHE != ''"> and AFFICHE = #{AFFICHE}</if>
+            <if test="affiche != null  and affiche != ''"> and affiche = #{affiche}</if>
             <if test="vectorPlaceName != null  and vectorPlaceName != ''"> and VECTOR_PLACE_NAME like concat('%', #{vectorPlaceName}, '%')</if>
             <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
             <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
             <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="procInsId != null  and procInsId != ''"> and PROC_INS_ID = #{procInsId}</if>
         </where>
     </select>
     
     <select id="selectGovernmentRecordByRecordId" parameterType="Long" resultMap="GovernmentRecordResult">
         <include refid="selectGovernmentRecordVo"/>
         where RECORD_ID = #{recordId}
+    </select>
+
+    <select id="selectGovernmentRecordByProcInsId" parameterType="String" resultMap="GovernmentRecordResult">
+        <include refid="selectGovernmentRecordVo"/>
+        where PROC_INS_ID = #{procInsId}
     </select>
 
     <insert id="insertGovernmentRecord" parameterType="GovernmentRecord" useGeneratedKeys="true" keyProperty="recordId">
@@ -74,18 +81,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="approvalDepa != null">APPROVAL_DEPA,</if>
             <if test="recordReport != null">RECORD_REPORT,</if>
             <if test="approvalDocument != null">APPROVAL_DOCUMENT,</if>
-            <if test="APPLICATION != null">APPLICATION,</if>
-            <if test="ATTACHMENT != null">ATTACHMENT,</if>
-            <if test="STATUS != null">STATUS,</if>
+            <if test="application != null">application,</if>
+            <if test="attachment != null">attachment,</if>
+            <if test="status != null">status,</if>
             <if test="longitudeLatitude != null">LONGITUDE_LATITUDE,</if>
             <if test="recordStatus != null">RECORD_STATUS,</if>
-            <if test="AFFICHE != null">AFFICHE,</if>
+            <if test="affiche != null">affiche,</if>
             <if test="vectorPlaceName != null">VECTOR_PLACE_NAME,</if>
             <if test="createBy != null">CREATE_BY,</if>
             <if test="createTime != null">CREATE_TIME,</if>
             <if test="updateBy != null">UPDATE_BY,</if>
             <if test="updateTime != null">UPDATE_TIME,</if>
             <if test="remark != null">remark,</if>
+            <if test="procInsId != null">PROC_INS_ID,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="declareId != null">#{declareId},</if>
@@ -96,18 +104,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="approvalDepa != null">#{approvalDepa},</if>
             <if test="recordReport != null">#{recordReport},</if>
             <if test="approvalDocument != null">#{approvalDocument},</if>
-            <if test="APPLICATION != null">#{APPLICATION},</if>
-            <if test="ATTACHMENT != null">#{ATTACHMENT},</if>
-            <if test="STATUS != null">#{STATUS},</if>
+            <if test="application != null">#{application},</if>
+            <if test="attachment != null">#{attachment},</if>
+            <if test="status != null">#{status},</if>
             <if test="longitudeLatitude != null">#{longitudeLatitude},</if>
             <if test="recordStatus != null">#{recordStatus},</if>
-            <if test="AFFICHE != null">#{AFFICHE},</if>
+            <if test="affiche != null">#{affiche},</if>
             <if test="vectorPlaceName != null">#{vectorPlaceName},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
+            <if test="procInsId != null">#{procInsId},</if>
          </trim>
     </insert>
 
@@ -122,18 +131,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="approvalDepa != null">APPROVAL_DEPA = #{approvalDepa},</if>
             <if test="recordReport != null">RECORD_REPORT = #{recordReport},</if>
             <if test="approvalDocument != null">APPROVAL_DOCUMENT = #{approvalDocument},</if>
-            <if test="APPLICATION != null">APPLICATION = #{APPLICATION},</if>
-            <if test="ATTACHMENT != null">ATTACHMENT = #{ATTACHMENT},</if>
-            <if test="STATUS != null">STATUS = #{STATUS},</if>
+            <if test="application != null">application = #{application},</if>
+            <if test="attachment != null">attachment = #{attachment},</if>
+            <if test="status != null">status = #{status},</if>
             <if test="longitudeLatitude != null">LONGITUDE_LATITUDE = #{longitudeLatitude},</if>
             <if test="recordStatus != null">RECORD_STATUS = #{recordStatus},</if>
-            <if test="AFFICHE != null">AFFICHE = #{AFFICHE},</if>
+            <if test="affiche != null">affiche = #{affiche},</if>
             <if test="vectorPlaceName != null">VECTOR_PLACE_NAME = #{vectorPlaceName},</if>
             <if test="createBy != null">CREATE_BY = #{createBy},</if>
             <if test="createTime != null">CREATE_TIME = #{createTime},</if>
             <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
             <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
             <if test="remark != null">remark = #{remark},</if>
+            <if test="procInsId != null">PROC_INS_ID = #{procInsId},</if>
         </trim>
         where RECORD_ID = #{recordId}
     </update>

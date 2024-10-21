@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.FlowableStatus;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.flowable.domain.vo.FlowTaskVo;
@@ -34,7 +35,8 @@ public class GovernmentInquiryServiceImpl implements IGovernmentInquiryService
     @Autowired
     private GovernmentInquiryMapper governmentInquiryMapper;
 
-    @Resource GFlowableServiceImpl gFlowableService;
+    @Resource
+    private GFlowableServiceImpl gFlowableService;
 
     /**
      * 查询地名预审格
@@ -90,14 +92,14 @@ public class GovernmentInquiryServiceImpl implements IGovernmentInquiryService
             return AjaxResult.error("已存在地名名称为"+governmentInquiry.getToponym()+"预审申请");
         }
 
-        AjaxResult ajaxResult = gFlowableService.flowTaskStart();
+        AjaxResult ajaxResult = gFlowableService.flowTaskStartInquiry(governmentInquiry.getToponym());
         governmentInquiry.setCreateTime(DateUtils.getNowDate());
         String procInsId = ajaxResult.get(DATA_TAG).toString();
         governmentInquiry.setProcInsId(procInsId);
-        governmentInquiry.setInquiryStatus("待审核");
-        GovernmentInquiry insertGovernmentInquiry = governmentInquiryMapper.insertGovernmentInquiry(governmentInquiry);
+        governmentInquiry.setInquiryStatus(FlowableStatus.AWAIT.getInfo());
+        Integer insertId =  governmentInquiryMapper.insertGovernmentInquiry(governmentInquiry);
 
-        return StringUtils.isNotNull(insertGovernmentInquiry) ? AjaxResult.success() : AjaxResult.error();
+        return insertId > 0 ? AjaxResult.success() : AjaxResult.error();
     }
 
     /**
