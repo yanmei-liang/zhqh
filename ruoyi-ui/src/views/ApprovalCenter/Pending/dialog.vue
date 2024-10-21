@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="批量审批" :visible.sync="dialogVisible" width="40%">
+  <el-dialog title="批量审批" :visible.sync="data" width="40%" style="border-radius: 10px;" :before-close="handleClose">
     <p>当前选中 11 条审批项</p>
     <div>
       <span>请选择审批操作：</span>
@@ -29,7 +29,7 @@
     </div>
 
     <span slot="footer" class="dialog-footer">
-      <el-button @click="dialogVisible = false" style="margin-right: 10%"
+      <el-button @click="handleClose" style="margin-right: 10%"
         >取 消</el-button
       >
       <el-button type="primary" @click="handleSubmit" style="margin-left: 10%"
@@ -40,18 +40,25 @@
 </template>
 <script>
 export default {
+  props: ["data"],
   data() {
     return {
-      dialogVisible: true,
+      dialogVisible: false,
       radio: "1",
       textarea: "",
     };
   },
+  computed: {
+  },
   methods: {
+    handleClose() {
+      this.$emit('handleClose')
+    },
     handleClick(val) {
       this.textarea = val;
     },
     handleSubmit() {
+      this.$emit('handleSubmit')
       this.$message({
         message: "操作成功",
         type: "success",

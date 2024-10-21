@@ -286,6 +286,7 @@
         </el-form-item>
         <el-form-item label="附件" prop="attachment">
           <el-input v-model="form.attachment" placeholder="请输入附件" />
+        </el-form-item>
         <el-form-item label="其他附件" prop="ATTACHMENT">
           <!-- <el-input v-model="form.ATTACHMENT" placeholder="请输入附件" /> -->
           <FileUpload/>

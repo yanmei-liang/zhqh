@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData.data || ''" style="width: 100%" size="mini" @row-click="handRowClick" @selection-change="handSelect">
+    <el-table :data="tableData.data || ''" style="width: 100%" size="mini"  v-loading="false" @row-click="handRowClick" @selection-change="handSelect">
       <slot name="selection"></slot>
       <el-table-column
       type="selection"
@@ -11,6 +11,7 @@
         :prop="item.prop"
         :label="item.label"
         :width="item.width"
+       
       >
       </el-table-column>
       <slot></slot>

@@ -37,18 +37,20 @@
       </el-form>
     </div>
     <div style="padding-bottom: 20px; border-bottom: 1px solid black">
-      <el-button type="primary">批量审批</el-button>
+      <el-button type="primary" @click="dataList = true">批量审批</el-button>
     </div>
     <div>
       <Table :tableData="tableData">
         <template>
           <el-table-column fixed="right" label="操作" width="100">
-            <el-button type="text" size="small">审批</el-button>
+            <el-button type="text" size="small" @click="handleApproval"
+              >审批</el-button
+            >
           </el-table-column>
         </template>
       </Table>
     </div>
-    <Dialog />
+    <Dialog :data="dataList" @handleSubmit="handleSubmit" @handleClose="handleClose"/>
   </div>
 </template>
 <script>
@@ -58,10 +60,11 @@ export default {
   components: { Table, Dialog },
   data() {
     return {
+      dataList: false,
       formInline: {
         user: "",
         region: "",
-        value1:''
+        value1: "",
       },
       tableData: {
         selection: true,
@@ -124,8 +127,17 @@ export default {
     };
   },
   methods: {
+    handleSubmit(){
+      this.dataList =false
+    },
+    handleClose(){
+      this.dataList =false
+    },
     onSubmit() {
       console.log("submit!");
+    },
+    handleApproval(val) {
+      console.log(val);
     },
   },
 };
