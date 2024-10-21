@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.DmLimitMarkMapper">
+    
+    <resultMap type="com.ruoyi.government.domain.DmLimitMark" id="DmLimitMarkResult">
+        <result property="limitId"    column="LIMIT_ID"    />
+        <result property="boundarypostNo"    column="BOUNDARYPOST_NO"    />
+        <result property="boundarypostCode"    column="BOUNDARYPOST_CODE"    />
+        <result property="spatialdataCode"    column="SPATIALDATA_CODE"    />
+        <result property="boundarypostName"    column="BOUNDARYPOST_NAME"    />
+        <result property="boundarypostLv"    column="BOUNDARYPOST_LV"    />
+        <result property="boundarypostType"    column="BOUNDARYPOST_TYPE"    />
+        <result property="boundarypostTypeTwo"    column="BOUNDARYPOST_TYPE_TWO"    />
+        <result property="boundarypostMaterial"    column="BOUNDARYPOST_MATERIAL"    />
+        <result property="informationType"    column="INFORMATION_TYPE"    />
+        <result property="limitCode"    column="LIMIT_CODE"    />
+        <result property="whetherPublicity"    column="WHETHER_PUBLICITY"    />
+        <result property="boundarymarkerCode"    column="BOUNDARYMARKER_CODE"    />
+        <result property="ELEVATION"    column="ELEVATION"    />
+        <result property="onePhysicalposition"    column="ONE_PHYSICALPOSITION"    />
+        <result property="oneAzimuthangle"    column="ONE_AZIMUTHANGLE"    />
+        <result property="oneAzimuthDistance"    column="ONE_AZIMUTH_DISTANCE"    />
+        <result property="twoPhysicalposition"    column="TWO_PHYSICALPOSITION"    />
+        <result property="twoAzimuthangle"    column="TWO_AZIMUTHANGLE"    />
+        <result property="twoAzimuthDistance"    column="TWO_AZIMUTH_DISTANCE"    />
+        <result property="threePhysicalposition"    column="THREE_PHYSICALPOSITION"    />
+        <result property="threeAzimuthangle"    column="THREE_AZIMUTHANGLE"    />
+        <result property="threeAzimuthDistance"    column="THREE_AZIMUTH_DISTANCE"    />
+        <result property="boundarypostHistoricalrecord"    column="BOUNDARYPOST_HISTORICALRECORD"    />
+        <result property="boundarypostTable"    column="BOUNDARYPOST_TABLE"    />
+        <result property="positionDescription"    column="POSITION_DESCRIPTION"    />
+        <result property="oneLocation"    column="ONE_LOCATION"    />
+        <result property="twoLocation"    column="TWO_LOCATION"    />
+        <result property="threeLocation"    column="THREE_LOCATION"    />
+        <result property="oneTechnicalresponsibility"    column="ONE_TECHNICALRESPONSIBILITY"    />
+        <result property="twoTechnicalresponsibility"    column="TWO_TECHNICALRESPONSIBILITY"    />
+        <result property="threeTechnicalresponsibility"    column="THREE_TECHNICALRESPONSIBILITY"    />
+        <result property="oneGradetime"    column="ONE_GRADETIME"    />
+        <result property="twoGradetime"    column="TWO_GRADETIME"    />
+        <result property="threeGradetime"    column="THREE_GRADETIME"    />
+        <result property="oneAdministrativeregion"    column="ONE_ADMINISTRATIVEREGION"    />
+        <result property="twoAdministrativeregion"    column="TWO_ADMINISTRATIVEREGION"    />
+        <result property="threeAdministrativeregion"    column="THREE_ADMINISTRATIVEREGION"    />
+        <result property="ordinate"    column="ORDINATE"    />
+        <result property="abscissa"    column="ABSCISSA"    />
+        <result property="longitude"    column="LONGITUDE"    />
+        <result property="latitude"    column="LATITUDE"    />
+        <result property="equipmentNo"    column="EQUIPMENT_NO"    />
+        <result property="equipmentName"    column="EQUIPMENT_NAME"    />
+        <result property="equipmentState"    column="EQUIPMENT_STATE"    />
+        <result property="lastmessageTime"    column="LASTMESSAGE_TIME"    />
+        <result property="tiltNot"    column="TILT_NOT"    />
+        <result property="notPowerfailure"    column="NOT_POWERFAILURE"    />
+        <result property="driftDistance"    column="DRIFT_DISTANCE"    />
+        <result property="promptLocation"    column="PROMPT_LOCATION"    />
+        <result property="notTrusteeship"    column="NOT_TRUSTEESHIP"    />
+        <result property="trusteeshipUnit"    column="TRUSTEESHIP_UNIT"    />
+        <result property="stakepositionPicture"    column="STAKEPOSITION_PICTURE"    />
+        <result property="boundarypostRegistrationform"    column="BOUNDARYPOST_REGISTRATIONFORM"    />
+        <result property="boundarypostPicture"    column="BOUNDARYPOST_PICTURE"    />
+        <result property="boundarypostVideo"    column="BOUNDARYPOST_VIDEO"    />
+        <result property="threeIntersectionprotocol"    column="THREE_INTERSECTIONPROTOCOL"    />
+        <result property="threeIntersectionpicture"    column="THREE_INTERSECTIONPICTURE"    />
+        <result property="threeIntersectionminutes"    column="THREE_INTERSECTIONMINUTES"    />
+        <result property="aTechnicalsignature"    column="A_TECHNICALSIGNATURE"    />
+        <result property="aBoundarysettlement"    column="A_BOUNDARYSETTLEMENT"    />
+        <result property="aSignaturetime"    column="A_SIGNATURETIME"    />
+        <result property="bTechnicalsignature"    column="B_TECHNICALSIGNATURE"    />
+        <result property="bBoundarysettlement"    column="B_BOUNDARYSETTLEMENT"    />
+        <result property="bSignaturetime"    column="B_SIGNATURETIME"    />
+        <result property="cTechnicalsignature"    column="C_TECHNICALSIGNATURE"    />
+        <result property="cBoundarysettlement"    column="C_BOUNDARYSETTLEMENT"    />
+        <result property="cSignaturetime"    column="C_SIGNATURETIME"    />
+        <result property="otherAccessories"    column="OTHER_ACCESSORIES"    />
+        <result property="otherInformation"    column="OTHER_INFORMATION"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="REMARK"    />
+    </resultMap>
+
+    <sql id="selectDmLimitMarkVo">
+        select LIMIT_ID, BOUNDARYPOST_NO, BOUNDARYPOST_CODE, SPATIALDATA_CODE, BOUNDARYPOST_NAME, BOUNDARYPOST_LV, BOUNDARYPOST_TYPE, BOUNDARYPOST_TYPE_TWO, BOUNDARYPOST_MATERIAL, INFORMATION_TYPE, LIMIT_CODE, WHETHER_PUBLICITY, BOUNDARYMARKER_CODE, ELEVATION, ONE_PHYSICALPOSITION, ONE_AZIMUTHANGLE, ONE_AZIMUTH_DISTANCE, TWO_PHYSICALPOSITION, TWO_AZIMUTHANGLE, TWO_AZIMUTH_DISTANCE, THREE_PHYSICALPOSITION, THREE_AZIMUTHANGLE, THREE_AZIMUTH_DISTANCE, BOUNDARYPOST_HISTORICALRECORD, BOUNDARYPOST_TABLE, POSITION_DESCRIPTION, ONE_LOCATION, TWO_LOCATION, THREE_LOCATION, ONE_TECHNICALRESPONSIBILITY, TWO_TECHNICALRESPONSIBILITY, THREE_TECHNICALRESPONSIBILITY, ONE_GRADETIME, TWO_GRADETIME, THREE_GRADETIME, ONE_ADMINISTRATIVEREGION, TWO_ADMINISTRATIVEREGION, THREE_ADMINISTRATIVEREGION, ORDINATE, ABSCISSA, LONGITUDE, LATITUDE, EQUIPMENT_NO, EQUIPMENT_NAME, EQUIPMENT_STATE, LASTMESSAGE_TIME, TILT_NOT, NOT_POWERFAILURE, DRIFT_DISTANCE, PROMPT_LOCATION, NOT_TRUSTEESHIP, TRUSTEESHIP_UNIT, STAKEPOSITION_PICTURE, BOUNDARYPOST_REGISTRATIONFORM, BOUNDARYPOST_PICTURE, BOUNDARYPOST_VIDEO, THREE_INTERSECTIONPROTOCOL, THREE_INTERSECTIONPICTURE, THREE_INTERSECTIONMINUTES, A_TECHNICALSIGNATURE, A_BOUNDARYSETTLEMENT, A_SIGNATURETIME, B_TECHNICALSIGNATURE, B_BOUNDARYSETTLEMENT, B_SIGNATURETIME, C_TECHNICALSIGNATURE, C_BOUNDARYSETTLEMENT, C_SIGNATURETIME, OTHER_ACCESSORIES, OTHER_INFORMATION, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, REMARK from DM_LIMIT_MARK
+    </sql>
+
+    <select id="selectDmLimitMarkList" parameterType="com.ruoyi.government.domain.DmLimitMark" resultMap="DmLimitMarkResult">
+        <include refid="selectDmLimitMarkVo"/>
+        <where>  
+            <if test="boundarypostNo != null  and boundarypostNo != ''"> and BOUNDARYPOST_NO = #{boundarypostNo}</if>
+            <if test="boundarypostCode != null  and boundarypostCode != ''"> and BOUNDARYPOST_CODE = #{boundarypostCode}</if>
+            <if test="spatialdataCode != null  and spatialdataCode != ''"> and SPATIALDATA_CODE = #{spatialdataCode}</if>
+            <if test="boundarypostName != null  and boundarypostName != ''"> and BOUNDARYPOST_NAME like concat('%', #{boundarypostName}, '%')</if>
+            <if test="boundarypostLv != null  and boundarypostLv != ''"> and BOUNDARYPOST_LV = #{boundarypostLv}</if>
+            <if test="boundarypostType != null  and boundarypostType != ''"> and BOUNDARYPOST_TYPE = #{boundarypostType}</if>
+            <if test="boundarypostTypeTwo != null  and boundarypostTypeTwo != ''"> and BOUNDARYPOST_TYPE_TWO = #{boundarypostTypeTwo}</if>
+            <if test="boundarypostMaterial != null  and boundarypostMaterial != ''"> and BOUNDARYPOST_MATERIAL = #{boundarypostMaterial}</if>
+            <if test="informationType != null  and informationType != ''"> and INFORMATION_TYPE = #{informationType}</if>
+            <if test="limitCode != null  and limitCode != ''"> and LIMIT_CODE = #{limitCode}</if>
+            <if test="whetherPublicity != null "> and WHETHER_PUBLICITY = #{whetherPublicity}</if>
+            <if test="boundarymarkerCode != null  and boundarymarkerCode != ''"> and BOUNDARYMARKER_CODE = #{boundarymarkerCode}</if>
+            <if test="ELEVATION != null  and ELEVATION != ''"> and ELEVATION = #{ELEVATION}</if>
+            <if test="onePhysicalposition != null  and onePhysicalposition != ''"> and ONE_PHYSICALPOSITION = #{onePhysicalposition}</if>
+            <if test="oneAzimuthangle != null  and oneAzimuthangle != ''"> and ONE_AZIMUTHANGLE = #{oneAzimuthangle}</if>
+            <if test="oneAzimuthDistance != null  and oneAzimuthDistance != ''"> and ONE_AZIMUTH_DISTANCE = #{oneAzimuthDistance}</if>
+            <if test="twoPhysicalposition != null  and twoPhysicalposition != ''"> and TWO_PHYSICALPOSITION = #{twoPhysicalposition}</if>
+            <if test="twoAzimuthangle != null  and twoAzimuthangle != ''"> and TWO_AZIMUTHANGLE = #{twoAzimuthangle}</if>
+            <if test="twoAzimuthDistance != null  and twoAzimuthDistance != ''"> and TWO_AZIMUTH_DISTANCE = #{twoAzimuthDistance}</if>
+            <if test="threePhysicalposition != null  and threePhysicalposition != ''"> and THREE_PHYSICALPOSITION = #{threePhysicalposition}</if>
+            <if test="threeAzimuthangle != null  and threeAzimuthangle != ''"> and THREE_AZIMUTHANGLE = #{threeAzimuthangle}</if>
+            <if test="threeAzimuthDistance != null  and threeAzimuthDistance != ''"> and THREE_AZIMUTH_DISTANCE = #{threeAzimuthDistance}</if>
+            <if test="boundarypostHistoricalrecord != null  and boundarypostHistoricalrecord != ''"> and BOUNDARYPOST_HISTORICALRECORD = #{boundarypostHistoricalrecord}</if>
+            <if test="boundarypostTable != null  and boundarypostTable != ''"> and BOUNDARYPOST_TABLE = #{boundarypostTable}</if>
+            <if test="positionDescription != null  and positionDescription != ''"> and POSITION_DESCRIPTION = #{positionDescription}</if>
+            <if test="oneLocation != null  and oneLocation != ''"> and ONE_LOCATION = #{oneLocation}</if>
+            <if test="twoLocation != null  and twoLocation != ''"> and TWO_LOCATION = #{twoLocation}</if>
+            <if test="threeLocation != null  and threeLocation != ''"> and THREE_LOCATION = #{threeLocation}</if>
+            <if test="oneTechnicalresponsibility != null  and oneTechnicalresponsibility != ''"> and ONE_TECHNICALRESPONSIBILITY = #{oneTechnicalresponsibility}</if>
+            <if test="twoTechnicalresponsibility != null  and twoTechnicalresponsibility != ''"> and TWO_TECHNICALRESPONSIBILITY = #{twoTechnicalresponsibility}</if>
+            <if test="threeTechnicalresponsibility != null  and threeTechnicalresponsibility != ''"> and THREE_TECHNICALRESPONSIBILITY = #{threeTechnicalresponsibility}</if>
+            <if test="oneGradetime != null "> and ONE_GRADETIME = #{oneGradetime}</if>
+            <if test="twoGradetime != null "> and TWO_GRADETIME = #{twoGradetime}</if>
+            <if test="threeGradetime != null "> and THREE_GRADETIME = #{threeGradetime}</if>
+            <if test="oneAdministrativeregion != null  and oneAdministrativeregion != ''"> and ONE_ADMINISTRATIVEREGION = #{oneAdministrativeregion}</if>
+            <if test="twoAdministrativeregion != null  and twoAdministrativeregion != ''"> and TWO_ADMINISTRATIVEREGION = #{twoAdministrativeregion}</if>
+            <if test="threeAdministrativeregion != null  and threeAdministrativeregion != ''"> and THREE_ADMINISTRATIVEREGION = #{threeAdministrativeregion}</if>
+            <if test="ordinate != null  and ordinate != ''"> and ORDINATE = #{ordinate}</if>
+            <if test="abscissa != null  and abscissa != ''"> and ABSCISSA = #{abscissa}</if>
+            <if test="longitude != null  and longitude != ''"> and LONGITUDE = #{longitude}</if>
+            <if test="latitude != null  and latitude != ''"> and LATITUDE = #{latitude}</if>
+            <if test="equipmentNo != null  and equipmentNo != ''"> and EQUIPMENT_NO = #{equipmentNo}</if>
+            <if test="equipmentName != null  and equipmentName != ''"> and EQUIPMENT_NAME like concat('%', #{equipmentName}, '%')</if>
+            <if test="equipmentState != null "> and EQUIPMENT_STATE = #{equipmentState}</if>
+            <if test="lastmessageTime != null "> and LASTMESSAGE_TIME = #{lastmessageTime}</if>
+            <if test="tiltNot != null "> and TILT_NOT = #{tiltNot}</if>
+            <if test="notPowerfailure != null "> and NOT_POWERFAILURE = #{notPowerfailure}</if>
+            <if test="driftDistance != null "> and DRIFT_DISTANCE = #{driftDistance}</if>
+            <if test="promptLocation != null  and promptLocation != ''"> and PROMPT_LOCATION = #{promptLocation}</if>
+            <if test="notTrusteeship != null "> and NOT_TRUSTEESHIP = #{notTrusteeship}</if>
+            <if test="trusteeshipUnit != null  and trusteeshipUnit != ''"> and TRUSTEESHIP_UNIT = #{trusteeshipUnit}</if>
+            <if test="stakepositionPicture != null  and stakepositionPicture != ''"> and STAKEPOSITION_PICTURE = #{stakepositionPicture}</if>
+            <if test="boundarypostRegistrationform != null  and boundarypostRegistrationform != ''"> and BOUNDARYPOST_REGISTRATIONFORM = #{boundarypostRegistrationform}</if>
+            <if test="boundarypostPicture != null  and boundarypostPicture != ''"> and BOUNDARYPOST_PICTURE = #{boundarypostPicture}</if>
+            <if test="boundarypostVideo != null  and boundarypostVideo != ''"> and BOUNDARYPOST_VIDEO = #{boundarypostVideo}</if>
+            <if test="threeIntersectionprotocol != null  and threeIntersectionprotocol != ''"> and THREE_INTERSECTIONPROTOCOL = #{threeIntersectionprotocol}</if>
+            <if test="threeIntersectionpicture != null  and threeIntersectionpicture != ''"> and THREE_INTERSECTIONPICTURE = #{threeIntersectionpicture}</if>
+            <if test="threeIntersectionminutes != null  and threeIntersectionminutes != ''"> and THREE_INTERSECTIONMINUTES = #{threeIntersectionminutes}</if>
+            <if test="aTechnicalsignature != null  and aTechnicalsignature != ''"> and A_TECHNICALSIGNATURE = #{aTechnicalsignature}</if>
+            <if test="aBoundarysettlement != null  and aBoundarysettlement != ''"> and A_BOUNDARYSETTLEMENT = #{aBoundarysettlement}</if>
+            <if test="aSignaturetime != null "> and A_SIGNATURETIME = #{aSignaturetime}</if>
+            <if test="bTechnicalsignature != null  and bTechnicalsignature != ''"> and B_TECHNICALSIGNATURE = #{bTechnicalsignature}</if>
+            <if test="bBoundarysettlement != null  and bBoundarysettlement != ''"> and B_BOUNDARYSETTLEMENT = #{bBoundarysettlement}</if>
+            <if test="bSignaturetime != null "> and B_SIGNATURETIME = #{bSignaturetime}</if>
+            <if test="cTechnicalsignature != null  and cTechnicalsignature != ''"> and C_TECHNICALSIGNATURE = #{cTechnicalsignature}</if>
+            <if test="cBoundarysettlement != null  and cBoundarysettlement != ''"> and C_BOUNDARYSETTLEMENT = #{cBoundarysettlement}</if>
+            <if test="cSignaturetime != null "> and C_SIGNATURETIME = #{cSignaturetime}</if>
+            <if test="otherAccessories != null  and otherAccessories != ''"> and OTHER_ACCESSORIES = #{otherAccessories}</if>
+            <if test="otherInformation != null  and otherInformation != ''"> and OTHER_INFORMATION = #{otherInformation}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="beginDate != null  and endDate != null"> and UPDATE_TIME BETWEEN #{beginDate} AND #{endDate} </if>
+        </where>
+    </select>
+    
+    <select id="selectDmLimitMarkByLimitId" parameterType="Long" resultMap="DmLimitMarkResult">
+        <include refid="selectDmLimitMarkVo"/>
+        where LIMIT_ID = #{limitId}
+    </select>
+
+    <insert id="insertDmLimitMark" parameterType="com.ruoyi.government.domain.DmLimitMark" useGeneratedKeys="true" keyProperty="limitId">
+        insert into DM_LIMIT_MARK
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="boundarypostNo != null">BOUNDARYPOST_NO,</if>
+            <if test="boundarypostCode != null">BOUNDARYPOST_CODE,</if>
+            <if test="spatialdataCode != null">SPATIALDATA_CODE,</if>
+            <if test="boundarypostName != null">BOUNDARYPOST_NAME,</if>
+            <if test="boundarypostLv != null">BOUNDARYPOST_LV,</if>
+            <if test="boundarypostType != null">BOUNDARYPOST_TYPE,</if>
+            <if test="boundarypostTypeTwo != null">BOUNDARYPOST_TYPE_TWO,</if>
+            <if test="boundarypostMaterial != null">BOUNDARYPOST_MATERIAL,</if>
+            <if test="informationType != null">INFORMATION_TYPE,</if>
+            <if test="limitCode != null">LIMIT_CODE,</if>
+            <if test="whetherPublicity != null">WHETHER_PUBLICITY,</if>
+            <if test="boundarymarkerCode != null">BOUNDARYMARKER_CODE,</if>
+            <if test="ELEVATION != null">ELEVATION,</if>
+            <if test="onePhysicalposition != null">ONE_PHYSICALPOSITION,</if>
+            <if test="oneAzimuthangle != null">ONE_AZIMUTHANGLE,</if>
+            <if test="oneAzimuthDistance != null">ONE_AZIMUTH_DISTANCE,</if>
+            <if test="twoPhysicalposition != null">TWO_PHYSICALPOSITION,</if>
+            <if test="twoAzimuthangle != null">TWO_AZIMUTHANGLE,</if>
+            <if test="twoAzimuthDistance != null">TWO_AZIMUTH_DISTANCE,</if>
+            <if test="threePhysicalposition != null">THREE_PHYSICALPOSITION,</if>
+            <if test="threeAzimuthangle != null">THREE_AZIMUTHANGLE,</if>
+            <if test="threeAzimuthDistance != null">THREE_AZIMUTH_DISTANCE,</if>
+            <if test="boundarypostHistoricalrecord != null">BOUNDARYPOST_HISTORICALRECORD,</if>
+            <if test="boundarypostTable != null">BOUNDARYPOST_TABLE,</if>
+            <if test="positionDescription != null">POSITION_DESCRIPTION,</if>
+            <if test="oneLocation != null">ONE_LOCATION,</if>
+            <if test="twoLocation != null">TWO_LOCATION,</if>
+            <if test="threeLocation != null">THREE_LOCATION,</if>
+            <if test="oneTechnicalresponsibility != null">ONE_TECHNICALRESPONSIBILITY,</if>
+            <if test="twoTechnicalresponsibility != null">TWO_TECHNICALRESPONSIBILITY,</if>
+            <if test="threeTechnicalresponsibility != null">THREE_TECHNICALRESPONSIBILITY,</if>
+            <if test="oneGradetime != null">ONE_GRADETIME,</if>
+            <if test="twoGradetime != null">TWO_GRADETIME,</if>
+            <if test="threeGradetime != null">THREE_GRADETIME,</if>
+            <if test="oneAdministrativeregion != null">ONE_ADMINISTRATIVEREGION,</if>
+            <if test="twoAdministrativeregion != null">TWO_ADMINISTRATIVEREGION,</if>
+            <if test="threeAdministrativeregion != null">THREE_ADMINISTRATIVEREGION,</if>
+            <if test="ordinate != null">ORDINATE,</if>
+            <if test="abscissa != null">ABSCISSA,</if>
+            <if test="longitude != null">LONGITUDE,</if>
+            <if test="latitude != null">LATITUDE,</if>
+            <if test="equipmentNo != null">EQUIPMENT_NO,</if>
+            <if test="equipmentName != null">EQUIPMENT_NAME,</if>
+            <if test="equipmentState != null">EQUIPMENT_STATE,</if>
+            <if test="lastmessageTime != null">LASTMESSAGE_TIME,</if>
+            <if test="tiltNot != null">TILT_NOT,</if>
+            <if test="notPowerfailure != null">NOT_POWERFAILURE,</if>
+            <if test="driftDistance != null">DRIFT_DISTANCE,</if>
+            <if test="promptLocation != null">PROMPT_LOCATION,</if>
+            <if test="notTrusteeship != null">NOT_TRUSTEESHIP,</if>
+            <if test="trusteeshipUnit != null">TRUSTEESHIP_UNIT,</if>
+            <if test="stakepositionPicture != null">STAKEPOSITION_PICTURE,</if>
+            <if test="boundarypostRegistrationform != null">BOUNDARYPOST_REGISTRATIONFORM,</if>
+            <if test="boundarypostPicture != null">BOUNDARYPOST_PICTURE,</if>
+            <if test="boundarypostVideo != null">BOUNDARYPOST_VIDEO,</if>
+            <if test="threeIntersectionprotocol != null">THREE_INTERSECTIONPROTOCOL,</if>
+            <if test="threeIntersectionpicture != null">THREE_INTERSECTIONPICTURE,</if>
+            <if test="threeIntersectionminutes != null">THREE_INTERSECTIONMINUTES,</if>
+            <if test="aTechnicalsignature != null">A_TECHNICALSIGNATURE,</if>
+            <if test="aBoundarysettlement != null">A_BOUNDARYSETTLEMENT,</if>
+            <if test="aSignaturetime != null">A_SIGNATURETIME,</if>
+            <if test="bTechnicalsignature != null">B_TECHNICALSIGNATURE,</if>
+            <if test="bBoundarysettlement != null">B_BOUNDARYSETTLEMENT,</if>
+            <if test="bSignaturetime != null">B_SIGNATURETIME,</if>
+            <if test="cTechnicalsignature != null">C_TECHNICALSIGNATURE,</if>
+            <if test="cBoundarysettlement != null">C_BOUNDARYSETTLEMENT,</if>
+            <if test="cSignaturetime != null">C_SIGNATURETIME,</if>
+            <if test="otherAccessories != null">OTHER_ACCESSORIES,</if>
+            <if test="otherInformation != null">OTHER_INFORMATION,</if>
+            <if test="createBy != null">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+            <if test="updateBy != null">UPDATE_BY,</if>
+            <if test="updateTime != null">UPDATE_TIME,</if>
+            <if test="remark != null">REMARK,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="boundarypostNo != null">#{boundarypostNo},</if>
+            <if test="boundarypostCode != null">#{boundarypostCode},</if>
+            <if test="spatialdataCode != null">#{spatialdataCode},</if>
+            <if test="boundarypostName != null">#{boundarypostName},</if>
+            <if test="boundarypostLv != null">#{boundarypostLv},</if>
+            <if test="boundarypostType != null">#{boundarypostType},</if>
+            <if test="boundarypostTypeTwo != null">#{boundarypostTypeTwo},</if>
+            <if test="boundarypostMaterial != null">#{boundarypostMaterial},</if>
+            <if test="informationType != null">#{informationType},</if>
+            <if test="limitCode != null">#{limitCode},</if>
+            <if test="whetherPublicity != null">#{whetherPublicity},</if>
+            <if test="boundarymarkerCode != null">#{boundarymarkerCode},</if>
+            <if test="ELEVATION != null">#{ELEVATION},</if>
+            <if test="onePhysicalposition != null">#{onePhysicalposition},</if>
+            <if test="oneAzimuthangle != null">#{oneAzimuthangle},</if>
+            <if test="oneAzimuthDistance != null">#{oneAzimuthDistance},</if>
+            <if test="twoPhysicalposition != null">#{twoPhysicalposition},</if>
+            <if test="twoAzimuthangle != null">#{twoAzimuthangle},</if>
+            <if test="twoAzimuthDistance != null">#{twoAzimuthDistance},</if>
+            <if test="threePhysicalposition != null">#{threePhysicalposition},</if>
+            <if test="threeAzimuthangle != null">#{threeAzimuthangle},</if>
+            <if test="threeAzimuthDistance != null">#{threeAzimuthDistance},</if>
+            <if test="boundarypostHistoricalrecord != null">#{boundarypostHistoricalrecord},</if>
+            <if test="boundarypostTable != null">#{boundarypostTable},</if>
+            <if test="positionDescription != null">#{positionDescription},</if>
+            <if test="oneLocation != null">#{oneLocation},</if>
+            <if test="twoLocation != null">#{twoLocation},</if>
+            <if test="threeLocation != null">#{threeLocation},</if>
+            <if test="oneTechnicalresponsibility != null">#{oneTechnicalresponsibility},</if>
+            <if test="twoTechnicalresponsibility != null">#{twoTechnicalresponsibility},</if>
+            <if test="threeTechnicalresponsibility != null">#{threeTechnicalresponsibility},</if>
+            <if test="oneGradetime != null">#{oneGradetime},</if>
+            <if test="twoGradetime != null">#{twoGradetime},</if>
+            <if test="threeGradetime != null">#{threeGradetime},</if>
+            <if test="oneAdministrativeregion != null">#{oneAdministrativeregion},</if>
+            <if test="twoAdministrativeregion != null">#{twoAdministrativeregion},</if>
+            <if test="threeAdministrativeregion != null">#{threeAdministrativeregion},</if>
+            <if test="ordinate != null">#{ORDINATE},</if>
+            <if test="abscissa != null">#{ABSCISSA},</if>
+            <if test="longitude != null">#{LONGITUDE},</if>
+            <if test="latitude != null">#{LATITUDE},</if>
+            <if test="equipmentNo != null">#{equipmentNo},</if>
+            <if test="equipmentName != null">#{equipmentName},</if>
+            <if test="equipmentState != null">#{equipmentState},</if>
+            <if test="lastmessageTime != null">#{lastmessageTime},</if>
+            <if test="tiltNot != null">#{tiltNot},</if>
+            <if test="notPowerfailure != null">#{notPowerfailure},</if>
+            <if test="driftDistance != null">#{driftDistance},</if>
+            <if test="promptLocation != null">#{promptLocation},</if>
+            <if test="notTrusteeship != null">#{notTrusteeship},</if>
+            <if test="trusteeshipUnit != null">#{trusteeshipUnit},</if>
+            <if test="stakepositionPicture != null">#{stakepositionPicture},</if>
+            <if test="boundarypostRegistrationform != null">#{boundarypostRegistrationform},</if>
+            <if test="boundarypostPicture != null">#{boundarypostPicture},</if>
+            <if test="boundarypostVideo != null">#{boundarypostVideo},</if>
+            <if test="threeIntersectionprotocol != null">#{threeIntersectionprotocol},</if>
+            <if test="threeIntersectionpicture != null">#{threeIntersectionpicture},</if>
+            <if test="threeIntersectionminutes != null">#{threeIntersectionminutes},</if>
+            <if test="aTechnicalsignature != null">#{aTechnicalsignature},</if>
+            <if test="aBoundarysettlement != null">#{aBoundarysettlement},</if>
+            <if test="aSignaturetime != null">#{aSignaturetime},</if>
+            <if test="bTechnicalsignature != null">#{bTechnicalsignature},</if>
+            <if test="bBoundarysettlement != null">#{bBoundarysettlement},</if>
+            <if test="bSignaturetime != null">#{bSignaturetime},</if>
+            <if test="cTechnicalsignature != null">#{cTechnicalsignature},</if>
+            <if test="cBoundarysettlement != null">#{cBoundarysettlement},</if>
+            <if test="cSignaturetime != null">#{cSignaturetime},</if>
+            <if test="otherAccessories != null">#{otherAccessories},</if>
+            <if test="otherInformation != null">#{otherInformation},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmLimitMark" parameterType="com.ruoyi.government.domain.DmLimitMark">
+        update DM_LIMIT_MARK
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="boundarypostNo != null">BOUNDARYPOST_NO = #{boundarypostNo},</if>
+            <if test="boundarypostCode != null">BOUNDARYPOST_CODE = #{boundarypostCode},</if>
+            <if test="spatialdataCode != null">SPATIALDATA_CODE = #{spatialdataCode},</if>
+            <if test="boundarypostName != null">BOUNDARYPOST_NAME = #{boundarypostName},</if>
+            <if test="boundarypostLv != null">BOUNDARYPOST_LV = #{boundarypostLv},</if>
+            <if test="boundarypostType != null">BOUNDARYPOST_TYPE = #{boundarypostType},</if>
+            <if test="boundarypostTypeTwo != null">BOUNDARYPOST_TYPE_TWO = #{boundarypostTypeTwo},</if>
+            <if test="boundarypostMaterial != null">BOUNDARYPOST_MATERIAL = #{boundarypostMaterial},</if>
+            <if test="informationType != null">INFORMATION_TYPE = #{informationType},</if>
+            <if test="limitCode != null">LIMIT_CODE = #{limitCode},</if>
+            <if test="whetherPublicity != null">WHETHER_PUBLICITY = #{whetherPublicity},</if>
+            <if test="boundarymarkerCode != null">BOUNDARYMARKER_CODE = #{boundarymarkerCode},</if>
+            <if test="ELEVATION != null">ELEVATION = #{ELEVATION},</if>
+            <if test="onePhysicalposition != null">ONE_PHYSICALPOSITION = #{onePhysicalposition},</if>
+            <if test="oneAzimuthangle != null">ONE_AZIMUTHANGLE = #{oneAzimuthangle},</if>
+            <if test="oneAzimuthDistance != null">ONE_AZIMUTH_DISTANCE = #{oneAzimuthDistance},</if>
+            <if test="twoPhysicalposition != null">TWO_PHYSICALPOSITION = #{twoPhysicalposition},</if>
+            <if test="twoAzimuthangle != null">TWO_AZIMUTHANGLE = #{twoAzimuthangle},</if>
+            <if test="twoAzimuthDistance != null">TWO_AZIMUTH_DISTANCE = #{twoAzimuthDistance},</if>
+            <if test="threePhysicalposition != null">THREE_PHYSICALPOSITION = #{threePhysicalposition},</if>
+            <if test="threeAzimuthangle != null">THREE_AZIMUTHANGLE = #{threeAzimuthangle},</if>
+            <if test="threeAzimuthDistance != null">THREE_AZIMUTH_DISTANCE = #{threeAzimuthDistance},</if>
+            <if test="boundarypostHistoricalrecord != null">BOUNDARYPOST_HISTORICALRECORD = #{boundarypostHistoricalrecord},</if>
+            <if test="boundarypostTable != null">BOUNDARYPOST_TABLE = #{boundarypostTable},</if>
+            <if test="positionDescription != null">POSITION_DESCRIPTION = #{positionDescription},</if>
+            <if test="oneLocation != null">ONE_LOCATION = #{oneLocation},</if>
+            <if test="twoLocation != null">TWO_LOCATION = #{twoLocation},</if>
+            <if test="threeLocation != null">THREE_LOCATION = #{threeLocation},</if>
+            <if test="oneTechnicalresponsibility != null">ONE_TECHNICALRESPONSIBILITY = #{oneTechnicalresponsibility},</if>
+            <if test="twoTechnicalresponsibility != null">TWO_TECHNICALRESPONSIBILITY = #{twoTechnicalresponsibility},</if>
+            <if test="threeTechnicalresponsibility != null">THREE_TECHNICALRESPONSIBILITY = #{threeTechnicalresponsibility},</if>
+            <if test="oneGradetime != null">ONE_GRADETIME = #{oneGradetime},</if>
+            <if test="twoGradetime != null">TWO_GRADETIME = #{twoGradetime},</if>
+            <if test="threeGradetime != null">THREE_GRADETIME = #{threeGradetime},</if>
+            <if test="oneAdministrativeregion != null">ONE_ADMINISTRATIVEREGION = #{oneAdministrativeregion},</if>
+            <if test="twoAdministrativeregion != null">TWO_ADMINISTRATIVEREGION = #{twoAdministrativeregion},</if>
+            <if test="threeAdministrativeregion != null">THREE_ADMINISTRATIVEREGION = #{threeAdministrativeregion},</if>
+            <if test="ordinate != null">ORDINATE = #{ordinate},</if>
+            <if test="abscissa != null">ABSCISSA = #{abscissa},</if>
+            <if test="longitude != null">LONGITUDE = #{longitude},</if>
+            <if test="latitude != null">LATITUDE = #{latitude},</if>
+            <if test="equipmentNo != null">EQUIPMENT_NO = #{equipmentNo},</if>
+            <if test="equipmentName != null">EQUIPMENT_NAME = #{equipmentName},</if>
+            <if test="equipmentState != null">EQUIPMENT_STATE = #{equipmentState},</if>
+            <if test="lastmessageTime != null">LASTMESSAGE_TIME = #{lastmessageTime},</if>
+            <if test="tiltNot != null">TILT_NOT = #{tiltNot},</if>
+            <if test="notPowerfailure != null">NOT_POWERFAILURE = #{notPowerfailure},</if>
+            <if test="driftDistance != null">DRIFT_DISTANCE = #{driftDistance},</if>
+            <if test="promptLocation != null">PROMPT_LOCATION = #{promptLocation},</if>
+            <if test="notTrusteeship != null">NOT_TRUSTEESHIP = #{notTrusteeship},</if>
+            <if test="trusteeshipUnit != null">TRUSTEESHIP_UNIT = #{trusteeshipUnit},</if>
+            <if test="stakepositionPicture != null">STAKEPOSITION_PICTURE = #{stakepositionPicture},</if>
+            <if test="boundarypostRegistrationform != null">BOUNDARYPOST_REGISTRATIONFORM = #{boundarypostRegistrationform},</if>
+            <if test="boundarypostPicture != null">BOUNDARYPOST_PICTURE = #{boundarypostPicture},</if>
+            <if test="boundarypostVideo != null">BOUNDARYPOST_VIDEO = #{boundarypostVideo},</if>
+            <if test="threeIntersectionprotocol != null">THREE_INTERSECTIONPROTOCOL = #{threeIntersectionprotocol},</if>
+            <if test="threeIntersectionpicture != null">THREE_INTERSECTIONPICTURE = #{threeIntersectionpicture},</if>
+            <if test="threeIntersectionminutes != null">THREE_INTERSECTIONMINUTES = #{threeIntersectionminutes},</if>
+            <if test="aTechnicalsignature != null">A_TECHNICALSIGNATURE = #{aTechnicalsignature},</if>
+            <if test="aBoundarysettlement != null">A_BOUNDARYSETTLEMENT = #{aBoundarysettlement},</if>
+            <if test="aSignaturetime != null">A_SIGNATURETIME = #{aSignaturetime},</if>
+            <if test="bTechnicalsignature != null">B_TECHNICALSIGNATURE = #{bTechnicalsignature},</if>
+            <if test="bBoundarysettlement != null">B_BOUNDARYSETTLEMENT = #{bBoundarysettlement},</if>
+            <if test="bSignaturetime != null">B_SIGNATURETIME = #{bSignaturetime},</if>
+            <if test="cTechnicalsignature != null">C_TECHNICALSIGNATURE = #{cTechnicalsignature},</if>
+            <if test="cBoundarysettlement != null">C_BOUNDARYSETTLEMENT = #{cBoundarysettlement},</if>
+            <if test="cSignaturetime != null">C_SIGNATURETIME = #{cSignaturetime},</if>
+            <if test="otherAccessories != null">OTHER_ACCESSORIES = #{otherAccessories},</if>
+            <if test="otherInformation != null">OTHER_INFORMATION = #{otherInformation},</if>
+            <if test="createBy != null">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null">REMARK = #{remark},</if>
+        </trim>
+        where LIMIT_ID = #{limitId}
+    </update>
+
+    <delete id="deleteDmLimitMarkByLimitId" parameterType="Long">
+        delete from DM_LIMIT_MARK where LIMIT_ID = #{limitId}
+    </delete>
+
+    <delete id="deleteDmLimitMarkByLimitIds" parameterType="String">
+        delete from DM_LIMIT_MARK where LIMIT_ID in 
+        <foreach item="limitId" collection="array" open="(" separator="," close=")">
+            #{limitId}
+        </foreach>
+    </delete>
+</mapper>

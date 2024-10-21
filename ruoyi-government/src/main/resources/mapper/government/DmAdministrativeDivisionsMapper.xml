@@ -32,9 +32,78 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select ID, ADMINISTRATIVE_DIVISION_NAME, ADMINISTRATIVE_DIVISION_CODE, ADDRESS, AREA, POSTAL_CODE, ADMINISTRATIVE_LEVEL, SUPERIORS_NAME, SUPERIORS_CODE, UNIT_WEBSITE, CONTACT_NUMBER, ATTACHMENTS, MULTIMEDIA_VIDEO, ORIGINAL_PRONUNCIATION, OTHER_ACCESSORIES, GEOGRAPHICALPOSITION_MSG, remark, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME from DM_ADMINISTRATIVE_DIVISIONS
     </sql>
 
+    <!-- 范围筛选数据 -->
+    <select id="selAreaRadius" parameterType="java.lang.String"  resultType="java.util.Map">
+        SELECT
+        CASE WHEN 5000 > AREA THEN '0-5000'
+        WHEN AREA BETWEEN 5000 AND 10000 THEN '5000-10000'
+        WHEN AREA BETWEEN 10000 AND 15000 THEN '10000-15000'
+        WHEN AREA BETWEEN 15000 AND 20000 THEN '15000-20000'
+        WHEN AREA >= 20000 THEN '20000'
+        END AS range,
+        COUNT(*) AS count
+        FROM DM_ADMINISTRATIVE_DIVISIONS
+        WHERE SUPERIORS_CODE = #{superiorsCode}
+        GROUP BY
+        CASE WHEN 5000 > AREA   THEN '0-5000'
+        WHEN AREA BETWEEN 5000 AND 10000 THEN '5000-10000'
+        WHEN AREA BETWEEN 10000 AND 15000 THEN '10000-15000'
+        WHEN AREA BETWEEN 15000 AND 20000 THEN '15000-20000'
+        WHEN AREA >= 20000 THEN '20000'
+        END
+        ORDER BY
+        MIN(AREA)
+    </select>
+
+    <!-- 导出范围筛选数据 -->
+    <select id="exportselAreaRadius" parameterType="java.lang.String"  resultType="com.ruoyi.government.domain.vo.ExportFile">
+        SELECT
+            CASE WHEN 5000 > AREA THEN '0-5000'
+                 WHEN AREA BETWEEN 5000 AND 10000 THEN '5000-10000'
+                 WHEN AREA BETWEEN 10000 AND 15000 THEN '10000-15000'
+                 WHEN AREA BETWEEN 15000 AND 20000 THEN '15000-20000'
+                 WHEN AREA >= 20000 THEN '20000'
+                END AS level,
+            COUNT(*) AS count
+        FROM DM_ADMINISTRATIVE_DIVISIONS
+        WHERE SUPERIORS_CODE = #{superiorsCode}
+        GROUP BY
+            CASE WHEN 5000 > AREA   THEN '0-5000'
+            WHEN AREA BETWEEN 5000 AND 10000 THEN '5000-10000'
+            WHEN AREA BETWEEN 10000 AND 15000 THEN '10000-15000'
+            WHEN AREA BETWEEN 15000 AND 20000 THEN '15000-20000'
+            WHEN AREA >= 20000 THEN '20000'
+        END
+        ORDER BY
+        MIN(AREA)
+    </select>
+
+    <!-- 导出级别 -->
+    <select id="exportSelStatisticallevel" parameterType="java.lang.String"  resultType="com.ruoyi.government.domain.vo.ExportFile">
+        select administrative_level as level ,count(*) as count from DM_ADMINISTRATIVE_DIVISIONS
+        WHERE SUPERIORS_CODE = #{superiorsCode} group by administrative_level;
+    </select>
+
+
+    <!-- 统计级别 -->
+    <select id="selStatisticallevel" parameterType="java.lang.String"  resultType="java.util.Map">
+        select administrative_level as level ,count(*) as amount from DM_ADMINISTRATIVE_DIVISIONS
+        WHERE SUPERIORS_CODE = #{superiorsCode} group by administrative_level;
+    </select>
+
     <!-- 返回行政级别下拉框 -->
     <select id="selectDmAdministrativeByAdministrativeLevel"  resultType="java.lang.String">
         SELECT DISTINCT ADMINISTRATIVE_LEVEL FROM DM_ADMINISTRATIVE_DIVISIONS
+    </select>
+
+    <!-- 查询总条数 -->
+    <select id="selectDmAdministrativeCount" parameterType="com.ruoyi.government.domain.DmAdministrativeDivisions"  resultType="java.lang.Integer">
+        SELECT count(1) FROM DM_ADMINISTRATIVE_DIVISIONS
+        <where>
+            <if test="administrativeDivisionName != null  and administrativeDivisionName != ''"> and ADMINISTRATIVE_DIVISION_NAME like concat('%', #{administrativeDivisionName}, '%')</if>
+            <if test="administrativeLevel != null  and administrativeLevel != ''"> and ADMINISTRATIVE_LEVEL = #{administrativeLevel}</if>
+            <if test="beginDate != null  and endDate != null"> and UPDATE_TIME BETWEEN #{beginDate} AND #{endDate} </if>
+        </where>
     </select>
 
     <select id="selectDmAdministrativeDivisionsList" parameterType="com.ruoyi.government.domain.DmAdministrativeDivisions" resultMap="DmAdministrativeDivisionsResult">
@@ -55,11 +124,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="originalPronunciation != null  and originalPronunciation != ''"> and ORIGINAL_PRONUNCIATION = #{originalPronunciation}</if>
             <if test="otherAccessories != null  and otherAccessories != ''"> and OTHER_ACCESSORIES = #{otherAccessories}</if>
             <if test="geographicalpositionMsg != null  and geographicalpositionMsg != ''"> and GEOGRAPHICALPOSITION_MSG = #{geographicalpositionMsg}</if>
-            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="remark != null  and remark != ''"> and REMARK = #{remark}</if>
             <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
             <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
-            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="beginDate != null  and endDate != null"> and UPDATE_TIME BETWEEN #{beginDate} AND #{endDate} </if>
         </where>
     </select>
     

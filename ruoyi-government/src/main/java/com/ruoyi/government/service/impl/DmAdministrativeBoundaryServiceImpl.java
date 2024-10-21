@@ -2,6 +2,7 @@ package com.ruoyi.government.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.government.domain.vo.ExportFileDmAdministrativeBoundary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.government.mapper.DmAdministrativeBoundaryMapper;
@@ -19,6 +20,31 @@ public class DmAdministrativeBoundaryServiceImpl implements IDmAdministrativeBou
 {
     @Autowired
     private DmAdministrativeBoundaryMapper dmAdministrativeBoundaryMapper;
+
+    /**
+     * 查询总条数
+     *
+     */
+    @Override
+    public Integer selectDmAdministrativeBoundaryCount(DmAdministrativeBoundary dmAdministrativeBoundary){
+        return dmAdministrativeBoundaryMapper.selectDmAdministrativeBoundaryCount(dmAdministrativeBoundary);
+    }
+
+    /**
+     * 按界线等级统计
+     */
+    @Override
+    public List<ExportFileDmAdministrativeBoundary> selectRankStatistics(){
+        return dmAdministrativeBoundaryMapper.selectRankStatistics();
+    }
+
+    /**
+     * 按界线区划统计
+     */
+    @Override
+    public  List<ExportFileDmAdministrativeBoundary> selectDivisionStatistics(){
+        return dmAdministrativeBoundaryMapper.selectDivisionStatistics();
+    }
 
     /**
      * 查询行政界线

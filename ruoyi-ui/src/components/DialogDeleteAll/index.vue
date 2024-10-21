@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <el-dialog
-      :title="dialog.title || 标题"
+      :title="dialog.title || '标题'"
       :visible.sync="dialog.dialogVisible"
       width="30%"
     >

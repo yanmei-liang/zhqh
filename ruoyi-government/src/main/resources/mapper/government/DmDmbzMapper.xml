@@ -40,6 +40,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select DMBZ_ID, STANDARD_NAME, SET_UNIT, ESTABLISHMENT_YEAR, DATA_SOURCE, FLAG_CODE, KJ_CODE, DMBZ_CODE, TMLMZMPX, XZQH_NAME, XZQH_CODE, NATIONAL_SCRIPT, SZKXZQH_NAME, EAST_LONGITUDE, NORTH_LATITUDE, SET_TIME, MANUFACTURER, MATERIAL, SPECIFICATION, FILE_NAME, SIGNIN_TIME, REGISTRANT, REGISTRATION_UNIT, AUDITOR, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark from DM_DMBZ
     </sql>
 
+    <!-- 按地名标志类别统计 -->
+    <select id="selectDmDmbzCategoryStatistics" resultType="com.ruoyi.government.domain.vo.ExportFile">
+        select DML."code"  as level ,DML."name",count(*) as count from DM_DMBZ dmbz LEFT JOIN DM_DMLB dml
+        ON dmbz.DMLB_CODE = dml."code"
+        group by DML."name",dml."code"
+    </select>
+
+    <!-- 按地名标志区划统计 -->
+    <select id="selectDmDmbzDivisionStatistics" resultType="com.ruoyi.government.domain.vo.ExportFile">
+        select XZQH_NAME as level,count(*) as count from DM_DMBZ
+        group by XZQH_NAME
+    </select>
+
+    <!-- 查询总条数 -->
+    <select id="selectDmDmbzCount" parameterType="com.ruoyi.government.domain.DmDmbz"  resultType="java.lang.Integer">
+        SELECT count(1) FROM DM_DMBZ
+        <where>
+            <if test="standardName != null  and standardName != ''"> and STANDARD_NAME like concat('%', #{standardName}, '%')</if>
+            <if test="setUnit != null  and setUnit != ''"> and SET_UNIT = #{setUnit}</if>
+            <if test="establishmentYear != null  and establishmentYear != ''"> and ESTABLISHMENT_YEAR = #{establishmentYear}</if>
+            <if test="dataSource != null  and dataSource != ''"> and DATA_SOURCE = #{dataSource}</if>
+            <if test="flagCode != null  and flagCode != ''"> and FLAG_CODE = #{flagCode}</if>
+            <if test="kjCode != null  and kjCode != ''"> and KJ_CODE = #{kjCode}</if>
+            <if test="dmbzCode != null  and dmbzCode != ''"> and DMBZ_CODE = #{dmbzCode}</if>
+            <if test="TMLMZMPX != null  and TMLMZMPX != ''"> and TMLMZMPX = #{TMLMZMPX}</if>
+            <if test="xzqhName != null  and xzqhName != ''"> and XZQH_NAME like concat('%', #{xzqhName}, '%')</if>
+            <if test="xzqhCode != null  and xzqhCode != ''"> and XZQH_CODE = #{xzqhCode}</if>
+            <if test="nationalScript != null  and nationalScript != ''"> and NATIONAL_SCRIPT = #{nationalScript}</if>
+            <if test="szkxzqhName != null  and szkxzqhName != ''"> and SZKXZQH_NAME like concat('%', #{szkxzqhName}, '%')</if>
+            <if test="eastLongitude != null  and eastLongitude != ''"> and EAST_LONGITUDE = #{eastLongitude}</if>
+            <if test="northLatitude != null  and northLatitude != ''"> and NORTH_LATITUDE = #{northLatitude}</if>
+            <if test="setTime != null  and setTime != ''"> and SET_TIME = #{setTime}</if>
+            <if test="MANUFACTURER != null  and MANUFACTURER != ''"> and MANUFACTURER = #{MANUFACTURER}</if>
+            <if test="MATERIAL != null  and MATERIAL != ''"> and MATERIAL = #{MATERIAL}</if>
+            <if test="SPECIFICATION != null  and SPECIFICATION != ''"> and SPECIFICATION = #{SPECIFICATION}</if>
+            <if test="fileName != null  and fileName != ''"> and FILE_NAME like concat('%', #{fileName}, '%')</if>
+            <if test="signinTime != null  and signinTime != ''"> and SIGNIN_TIME = #{signinTime}</if>
+            <if test="REGISTRANT != null  and REGISTRANT != ''"> and REGISTRANT = #{REGISTRANT}</if>
+            <if test="registrationUnit != null  and registrationUnit != ''"> and REGISTRATION_UNIT = #{registrationUnit}</if>
+            <if test="AUDITOR != null  and AUDITOR != ''"> and AUDITOR = #{AUDITOR}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="beginDate != null  and endDate != null"> and UPDATE_TIME BETWEEN #{beginDate} AND #{endDate} </if>
+        </where>
+    </select>
+
+
     <select id="selectDmDmbzList" parameterType="com.ruoyi.government.domain.DmDmbz" resultMap="DmDmbzResult">
         <include refid="selectDmDmbzVo"/>
         <where>  
@@ -69,8 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
             <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
             <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
-            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
-            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="beginDate != null  and endDate != null"> and UPDATE_TIME BETWEEN #{beginDate} AND #{endDate} </if>
         </where>
     </select>
     

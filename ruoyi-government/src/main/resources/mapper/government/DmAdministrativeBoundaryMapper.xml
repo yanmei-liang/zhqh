@@ -59,6 +59,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select BOUNDARY_ID, SPATIALDATA_CODE, BOUNDARYLINE_NAME, BOUNDARYLINE_CODE, BOUNDARYLINE_LV, BOUNDARYZONING_CODE, BOUNDARYZONING_NAME, BOUNDARY_LENGTH, GEOGRAPHICALPOSITION_MSG, BOUNDARYLINE_START, BOUNDARYLINE_END, SUPERIOR_EXAMINE, SUPERIOR_INSTRUCTIONS, DEMARCATION_PROGRAMME, MEETING_MINUTES, MEETING_AGREEMENT, MEETING_PICTURE, WORK_SUMMARY, SUPERIOR_AGREEMENT_EXAMINE, LANDAGREEMENT_INSTRUCTIONS, BOUNDARY_AGREEMENT, AGREEMENT_APPLYFOR, AGREEMENT_INSTRUCTIONS, AGREEMENT_PICTURE, BOUNDARYCHANGE_HISTORY, SET_TIME, DISPUTEOR_NOT, INFORMATION_STATE, INFORMATION_SOURCE, BOUNDARYPOST_QUANTITY, SINGLECOLUMN_QUANTITY, DOUBLECOLUMN_QUANTITY, THREECOLUMN_QUANTITY, OTHER_INFORMATION, MULTIMEDIA_PHOTO, MULTIMEDIA_VIDEO, BOUNDARYAGREEMENT_DOCUMENT, BOUNDARYAGREEMENT_PICTURE, BOUNDARYPOST_TABLE, ANNUALINSPECTION_REPORT, ANNUALINSPECTION_PLAN, PROCESSING_RESULT, ANNUALINSPECTION_RESULT, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark from DM_ADMINISTRATIVE_BOUNDARY
     </sql>
 
+    <!-- 按界线等级统计 -->
+    <select id="selectRankStatistics" resultType="com.ruoyi.government.domain.vo.ExportFileDmAdministrativeBoundary">
+        select BOUNDARYLINE_LV as level,count(*) as count, SUM(BOUNDARY_LENGTH) as boundaryLength ,
+        SUM(BOUNDARYPOST_QUANTITY) as boundarypostQuantity  from DM_ADMINISTRATIVE_BOUNDARY
+        group by BOUNDARYLINE_LV
+    </select>
+
+    <!-- 按界线区划统计 -->
+    <select id="selectDivisionStatistics" resultType="com.ruoyi.government.domain.vo.ExportFileDmAdministrativeBoundary">
+        select BOUNDARYLINE_NAME as level,count(*) as count, SUM(BOUNDARY_LENGTH) as boundaryLength ,
+        SUM(BOUNDARYPOST_QUANTITY) as boundarypostQuantity  from DM_ADMINISTRATIVE_BOUNDARY
+        group by BOUNDARYLINE_NAME
+    </select>
+
+    <!-- 查询总条数 -->
+    <select id="selectDmAdministrativeBoundaryCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM DM_ADMINISTRATIVE_BOUNDARY
+        <where>
+            <if test="spatialdataCode != null  and spatialdataCode != ''"> and SPATIALDATA_CODE = #{spatialdataCode}</if>
+            <if test="boundarylineName != null  and boundarylineName != ''"> and BOUNDARYLINE_NAME like concat('%', #{boundarylineName}, '%')</if>
+            <if test="boundarylineCode != null  and boundarylineCode != ''"> and BOUNDARYLINE_CODE = #{boundarylineCode}</if>
+            <if test="boundarylineLv != null  and boundarylineLv != ''"> and BOUNDARYLINE_LV = #{boundarylineLv}</if>
+            <if test="boundaryzoningCode != null  and boundaryzoningCode != ''"> and BOUNDARYZONING_CODE = #{boundaryzoningCode}</if>
+            <if test="boundaryzoningName != null  and boundaryzoningName != ''"> and BOUNDARYZONING_NAME like concat('%', #{boundaryzoningName}, '%')</if>
+            <if test="boundaryLength != null "> and BOUNDARY_LENGTH = #{boundaryLength}</if>
+            <if test="geographicalpositionMsg != null  and geographicalpositionMsg != ''"> and GEOGRAPHICALPOSITION_MSG = #{geographicalpositionMsg}</if>
+            <if test="boundarylineStart != null  and boundarylineStart != ''"> and BOUNDARYLINE_START = #{boundarylineStart}</if>
+            <if test="boundarylineEnd != null  and boundarylineEnd != ''"> and BOUNDARYLINE_END = #{boundarylineEnd}</if>
+            <if test="superiorExamine != null  and superiorExamine != ''"> and SUPERIOR_EXAMINE = #{superiorExamine}</if>
+            <if test="superiorInstructions != null  and superiorInstructions != ''"> and SUPERIOR_INSTRUCTIONS = #{superiorInstructions}</if>
+            <if test="demarcationProgramme != null  and demarcationProgramme != ''"> and DEMARCATION_PROGRAMME = #{demarcationProgramme}</if>
+            <if test="meetingMinutes != null  and meetingMinutes != ''"> and MEETING_MINUTES = #{meetingMinutes}</if>
+            <if test="meetingAgreement != null  and meetingAgreement != ''"> and MEETING_AGREEMENT = #{meetingAgreement}</if>
+            <if test="meetingPicture != null  and meetingPicture != ''"> and MEETING_PICTURE = #{meetingPicture}</if>
+            <if test="workSummary != null  and workSummary != ''"> and WORK_SUMMARY = #{workSummary}</if>
+            <if test="superiorAgreementExamine != null  and superiorAgreementExamine != ''"> and SUPERIOR_AGREEMENT_EXAMINE = #{superiorAgreementExamine}</if>
+            <if test="landagreementInstructions != null  and landagreementInstructions != ''"> and LANDAGREEMENT_INSTRUCTIONS = #{landagreementInstructions}</if>
+            <if test="boundaryAgreement != null  and boundaryAgreement != ''"> and BOUNDARY_AGREEMENT = #{boundaryAgreement}</if>
+            <if test="agreementApplyfor != null  and agreementApplyfor != ''"> and AGREEMENT_APPLYFOR = #{agreementApplyfor}</if>
+            <if test="agreementInstructions != null  and agreementInstructions != ''"> and AGREEMENT_INSTRUCTIONS = #{agreementInstructions}</if>
+            <if test="agreementPicture != null  and agreementPicture != ''"> and AGREEMENT_PICTURE = #{agreementPicture}</if>
+            <if test="boundarychangeHistory != null  and boundarychangeHistory != ''"> and BOUNDARYCHANGE_HISTORY = #{boundarychangeHistory}</if>
+            <if test="setTime != null "> and SET_TIME = #{setTime}</if>
+            <if test="disputeorNot != null "> and DISPUTEOR_NOT = #{disputeorNot}</if>
+            <if test="informationState != null "> and INFORMATION_STATE = #{informationState}</if>
+            <if test="informationSource != null  and informationSource != ''"> and INFORMATION_SOURCE = #{informationSource}</if>
+            <if test="boundarypostQuantity != null "> and BOUNDARYPOST_QUANTITY = #{boundarypostQuantity}</if>
+            <if test="singlecolumnQuantity != null "> and SINGLECOLUMN_QUANTITY = #{singlecolumnQuantity}</if>
+            <if test="doublecolumnQuantity != null "> and DOUBLECOLUMN_QUANTITY = #{doublecolumnQuantity}</if>
+            <if test="threecolumnQuantity != null "> and THREECOLUMN_QUANTITY = #{threecolumnQuantity}</if>
+            <if test="otherInformation != null  and otherInformation != ''"> and OTHER_INFORMATION = #{otherInformation}</if>
+            <if test="multimediaPhoto != null  and multimediaPhoto != ''"> and MULTIMEDIA_PHOTO = #{multimediaPhoto}</if>
+            <if test="multimediaVideo != null  and multimediaVideo != ''"> and MULTIMEDIA_VIDEO = #{multimediaVideo}</if>
+            <if test="boundaryagreementDocument != null  and boundaryagreementDocument != ''"> and BOUNDARYAGREEMENT_DOCUMENT = #{boundaryagreementDocument}</if>
+            <if test="boundaryagreementPicture != null  and boundaryagreementPicture != ''"> and BOUNDARYAGREEMENT_PICTURE = #{boundaryagreementPicture}</if>
+            <if test="boundarypostTable != null  and boundarypostTable != ''"> and BOUNDARYPOST_TABLE = #{boundarypostTable}</if>
+            <if test="annualinspectionReport != null  and annualinspectionReport != ''"> and ANNUALINSPECTION_REPORT = #{annualinspectionReport}</if>
+            <if test="annualinspectionPlan != null  and annualinspectionPlan != ''"> and ANNUALINSPECTION_PLAN = #{annualinspectionPlan}</if>
+            <if test="processingResult != null  and processingResult != ''"> and PROCESSING_RESULT = #{processingResult}</if>
+            <if test="annualinspectionResult != null  and annualinspectionResult != ''"> and ANNUALINSPECTION_RESULT = #{annualinspectionResult}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="beginDate != null  and beginDate != '' and endDate != null  and endDate != ''"> and UPDATE_TIME BETWEEN #{beginDate} AND #{endDate} </if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+        </where>
+    </select>
+
     <select id="selectDmAdministrativeBoundaryList" parameterType="com.ruoyi.government.domain.DmAdministrativeBoundary" resultMap="DmAdministrativeBoundaryResult">
         <include refid="selectDmAdministrativeBoundaryVo"/>
         <where>  
@@ -116,6 +184,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDmAdministrativeBoundaryVo"/>
         where BOUNDARY_ID = #{boundaryId}
     </select>
+
+
     
     <insert id="insertDmAdministrativeBoundary" parameterType="com.ruoyi.government.domain.DmAdministrativeBoundary" useGeneratedKeys="true" keyProperty="boundaryId">
         insert into DM_ADMINISTRATIVE_BOUNDARY
