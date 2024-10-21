@@ -9,7 +9,7 @@
             <el-col :span="6">
               <span>区划名称</span>
               <el-input
-                v-model="input"
+                v-model="formData.administrativeDivisionName"
                 placeholder="请输入内容"
                 size="small"
               ></el-input>
@@ -18,7 +18,7 @@
             <el-col :span="7">
               <span>行政级别</span>
               <el-select
-                v-model="selectVal"
+                v-model="formData.administrativeLevel"
                 size="small"
                 clearable
                 placeholder="请选择"
@@ -28,24 +28,17 @@
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
-                >
-                </el-option>
+                ></el-option>
               </el-select>
             </el-col>
 
             <el-col :span="7">
               <span>更新时间</span>
-              <el-date-picker
-                size="small"
-                v-model="value1"
-                type="datetime"
-                placeholder="选择日期时间"
-              >
-              </el-date-picker>
+              <el-date-picker size="small" v-model="value1" type="datetime" placeholder="选择日期时间"></el-date-picker>
             </el-col>
 
             <el-col :span="2">
-              <el-button type="primary" size="small">查询</el-button>
+              <el-button type="primary" size="small" @click="handleSearch">查询</el-button>
             </el-col>
             <el-col :span="2">
               <el-button type="primary" size="small">重置</el-button>
@@ -53,36 +46,26 @@
           </el-row>
           <!-- 按钮组 -->
           <div>
-            <el-button type="primary" @click="dialogVisible = true"
-              >新增</el-button
-            >
+            <el-button type="primary" @click="dialogVisible = true">新增</el-button>
             <el-button type="danger" @click="handleAllDelete">删除</el-button>
             <el-button type="info">导入</el-button>
           </div>
           <el-divider></el-divider>
           <!-- 表格 -->
           <div>
-            <Table
-              :tableData="tableList"
-              @selection-change="handleSelectionChange"
-            >
+            <Table :tableData="tableList" @selection-change="handleSelectionChange">
               <template #selection>
-                <el-table-column type="selection" width="55"> </el-table-column>
+                <el-table-column type="selection" width="55"></el-table-column>
               </template>
               <template>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
-                    <el-button
-                      size="mini"
-                      @click="handleEdit(scope.$index, scope.row)"
-                      >编辑</el-button
-                    >
+                    <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button
                       size="mini"
                       type="danger"
                       @click="handleDelete(scope.$index, scope.row)"
-                      >删除</el-button
-                    >
+                    >删除</el-button>
                   </template>
                 </el-table-column>
               </template>
@@ -91,13 +74,11 @@
         </el-col>
         <!-- top-right -->
         <el-col :span="8">
-          <el-tabs
-            v-model="activeName"
-            type="card"
-            :stretch="true"
-            style="width: 100%"
-          >
-            <el-tab-pane label="核心属性" name="first">核心属性</el-tab-pane>
+          <el-tabs v-model="activeName" type="card" :stretch="true" style="width: 100%">
+            <el-tab-pane label="核心属性" name="first">
+              核心属性
+              <img :src="imgUrl" />
+            </el-tab-pane>
             <el-tab-pane label="相关附件" name="second">相关附件</el-tab-pane>
           </el-tabs>
         </el-col>
@@ -118,40 +99,33 @@
               @click="handleExport"
               >导出</el-button
             >
-          </div> -->
-          <LeftTop :data="LeftTop">
-            
-          </LeftTop>
+          </div>-->
+          <LeftTop :data="LeftTop"></LeftTop>
         </el-col>
         <el-col :span="12" style="position: relative; height: 100%">
-         <RightTop :data="RightTop"></RightTop>
+          <RightTop :data="RightTop"></RightTop>
         </el-col>
       </el-row>
     </div>
-    <el-dialog
-      title="提示"
-      :visible.sync="dialogVisible"
-      width="60%"
-      :before-close="handleClose"
-    >
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
       <p>核心信息</p>
       <el-divider></el-divider>
       <Form :model="formData" :rules="rules">
         <template #left>
           <el-form-item label="行政区划名称:" prop="name">
-            <el-input v-model="formData.name" placeholder="" />
+            <el-input v-model="formData.name" placeholder />
           </el-form-item>
           <el-form-item label="驻地地址:" prop="address">
-            <el-input v-model="formData.address" placeholder="" />
+            <el-input v-model="formData.address" placeholder />
           </el-form-item>
           <el-form-item label="邮政编码:" prop="code">
-            <el-input v-model="formData.code" placeholder="" />
+            <el-input v-model="formData.code" placeholder />
           </el-form-item>
           <el-form-item label="上一级区划名称:" prop="previous">
-            <el-input v-model="formData.previous" placeholder="" />
+            <el-input v-model="formData.previous" placeholder />
           </el-form-item>
           <el-form-item label="单位网址:" prop="unit">
-            <el-input v-model="formData.unit" placeholder="" />
+            <el-input v-model="formData.unit" placeholder />
           </el-form-item>
           <el-form-item label="展示图片:" prop="photo">
             <el-upload
@@ -163,25 +137,25 @@
               <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible1">
-              <img width="100%" :src="dialogImageUrl" alt="" />
+              <img width="100%" :src="dialogImageUrl" alt />
             </el-dialog>
           </el-form-item>
         </template>
         <template #right>
           <el-form-item label="行政区划代码:" prop="nameNum">
-            <el-input v-model="formData.nameNum" placeholder="" />
+            <el-input v-model="formData.nameNum" placeholder />
           </el-form-item>
           <el-form-item label="面积(km²):" prop="area">
-            <el-input v-model="formData.area" placeholder="" />
+            <el-input v-model="formData.area" placeholder />
           </el-form-item>
           <el-form-item label="面积(km²):" prop="administrative">
-            <el-input v-model="formData.administrative" placeholder="" />
+            <el-input v-model="formData.administrative" placeholder />
           </el-form-item>
           <el-form-item label="上一级区划代码:" prop="previousNum">
-            <el-input v-model="formData.area" placeholder="" />
+            <el-input v-model="formData.area" placeholder />
           </el-form-item>
           <el-form-item label="联系电话:" prop="phoneNum">
-            <el-input v-model="formData.phoneNum" placeholder="" />
+            <el-input v-model="formData.phoneNum" placeholder />
           </el-form-item>
         </template>
       </Form>
@@ -192,116 +166,141 @@
   </div>
 </template>
 <script>
-import LeftTop from "@/components/ManageLayout/LeftTop.vue"
-import RightTop from "@/components/ManageLayout/RightTop.vue"
+import LeftTop from "@/components/ManageLayout/LeftTop.vue";
+import RightTop from "@/components/ManageLayout/RightTop.vue";
 import Table from "@/components/Table/index.vue";
 import Form from "@/components/form/index.vue";
 import DialogDelete from "@/components/DialogDelete/index.vue";
 import * as echarts from "echarts";
+import Axios from "axios";
+import { listDIVISION, mapStatistics } from "@/api/government/DIVISION";
 export default {
-  components: { Table, Form, DialogDelete ,LeftTop,RightTop},
+  components: { Table, Form, DialogDelete, LeftTop, RightTop },
   data() {
     return {
-      LeftTop:{
-        title:'按级别统计'
+      imgUrl:
+        "http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=12&layers=vec_c,eva_c&markers=116.39127,39.90712&markerStyles=-1,A,&tk=525ecf8803a6268acc612ba1ae3e3065",
+      LeftTop: {
+        title: "按级别统计"
       },
-      RightTop:{
-        title:'按面积统计'
+      RightTop: {
+        title: "按面积统计"
       },
       dialogData: {
-        dialogVisible: false,
+        dialogVisible: false
       },
       formData: {
-        name: "",
-        nameNum: "",
-        address: "",
-        code: "",
-        previous: "",
-        area: "",
-        previousNum: "",
-        administrative: "",
-        unit: "",
-        phoneNum: "",
-        photo: "",
+        administrativeDivisionName: "", //行政区划
+        administrativeLevel: "", //行政级别
+        beginDate: "", //开始时间
+        endDate: "" //结束时间
       },
       rules: {
         name: [
           { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
-        ],
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ]
       },
       dialogVisible: false,
       input: "",
       selectVal: "",
+      mapList: "",
       tableList: {
         data: [
           {
             date: "2016-05-03",
             name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
+            address: "上海市普陀区金沙江路 1518 弄"
           },
           {
             date: "2016-05-02",
             name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
+            address: "上海市普陀区金沙江路 1518 弄"
           },
           {
             date: "2016-05-04",
             name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
+            address: "上海市普陀区金沙江路 1518 弄"
           },
           {
             date: "2016-05-01",
             name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
+            address: "上海市普陀区金沙江路 1518 弄"
           },
           {
             date: "2016-05-08",
             name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
+            address: "上海市普陀区金沙江路 1518 弄"
           },
           {
             date: "2016-05-06",
             name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
+            address: "上海市普陀区金沙江路 1518 弄"
           },
           {
             date: "2016-05-07",
             name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
-          },
+            address: "上海市普陀区金沙江路 1518 弄"
+          }
         ],
         dataLength: 200,
         column: [
           {
             prop: "date",
             label: "日期",
-            width: "180",
+            width: "180"
           },
           {
             prop: "name",
             label: "姓名",
-            width: "180",
+            width: "180"
           },
           {
             prop: "address",
-            label: "地址",
+            label: "地址"
             // width: "180",
-          },
-        ],
+          }
+        ]
       },
       activeName: "first",
       value1: "",
       options: "",
       dialogImageUrl: "",
-      dialogVisible1: false,
+      dialogVisible1: false
     };
   },
   mounted() {
     this.SetChart("main");
     this.SetChart("main22");
+    // const m=Axios.get('http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=10&tk=4b6523449387afc9631764aa057b6e97').then((res)=>{
+    //   // this.imgUrl=res.data
+    //   console.log(res,'测试地图')
+    // }
+    // );
+    const m =
+      "http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=10&layers=vec_c,eva_c&tk=525ecf8803a6268acc612ba1ae3e3065";
+    Axios.get(m).then(res => {
+      console.log(res);
+    });
+    this.getList();
+    this.getmapList();
   },
   methods: {
+    // 获取列表
+    async getList() {
+      const { rows, total } = await listDIVISION();
+      this.tableList.data = rows;
+      this.tabList.dataLength = total;
+      this.tableList.column = rows[0];
+      console.log(this.tabList.data, "列表++++++++++++++++++++++");
+    },
+    // 面积统计
+    async getmapList() {
+      const res = await mapStatistics();
+      // console.log(res,'面积统计')
+    },
+    // 查询按钮
+    handleSearch() {},
     handleSelectionChange(val) {
       console.log(val);
     },
@@ -312,7 +311,7 @@ export default {
       this.dialogData = {
         title: "删除确认",
         content: "是否确认删除当前项？",
-        dialogVisible: true,
+        dialogVisible: true
       };
       console.log(this.dialogData);
     },
@@ -320,7 +319,7 @@ export default {
       this.dialogData = {
         title: "批量删除",
         content: "是否确认删除已选中项？",
-        dialogVisible: true,
+        dialogVisible: true
       };
     },
     SetChart(value) {
@@ -330,19 +329,18 @@ export default {
       option = {
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         },
         yAxis: {
-          type: "value",
+          type: "value"
         },
         series: [
           {
             data: [120, 200, 150, 80, 70, 110, 130],
-            type: "bar",
-          },
-        ],
+            type: "bar"
+          }
+        ]
       };
-
       myChart.setOption(option);
     },
     //新增
@@ -353,10 +351,10 @@ export default {
     handleExport() {},
     handleClose(done) {
       this.$confirm("确认关闭？")
-        .then((_) => {
+        .then(_ => {
           done();
         })
-        .catch((_) => {});
+        .catch(_ => {});
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -364,8 +362,8 @@ export default {
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
