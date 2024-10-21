@@ -41,7 +41,7 @@
               <el-button type="primary" size="small" @click="handleSearch">查询</el-button>
             </el-col>
             <el-col :span="2">
-              <el-button type="primary" size="small">重置</el-button>
+              <el-button type="primary" size="small" @click="reset">重置</el-button>
             </el-col>
           </el-row>
           <!-- 按钮组 -->
@@ -58,7 +58,7 @@
                 <el-table-column type="selection" width="55"></el-table-column>
               </template>
               <template>
-                <el-table-column label="操作">
+                <el-table-column label="操作" width="150">
                   <template slot-scope="scope">
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button
@@ -202,62 +202,44 @@ export default {
         ]
       },
       dialogVisible: false,
-      input: "",
-      selectVal: "",
       mapList: "",
       tableList: {
-        data: [
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄"
-          },
-          {
-            date: "2016-05-02",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄"
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄"
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄"
-          },
-          {
-            date: "2016-05-08",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄"
-          },
-          {
-            date: "2016-05-06",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄"
-          },
-          {
-            date: "2016-05-07",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄"
-          }
-        ],
+        data: [],
         dataLength: 200,
         column: [
           {
-            prop: "date",
-            label: "日期",
+            prop: "administrativeDivisionName",
+            label: "行政区划名称",
             width: "180"
           },
           {
-            prop: "name",
-            label: "姓名",
+            prop: "administrativeDivisionCode",
+            label: "行政区划代码",
             width: "180"
           },
           {
             prop: "address",
-            label: "地址"
+            label: "驻地地址"
+            // width: "180",
+          },
+          {
+            prop: "area",
+            label: "面积（km²）",
+            width: "80"
+          },
+          {
+            prop: "postalCode",
+            label: "邮政编码"
+            // width: "180",
+          },
+          {
+            prop: "administrativeLevel",
+            label: "行政级别"
+            // width: "180",
+          },
+          {
+            prop: "createTime",
+            label: "创建时间"
             // width: "180",
           }
         ]
@@ -285,14 +267,16 @@ export default {
     this.getList();
     this.getmapList();
   },
+  created() {
+    this.getList();
+  },
   methods: {
     // 获取列表
     async getList() {
       const { rows, total } = await listDIVISION();
       this.tableList.data = rows;
       this.tabList.dataLength = total;
-      this.tableList.column = rows[0];
-      console.log(this.tabList.data, "列表++++++++++++++++++++++");
+      // console.log(this.tableList, "列表++++++++++++++++++++++");
     },
     // 面积统计
     async getmapList() {
@@ -300,7 +284,19 @@ export default {
       // console.log(res,'面积统计')
     },
     // 查询按钮
-    handleSearch() {},
+    handleSearch() {
+      this.getList(this.formData);
+    },
+    // 重置按钮
+    reset() {
+      (this.formData = {
+        administrativeDivisionName: "", //行政区划
+        administrativeLevel: "", //行政级别
+        beginDate: "", //开始时间
+        endDate: "" //结束时间
+      }),
+        this.getList();
+    },
     handleSelectionChange(val) {
       console.log(val);
     },

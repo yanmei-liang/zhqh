@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 // 获取用户列表
-export function listDIVISION(query) {
+export function listDIVISION(data) {
     return request({
         url: '/government/DIVISIONS/list',
         method: 'get',
-        params: query
+        data: data
     })
 }
 
@@ -13,6 +13,15 @@ export function mapStatistics(data) {
     return request({
         url: "",
         method: 'post',
+        data: data
+    })
+}
+
+// 导出级别类型
+export function levelTypes(data) {
+    return request({
+        url: '/government​/DIVISIONS​/exportStatisticallevelList',
+        method: "post",
         data: data
     })
 }
