@@ -12,6 +12,7 @@
                 v-model="formData.administrativeDivisionName"
                 placeholder="请输入内容"
                 size="small"
+                @keyup.enter.native="handleQuery"
               ></el-input>
             </el-col>
 
@@ -38,7 +39,7 @@
             </el-col>
 
             <el-col :span="2">
-              <el-button type="primary" size="small" @click="handleSearch">查询</el-button>
+              <el-button type="primary" size="small" @click="handleQuery">查询</el-button>
             </el-col>
             <el-col :span="2">
               <el-button type="primary" size="small" @click="reset">重置</el-button>
@@ -173,7 +174,14 @@ import Form from "@/components/form/index.vue";
 import DialogDelete from "@/components/DialogDelete/index.vue";
 import * as echarts from "echarts";
 import Axios from "axios";
-import { listDIVISION, mapStatistics } from "@/api/government/DIVISION";
+import {
+  listDIVISION,
+  mapStatistics,
+  levelTypes,
+  delDIVISION,
+  selLevel,
+  aelArea
+} from "@/api/government/DIVISION";
 export default {
   components: { Table, Form, DialogDelete, LeftTop, RightTop },
   data() {
@@ -189,6 +197,7 @@ export default {
       dialogData: {
         dialogVisible: false
       },
+      livelList: [],
       formData: {
         administrativeDivisionName: "", //行政区划
         administrativeLevel: "", //行政级别
@@ -269,33 +278,43 @@ export default {
   },
   created() {
     this.getList();
+    // this.getLevellist();
   },
   methods: {
-    // 获取列表
+    // 行政区划列表
     async getList() {
-      const { rows, total } = await listDIVISION();
-      this.tableList.data = rows;
+      const {
+        data: { list, total }
+      } = await listDIVISION(this.formData);
+      this.tableList.data = list;
       this.tabList.dataLength = total;
-      // console.log(this.tableList, "列表++++++++++++++++++++++");
+      console.log(list, total, "列表++++++++++++++++++++++");
+    },
+    // 获取行政级别列表
+    async getLevellist() {
+      const res = await levelTypes();
+      console.log(res, "123465");
     },
     // 面积统计
     async getmapList() {
       const res = await mapStatistics();
       // console.log(res,'面积统计')
     },
-    // 查询按钮
-    handleSearch() {
-      this.getList(this.formData);
-    },
-    // 重置按钮
+    // 删除行政区域
+    async delDIVISION() {},
+    // 筛选重置按钮
     reset() {
-      (this.formData = {
-        administrativeDivisionName: "", //行政区划
-        administrativeLevel: "", //行政级别
-        beginDate: "", //开始时间
-        endDate: "" //结束时间
-      }),
-        this.getList();
+      this.formData = {
+        administrativeDivisionName: null, //行政区划
+        administrativeLevel: null, //行政级别
+        beginDate: null, //开始时间
+        endDate: null //结束时间
+      };
+      this.getList();
+    },
+    // 搜索按钮
+    handleQuery() {
+      this.getList();
     },
     handleSelectionChange(val) {
       console.log(val);
