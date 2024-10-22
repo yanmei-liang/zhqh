@@ -57,6 +57,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, code, name, alias, simple_name, history_name, chinese_name, ssmzyy, dmydy, hypthdy, lmzmpx, dmyz, dmlb, east_longitude, to_east_longitude, north_latitude, to_north_latitude, dmpczt, ytmc, th, scale, use_time, dmll, dmhy, dmlsyg, dmdg, mj, zbx, clff, dlstgk, zlly, remark, register_date, register_name, register_unit, tmlmzmpx, slnf, fznf, sfgk, create_by, create_time, update_by, update_time, dmtxx, xzqh, mmsj from DM_BASE
     </sql>
 
+    <!-- 地名标志类别统计 -->
+    <select id="selectDmBaseByDmStatistics" resultType="com.ruoyi.government.domain.vo.ExportFile">
+        select DML."name" as level ,count(*) as count from DM_BASE base LEFT JOIN DM_DMLB dml
+        ON base."dmlb" = dml."code"
+        group by DML."name"
+    </select>
+
+    <!-- 按地名标志区划统计  -->
+    <select id="selectDmBaseDivisionStatistics" resultType="com.ruoyi.government.domain.vo.ExportFile">
+        select ons.ADMINISTRATIVE_DIVISION_NAME  as level ,count(*) as count from DM_BASE base LEFT JOIN DM_ADMINISTRATIVE_DIVISIONS ons
+        ON base."xzqh" = ons.ADMINISTRATIVE_DIVISION_CODE
+        group by ons.ADMINISTRATIVE_DIVISION_NAME,ADMINISTRATIVE_DIVISION_CODE
+    </select>
+
+    <!-- 查询总条数 -->
+    <select id="selectDmBaseCount" parameterType="com.ruoyi.government.domain.DmBase"  resultType="java.lang.Integer">
+        SELECT count(1) FROM DM_BASE
+        <where>
+        <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        <if test="dmlb != null  and dmlb != ''"> and dmlb = #{dmlb}</if>
+        <if test="eastLongitude != null  and eastLongitude != ''"> and east_longitude = #{eastLongitude}</if>
+        <if test="toEastLongitude != null  and toEastLongitude != ''"> and to_east_longitude = #{toEastLongitude}</if>
+        <if test="northLatitude != null  and northLatitude != ''"> and north_latitude = #{northLatitude}</if>
+        <if test="toNorthLatitude != null  and toNorthLatitude != ''"> and to_north_latitude = #{toNorthLatitude}</if>
+        <if test="dmpczt != null  and dmpczt != ''"> and dmpczt = #{dmpczt}</if>
+        <if test="ytmc != null  and ytmc != ''"> and ytmc = #{ytmc}</if>
+        <if test="th != null  and th != ''"> and th = #{th}</if>
+        <if test="scale != null  and scale != ''"> and scale = #{scale}</if>
+        <if test="useTime != null  and useTime != ''"> and use_time = #{useTime}</if>
+        <if test="dmll != null  and dmll != ''"> and dmll = #{dmll}</if>
+        <if test="dmhy != null  and dmhy != ''"> and dmhy = #{dmhy}</if>
+        <if test="dmlsyg != null  and dmlsyg != ''"> and dmlsyg = #{dmlsyg}</if>
+        <if test="dmdg != null  and dmdg != ''"> and dmdg = #{dmdg}</if>
+        <if test="mj != null  and mj != ''"> and mj = #{mj}</if>
+        <if test="zbx != null  and zbx != ''"> and zbx = #{zbx}</if>
+        <if test="clff != null  and clff != ''"> and clff = #{clff}</if>
+        <if test="dlstgk != null  and dlstgk != ''"> and dlstgk = #{dlstgk}</if>
+        <if test="zlly != null  and zlly != ''"> and zlly = #{zlly}</if>
+        <if test="registerDate != null "> and register_date = #{registerDate}</if>
+        <if test="registerName != null  and registerName != ''"> and register_name like concat('%', #{registerName}, '%')</if>
+        <if test="registerUnit != null  and registerUnit != ''"> and register_unit = #{registerUnit}</if>
+        <if test="tmlmzmpx != null  and tmlmzmpx != ''"> and tmlmzmpx = #{tmlmzmpx}</if>
+        <if test="slnf != null  and slnf != ''"> and slnf = #{slnf}</if>
+        <if test="fznf != null  and fznf != ''"> and fznf = #{fznf}</if>
+        <if test="sfgk != null  and sfgk != ''"> and sfgk = #{sfgk}</if>
+        <if test="dmtxx != null  and dmtxx != ''"> and dmtxx = #{dmtxx}</if>
+        <if test="xzqh != null  and xzqh != ''"> and xzqh = #{xzqh}</if>
+        <if test="mmsj != null "> and mmsj = #{mmsj}</if>
+        <if test="beginDate != null  and endDate != null"> and update_time BETWEEN #{beginDate} AND #{endDate} </if>
+        </where>
+    </select>
+
     <select id="selectDmBaseList" parameterType="com.ruoyi.government.domain.DmBase" resultMap="DmBaseResult">
         <include refid="selectDmBaseVo"/>
         <where>  
@@ -100,6 +152,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="dmtxx != null  and dmtxx != ''"> and dmtxx = #{dmtxx}</if>
             <if test="xzqh != null  and xzqh != ''"> and xzqh = #{xzqh}</if>
             <if test="mmsj != null "> and mmsj = #{mmsj}</if>
+            <if test="beginDate != null  and endDate != null"> and update_time BETWEEN #{beginDate} AND #{endDate} </if>
         </where>
     </select>
     

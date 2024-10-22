@@ -1,7 +1,10 @@
 package com.ruoyi.government.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.government.domain.DmAdministrativeDivisions;
+import com.ruoyi.government.domain.vo.ExportFile;
 
 /**
  * 行政区划Service接口
@@ -11,6 +14,36 @@ import com.ruoyi.government.domain.DmAdministrativeDivisions;
  */
 public interface IDmAdministrativeDivisionsService
 {
+
+    /**
+     * 导出类别
+     *
+     */
+    public List<ExportFile> exportSelStatisticallevel(String superiorsCode);
+
+    /**
+     * 导出面积统计
+     *
+     */
+    public List<ExportFile> exportselAreaRadius(String superiorsCode);
+
+    /**
+     * 查询总条数
+     *
+     */
+    public Integer selectDmAdministrativeCount(DmAdministrativeDivisions dmAdministrativeDivisions);
+
+    /**
+     * 范围筛选数据
+     *
+     */
+    public List<Map<String,Integer>> selAreaRadius(String superiorsCode);
+
+    /**
+     * 返回行政级别下拉框
+     *
+     */
+    public List<Map<String,Integer>> selStatisticallevel(String superiorsCode);
 
     /**
      * 返回行政级别下拉框

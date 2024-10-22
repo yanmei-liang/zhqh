@@ -20,7 +20,7 @@ public class GovernmentDeclare extends BaseEntity
 
     /** 状态（0正常 1停用） */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
-    private String STATUS;
+    private String Status;
 
     /** 申报状态（待提交，已提交，审批中，已完成） */
     @Excel(name = "申报状态", readConverterExp = "待提交，已提交，审批中，已完成")
@@ -28,7 +28,7 @@ public class GovernmentDeclare extends BaseEntity
 
     /** 地名名称 */
     @Excel(name = "地名名称")
-    private String TOPONYM;
+    private String toponym;
 
     /** 地名标志 */
     @Excel(name = "地名标志")
@@ -36,7 +36,7 @@ public class GovernmentDeclare extends BaseEntity
 
     /** 地名编码 */
     @Excel(name = "地名编码")
-    private String CODE;
+    private String Code;
 
     /** 地名预审ID */
     @Excel(name = "地名预审ID")
@@ -50,7 +50,19 @@ public class GovernmentDeclare extends BaseEntity
     @Excel(name = "申报编号")
     private String declareCode;
 
-    public void setDeclareId(Long declareId) 
+    /** 流程实例ID */
+    @Excel(name = "流程实例ID")
+    private String procInsId;
+
+    public String getProcInsId() {
+        return procInsId;
+    }
+
+    public void setProcInsId(String procInsId) {
+        this.procInsId = procInsId;
+    }
+
+    public void setDeclareId(Long declareId)
     {
         this.declareId = declareId;
     }
@@ -59,14 +71,14 @@ public class GovernmentDeclare extends BaseEntity
     {
         return declareId;
     }
-    public void setSTATUS(String STATUS) 
+    public void setStatus(String Status) 
     {
-        this.STATUS = STATUS;
+        this.Status = Status;
     }
 
-    public String getSTATUS() 
+    public String getStatus() 
     {
-        return STATUS;
+        return Status;
     }
     public void setDeclareStatus(String declareStatus) 
     {
@@ -77,14 +89,14 @@ public class GovernmentDeclare extends BaseEntity
     {
         return declareStatus;
     }
-    public void setTOPONYM(String TOPONYM) 
+    public void setToponym(String toponym) 
     {
-        this.TOPONYM = TOPONYM;
+        this.toponym = toponym;
     }
 
-    public String getTOPONYM() 
+    public String getToponym() 
     {
-        return TOPONYM;
+        return toponym;
     }
     public void setToponymSign(String toponymSign) 
     {
@@ -95,14 +107,14 @@ public class GovernmentDeclare extends BaseEntity
     {
         return toponymSign;
     }
-    public void setCODE(String CODE) 
+    public void setCode(String Code) 
     {
-        this.CODE = CODE;
+        this.Code = Code;
     }
 
-    public String getCODE() 
+    public String getCode() 
     {
-        return CODE;
+        return Code;
     }
     public void setInquiryId(Long inquiryId) 
     {
@@ -141,14 +153,15 @@ public class GovernmentDeclare extends BaseEntity
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("remark", getRemark())
-            .append("STATUS", getSTATUS())
+            .append("Status", getStatus())
             .append("declareStatus", getDeclareStatus())
-            .append("TOPONYM", getTOPONYM())
+            .append("toponym", getToponym())
             .append("toponymSign", getToponymSign())
-            .append("CODE", getCODE())
+            .append("Code", getCode())
             .append("inquiryId", getInquiryId())
             .append("longitudeLatitude", getLongitudeLatitude())
             .append("declareCode", getDeclareCode())
+            .append("procInsId", getProcInsId())
             .toString();
     }
 }

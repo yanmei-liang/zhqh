@@ -11,18 +11,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="UPDATE_BY"    />
         <result property="updateTime"    column="UPDATE_TIME"    />
         <result property="remark"    column="remark"    />
-        <result property="STATUS"    column="STATUS"    />
+        <result property="status"    column="status"    />
         <result property="declareStatus"    column="DECLARE_STATUS"    />
-        <result property="TOPONYM"    column="TOPONYM"    />
+        <result property="toponym"    column="toponym"    />
         <result property="toponymSign"    column="TOPONYM_SIGN"    />
-        <result property="CODE"    column="CODE"    />
+        <result property="code"    column="code"    />
         <result property="inquiryId"    column="INQUIRY_ID"    />
         <result property="longitudeLatitude"    column="LONGITUDE_LATITUDE"    />
         <result property="declareCode"    column="DECLARE_CODE"    />
+        <result property="procInsId"    column="PROC_INS_ID"    />
+    </resultMap>
+
+    <resultMap type="StatusCount" id="StatusCount">
+        <result property="status"    column="STATUS"    />
+        <result property="num"    column="NUM"    />
     </resultMap>
 
     <sql id="selectGovernmentDeclareVo">
-        select DECLARE_ID, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark, STATUS, DECLARE_STATUS, TOPONYM, TOPONYM_SIGN, CODE, INQUIRY_ID, LONGITUDE_LATITUDE, DECLARE_CODE from GOVERNMENT_DECLARE
+        select DECLARE_ID, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, remark, status, DECLARE_STATUS, toponym, TOPONYM_SIGN, code, INQUIRY_ID, LONGITUDE_LATITUDE, DECLARE_CODE, PROC_INS_ID from GOVERNMENT_DECLARE
     </sql>
 
     <select id="selectGovernmentDeclareList" parameterType="GovernmentDeclare" resultMap="GovernmentDeclareResult">
@@ -33,20 +39,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
             <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
-            <if test="STATUS != null  and STATUS != ''"> and STATUS = #{STATUS}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="declareStatus != null  and declareStatus != ''"> and DECLARE_STATUS = #{declareStatus}</if>
-            <if test="TOPONYM != null  and TOPONYM != ''"> and TOPONYM = #{TOPONYM}</if>
+            <if test="toponym != null  and toponym != ''"> and toponym = #{toponym}</if>
             <if test="toponymSign != null  and toponymSign != ''"> and TOPONYM_SIGN = #{toponymSign}</if>
-            <if test="CODE != null  and CODE != ''"> and CODE = #{CODE}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="inquiryId != null "> and INQUIRY_ID = #{inquiryId}</if>
             <if test="longitudeLatitude != null  and longitudeLatitude != ''"> and LONGITUDE_LATITUDE = #{longitudeLatitude}</if>
             <if test="declareCode != null  and declareCode != ''"> and DECLARE_CODE = #{declareCode}</if>
+            <if test="procInsId != null  and procInsId != ''"> and PROC_INS_ID = #{procInsId}</if>
         </where>
     </select>
     
     <select id="selectGovernmentDeclareByDeclareId" parameterType="Long" resultMap="GovernmentDeclareResult">
         <include refid="selectGovernmentDeclareVo"/>
         where DECLARE_ID = #{declareId}
+    </select>
+
+    <select id="selectGovernmentDeclareStatusCount"  resultMap="StatusCount">
+        SELECT INQUIRY_STATUS AS status,COUNT(1) AS num FROM GOVERNMENT_INQUIRY
+        GROUP BY INQUIRY_STATUS
+    </select>
+
+    <select id="selectGovernmentDeclareByProcInsId" parameterType="String" resultMap="GovernmentDeclareResult">
+        <include refid="selectGovernmentDeclareVo"/>
+        where PROC_INS_ID = #{procInsId}
     </select>
 
     <insert id="insertGovernmentDeclare" parameterType="GovernmentDeclare" useGeneratedKeys="true" keyProperty="declareId">
@@ -57,14 +74,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">UPDATE_BY,</if>
             <if test="updateTime != null">UPDATE_TIME,</if>
             <if test="remark != null">remark,</if>
-            <if test="STATUS != null">STATUS,</if>
+            <if test="status != null">status,</if>
             <if test="declareStatus != null">DECLARE_STATUS,</if>
-            <if test="TOPONYM != null">TOPONYM,</if>
+            <if test="toponym != null">toponym,</if>
             <if test="toponymSign != null">TOPONYM_SIGN,</if>
-            <if test="CODE != null">CODE,</if>
+            <if test="code != null">code,</if>
             <if test="inquiryId != null">INQUIRY_ID,</if>
             <if test="longitudeLatitude != null">LONGITUDE_LATITUDE,</if>
             <if test="declareCode != null">DECLARE_CODE,</if>
+            <if test="procInsId != null">PROC_INS_ID,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="createBy != null">#{createBy},</if>
@@ -72,14 +90,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
-            <if test="STATUS != null">#{STATUS},</if>
+            <if test="status != null">#{status},</if>
             <if test="declareStatus != null">#{declareStatus},</if>
-            <if test="TOPONYM != null">#{TOPONYM},</if>
+            <if test="toponym != null">#{toponym},</if>
             <if test="toponymSign != null">#{toponymSign},</if>
-            <if test="CODE != null">#{CODE},</if>
+            <if test="code != null">#{code},</if>
             <if test="inquiryId != null">#{inquiryId},</if>
             <if test="longitudeLatitude != null">#{longitudeLatitude},</if>
             <if test="declareCode != null">#{declareCode},</if>
+            <if test="procInsId != null">#{procInsId},</if>
          </trim>
     </insert>
 
@@ -91,14 +110,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
             <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
             <if test="remark != null">remark = #{remark},</if>
-            <if test="STATUS != null">STATUS = #{STATUS},</if>
+            <if test="status != null">status = #{status},</if>
             <if test="declareStatus != null">DECLARE_STATUS = #{declareStatus},</if>
-            <if test="TOPONYM != null">TOPONYM = #{TOPONYM},</if>
+            <if test="toponym != null">toponym = #{toponym},</if>
             <if test="toponymSign != null">TOPONYM_SIGN = #{toponymSign},</if>
-            <if test="CODE != null">CODE = #{CODE},</if>
+            <if test="code != null">code = #{code},</if>
             <if test="inquiryId != null">INQUIRY_ID = #{inquiryId},</if>
             <if test="longitudeLatitude != null">LONGITUDE_LATITUDE = #{longitudeLatitude},</if>
             <if test="declareCode != null">DECLARE_CODE = #{declareCode},</if>
+            <if test="procInsId != null">PROC_INS_ID = #{procInsId},</if>
         </trim>
         where DECLARE_ID = #{declareId}
     </update>

@@ -1,7 +1,13 @@
 package com.ruoyi.web.controller.Dm;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.government.domain.vo.ExportFile;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +33,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author ruoyi
  * @date 2024-10-14
  */
+@Api(tags = "地名标志管理")
 @RestController
 @RequestMapping("/government/DMBZ")
 public class DmDmbzController extends BaseController
@@ -37,13 +44,22 @@ public class DmDmbzController extends BaseController
     /**
      * 查询地名标志列表
      */
+    @ApiOperation("获取数据列表")
     @PreAuthorize("@ss.hasPermi('government:DMBZ:list')")
     @GetMapping("/list")
-    public TableDataInfo list(DmDmbz dmDmbz)
+    public AjaxResult list(@RequestBody(required = false) DmDmbz dmDmbz)
     {
+        Map<String,Object> map=new HashMap<>();
         startPage();
         List<DmDmbz> list = dmDmbzService.selectDmDmbzList(dmDmbz);
-        return getDataTable(list);
+        Integer count = dmDmbzService.selectDmDmbzCount(dmDmbz);
+        List<ExportFile> exportFiles = dmDmbzService.selectDmDmbzDivisionStatistics();
+        List<ExportFile> exportFiles1 = dmDmbzService.selectDmDmbzCategoryStatistics();
+        map.put("total",count);
+        map.put("list",list);
+        map.put("DmStatistics",exportFiles);
+        map.put("DivisionStatistics",exportFiles1);
+        return AjaxResult.success(map);
     }
 
     /**
@@ -63,7 +79,7 @@ public class DmDmbzController extends BaseController
      * 获取地名标志详细信息
      */
     @PreAuthorize("@ss.hasPermi('government:DMBZ:query')")
-    @GetMapping(value = "/{dmbzId}")
+    @GetMapping(value = "/getInfo/{dmbzId}")
     public AjaxResult getInfo(@PathVariable("dmbzId") Long dmbzId)
     {
         return success(dmDmbzService.selectDmDmbzByDmbzId(dmbzId));
@@ -74,7 +90,7 @@ public class DmDmbzController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('government:DMBZ:add')")
     @Log(title = "地名标志", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping("addDmbz")
     public AjaxResult add(@RequestBody DmDmbz dmDmbz)
     {
         return toAjax(dmDmbzService.insertDmDmbz(dmDmbz));
@@ -85,7 +101,7 @@ public class DmDmbzController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('government:DMBZ:edit')")
     @Log(title = "地名标志", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @PutMapping("/editDmbz")
     public AjaxResult edit(@RequestBody DmDmbz dmDmbz)
     {
         return toAjax(dmDmbzService.updateDmDmbz(dmDmbz));
@@ -94,9 +110,10 @@ public class DmDmbzController extends BaseController
     /**
      * 删除地名标志
      */
+    @ApiOperation("删除地名标志")
     @PreAuthorize("@ss.hasPermi('government:DMBZ:remove')")
     @Log(title = "地名标志", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{dmbzIds}")
+	@DeleteMapping("/remove/{dmbzIds}")
     public AjaxResult remove(@PathVariable Long[] dmbzIds)
     {
         return toAjax(dmDmbzService.deleteDmDmbzByDmbzIds(dmbzIds));

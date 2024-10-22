@@ -2,6 +2,13 @@ package com.ruoyi.web.controller.Government;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.core.domain.R;
+import com.ruoyi.government.domain.StatusCount;
+import com.ruoyi.system.domain.FlowProcDefDto;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +34,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author ruoyi
  * @date 2024-10-15
  */
+@Api(tags = "地名申报管理")
 @RestController
 @RequestMapping("/government/DECLARE")
 public class GovernmentDeclareController extends BaseController
@@ -44,6 +52,18 @@ public class GovernmentDeclareController extends BaseController
         startPage();
         List<GovernmentDeclare> list = governmentDeclareService.selectGovernmentDeclareList(governmentDeclare);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询地名申报各状态合计
+     */
+    @PreAuthorize("@ss.hasPermi('government:DECLARE:list')")
+    @ApiOperation(value = "各状态合计", response = StatusCount.class)
+    @GetMapping("/statusCount")
+    public R<List<StatusCount>> statusCount()
+    {
+        List<StatusCount> list = governmentDeclareService.selectGovernmentDeclareStatusCount();
+        return R.ok(list);
     }
 
     /**
@@ -77,7 +97,8 @@ public class GovernmentDeclareController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody GovernmentDeclare governmentDeclare)
     {
-        return toAjax(governmentDeclareService.insertGovernmentDeclare(governmentDeclare));
+        governmentDeclare.setCreateBy(getUsername());
+        return governmentDeclareService.insertGovernmentDeclare(governmentDeclare);
     }
 
     /**
@@ -88,6 +109,7 @@ public class GovernmentDeclareController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody GovernmentDeclare governmentDeclare)
     {
+        governmentDeclare.setUpdateBy(getUsername());
         return toAjax(governmentDeclareService.updateGovernmentDeclare(governmentDeclare));
     }
 

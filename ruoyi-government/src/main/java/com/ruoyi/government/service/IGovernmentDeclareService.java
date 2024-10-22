@@ -1,7 +1,10 @@
 package com.ruoyi.government.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.government.domain.GovernmentDeclare;
+import com.ruoyi.government.domain.StatusCount;
 
 /**
  * 地名申报Service接口
@@ -19,6 +22,17 @@ public interface IGovernmentDeclareService
      */
     public GovernmentDeclare selectGovernmentDeclareByDeclareId(Long declareId);
 
+
+    public List<StatusCount> selectGovernmentDeclareStatusCount();
+
+    /**
+     * 查询地名申报
+     *
+     * @param procInsId 流程实例ID
+     * @return 地名申报
+     */
+    public GovernmentDeclare selectGovernmentDeclareByProcInsId(String procInsId);
+
     /**
      * 查询地名申报列表
      * 
@@ -33,7 +47,7 @@ public interface IGovernmentDeclareService
      * @param governmentDeclare 地名申报
      * @return 结果
      */
-    public int insertGovernmentDeclare(GovernmentDeclare governmentDeclare);
+    public AjaxResult insertGovernmentDeclare(GovernmentDeclare governmentDeclare);
 
     /**
      * 修改地名申报

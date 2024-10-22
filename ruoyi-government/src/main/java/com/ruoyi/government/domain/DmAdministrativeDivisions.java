@@ -1,9 +1,12 @@
 package com.ruoyi.government.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import java.util.Date;
 
 /**
  * 行政区划对象 DM_ADMINISTRATIVE_DIVISIONS
@@ -20,6 +23,7 @@ public class DmAdministrativeDivisions extends BaseEntity
 
     /** 行政区划名称 */
     @Excel(name = "行政区划名称")
+    @Schema(description="行政区划名称，模糊匹配",example="yuda0")
     private String administrativeDivisionName;
 
     /** 行政区划代码 */
@@ -40,6 +44,7 @@ public class DmAdministrativeDivisions extends BaseEntity
 
     /** 行政级别(数据字典，地级市、区、县、乡、村) */
     @Excel(name = "行政级别(数据字典，地级市、区、县、乡、村)")
+    @Schema(description="行政级别",example="地级市")
     private String administrativeLevel;
 
     /** 上一级区划名称 */
@@ -78,7 +83,20 @@ public class DmAdministrativeDivisions extends BaseEntity
     @Excel(name = "地理位置信息")
     private String geographicalpositionMsg;
 
-    public void setID(Long ID) 
+    /** 开始时间yyyy-MM-dd */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="开始时间yyyy-MM-dd",example="2020-10-01")
+    private Date beginDate;
+
+    /** 结束时间yyyy-MM-dd */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="结束时间yyyy-MM-dd",example="2020-10-30")
+    private Date endDate;
+
+
+
+
+    public void setID(Long ID)
     {
         this.ID = ID;
     }

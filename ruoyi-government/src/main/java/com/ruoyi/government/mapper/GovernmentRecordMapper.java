@@ -20,6 +20,14 @@ public interface GovernmentRecordMapper
     public GovernmentRecord selectGovernmentRecordByRecordId(Long recordId);
 
     /**
+     * 查询地名备案
+     *
+     * @param procInsId 流程实例ID
+     * @return 地名备案
+     */
+    public GovernmentRecord selectGovernmentRecordByProcInsId(String procInsId);
+
+    /**
      * 查询地名备案列表
      * 
      * @param governmentRecord 地名备案

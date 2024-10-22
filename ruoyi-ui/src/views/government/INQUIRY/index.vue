@@ -145,9 +145,9 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="主键预审ID" align="center" prop="inquiryId" />
-      <el-table-column label="预审地名名称" align="center" prop="toponym" />
+      <el-table-column label="预审地名名称" align="center" prop="TOPONYM" />
       <el-table-column label="报送单位" align="center" prop="submitDepa" />
-      <el-table-column label="联系人" align="center" prop="contacts" />
+      <el-table-column label="联系人" align="center" prop="CONTACTS" />
       <el-table-column label="联系人电话" align="center" prop="contactsPhone" />
       <el-table-column label="申请书" align="center" prop="application" />
       <el-table-column label="附件" align="center" prop="attachment" />
@@ -207,7 +207,8 @@
         label="建设内容与功能分区"
         align="center"
         prop="constructionDescribe"
-      />
+      >
+      </el-table-column>
       <el-table-column
         label="地名类型(地点，路线，区域)"
         align="center"
@@ -221,10 +222,18 @@
       <el-table-column
         label="操作"
         align="center"
+        fixed="right"
         class-name="small-padding fixed-width"
       >
         <template slot-scope="scope">
           <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleSee(scope.row)"
+            >查看</el-button
+          >
+          <!-- <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
@@ -239,7 +248,7 @@
             @click="handleDelete(scope.row)"
             v-hasPermi="['government:INQUIRY:remove']"
             >删除</el-button
-          >
+          > -->
         </template>
       </el-table-column>
     </el-table>
@@ -253,8 +262,8 @@
     />
 
     <!-- 添加或修改地名预审格对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" class="add_form" :visible.sync="open" width="40%" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="预审地名名称" prop="TOPONYM">
           <el-input v-model="form.toponym" placeholder="请输入预审地名名称" />
         </el-form-item>
@@ -271,14 +280,22 @@
           />
         </el-form-item>
         <el-form-item label="申请书" prop="APPLICATION">
+          <!-- <el-input v-model="form.APPLICATION" placeholder="请输入申请书" /> -->
+          <FileUpload/>
           <el-input v-model="form.application" placeholder="请输入申请书" />
         </el-form-item>
-        <el-form-item label="附件" prop="ATTACHMENT">
+        <el-form-item label="附件" prop="attachment">
           <el-input v-model="form.attachment" placeholder="请输入附件" />
         </el-form-item>
-        <el-form-item label="备注" prop="remark">
+        <el-form-item label="其他附件" prop="ATTACHMENT">
+          <!-- <el-input v-model="form.ATTACHMENT" placeholder="请输入附件" /> -->
+          <FileUpload/>
+        </el-form-item>
+        <el-form-item label="备注" prop="remark">e
           <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
+        <!-- <el-form-item label="地名编码" prop="CODE">
+          <el-input v-model="form.CODE" placeholder="请输入地名编码" />
         <el-form-item label="地名编码" prop="CODE">
           <el-input v-model="form.code" placeholder="请输入地名编码" />
         </el-form-item>
@@ -319,14 +336,14 @@
             v-model="form.constructionDescribe"
             placeholder="请输入建设内容与功能分区"
           />
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
-    <Details/>
+    <Details :data="dialogData" />
   </div>
 </template>
 
@@ -338,12 +355,17 @@ import {
   addINQUIRY,
   updateINQUIRY,
 } from "@/api/government/INQUIRY";
-import Details from "./details.vue"
+import Details from "./details.vue";
+import { flowRecord } from "@/api/flowable/finished";
+import FileUpload from "@/components/FileUpload/index.vue";
 export default {
-  components:{Details},
+  components: { Details,FileUpload },
   name: "INQUIRY",
   data() {
     return {
+      dialogData: {
+        dialogVisible: false,
+      },
       // 遮罩层
       loading: false,
       // 选中数组
@@ -389,6 +411,8 @@ export default {
         submitDepa: null,
         CONTACTS: null,
         contactsPhone: null,
+        APPLICATION: null,
+        ATTACHMENT: null,
         application: null,
         attachment: null,
         inquiryRemark: null,
@@ -425,15 +449,34 @@ export default {
     this.getList();
   },
   methods: {
+    // 查看
+    handleSee(val) {
+      const params = { procInsId: "55001", deployId: "50001" };
+      flowRecord(params)
+        .then((res) => {
+          console.log(res)
+          this.dialogData = {
+            flowRecordList: res.data.flowList,
+            dialogVisible: true,
+            // deployId: "10041",
+            // procInsId: "42501",
+          };
+        })
+        .catch((res) => {
+          this.goBack();
+        });
+    },
     /** 查询地名预审格列表 */
     getList() {
-      this.loading = true;listINQUIRY
+      this.loading = true;
+      listINQUIRY;
       listINQUIRY(this.queryParams).then((response) => {
         this.INQUIRYList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
     },
+
     // 取消按钮
     cancel() {
       this.open = false;
@@ -558,21 +601,28 @@ export default {
   justify-content: space-between;
   // margin: 20px 0;
   & .el-col:nth-child(1) {
-    background-color: #409EFF;
+    background-color: #409eff;
     height: 100%;
   }
   & .el-col:nth-child(2) {
-    background-color: #67C23A;
+    background-color: #67c23a;
     height: 100%;
   }
   & .el-col:nth-child(3) {
-    background-color: #F56C6C;
+    background-color: #f56c6c;
     height: 100%;
   }
-  .flex{
+  .flex {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 }
+.add_form{
+.el-form{
+  width: 90%;
+  margin: 0 auto;
+}
+}
+
 </style>

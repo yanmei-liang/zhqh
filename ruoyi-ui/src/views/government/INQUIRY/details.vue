@@ -2,13 +2,12 @@
   <div class="container">
     <el-dialog
       title="查看地名预审"
-      :visible.sync="dialogVisible"
+      :visible.sync="data.dialogVisible"
       width="50%"
-      style="margin-top: 15vh"
       :before-close="handleClose"
     >
       <div style="margin: 20px">
-        <el-row :gutter="20" style="display:flex">
+        <el-row :gutter="20" style="display: flex">
           <el-col :span="17">
             <div class="line flex" style="height: 40px; margin-bottom: 10px">
               <p>提交人：张立强</p>
@@ -56,10 +55,89 @@
               </div>
             </div>
           </el-col>
-          <el-col class="line" :span="7" style="max-height:500px">
+          <el-col class="line" :span="7" style="max-height: 500px">
             <h4 style="font-weight: 1000">审批流程</h4>
             <div>
-              <el-timeline>
+              <el-col :span="20" :offset="2">
+                <div class="block">
+                  <el-timeline>
+                    <el-timeline-item
+                      v-for="(item, index) in data.flowRecordList"
+                      :key="index"
+                      :icon="setIcon(item.finishTime)"
+                      :color="setColor(item.finishTime)"
+                    >
+                      <p style="font-weight: 1000">{{ item.taskName }}</p>
+                      <span style="font-size:12px">111</span>
+                      <span>1111</span>
+                      <!-- <el-card :body-style="{ padding: '10px' }">
+                        <el-descriptions
+                          class="margin-top"
+                          :column="1"
+                          size="small"
+                          border
+                        >
+                          <el-descriptions-item
+                            v-if="item.assigneeName"
+                            label-class-name="my-label"
+                          >
+                            <template slot="label"
+                              ><i class="el-icon-user"></i>办理人</template
+                            >
+                            {{ item.assigneeName }}
+                            <el-tag type="info" size="mini">{{
+                              item.deptName
+                            }}</el-tag>
+                          </el-descriptions-item>
+                          <el-descriptions-item
+                            v-if="item.candidate"
+                            label-class-name="my-label"
+                          >
+                            <template slot="label"
+                              ><i class="el-icon-user"></i>候选办理</template
+                            >
+                            {{ item.candidate }}
+                          </el-descriptions-item>
+                          <el-descriptions-item label-class-name="my-label">
+                            <template slot="label"
+                              ><i class="el-icon-date"></i>接收时间</template
+                            >
+                            {{ item.createTime }}
+                          </el-descriptions-item>
+                          <el-descriptions-item
+                            v-if="item.finishTime"
+                            label-class-name="my-label"
+                          >
+                            <template slot="label"
+                              ><i class="el-icon-date"></i>处理时间</template
+                            >
+                            {{ item.finishTime }}
+                          </el-descriptions-item>
+                          <el-descriptions-item
+                            v-if="item.duration"
+                            label-class-name="my-label"
+                          >
+                            <template slot="label"
+                              ><i class="el-icon-time"></i>耗时</template
+                            >
+                            {{ item.duration }}
+                          </el-descriptions-item>
+                          <el-descriptions-item
+                            v-if="item.comment"
+                            label-class-name="my-label"
+                          >
+                            <template slot="label"
+                              ><i class="el-icon-tickets"></i>处理意见</template
+                            >
+                            {{ item.comment.comment }}
+                          </el-descriptions-item>
+                        </el-descriptions>
+                      </el-card> -->
+                    </el-timeline-item>
+                  </el-timeline>
+                </div>
+              </el-col>
+              <!-- <el-timeline>
                 <el-timeline-item
                   v-for="(activity, index) in activities"
                   :key="index"
@@ -71,15 +149,15 @@
                 >
                   {{ activity.content }}
                 </el-timeline-item>
-              </el-timeline>
+              </el-timeline> -->
             </div>
           </el-col>
         </el-row>
       </div>
 
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
+        <el-button @click="data.dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="data.dialogVisible = false"
           >确 定</el-button
         >
       </span>
@@ -88,39 +166,63 @@
 </template>
 <script>
 export default {
+  props: ["data"],
   data() {
     return {
-      dialogVisible: true,
-      activities: [{
-          content: '支持使用图标',
-          timestamp: '2018-04-12 20:46',
-        //   size: 'large',
-        //   type: 'primary',
-         color: '#0bbd87',
-        //   icon: 'el-icon-success'
-        }, {
-          content: '支持自定义颜色',
-          timestamp: '2018-04-03 20:46',
-          color: '#0bbd87',
-          size: 'large',
-          icon: 'el-icon-circle-check'
-        }, {
-          content: '支持自定义尺寸',
-          timestamp: '2018-04-03 20:46',
-          size: 'large'
-        }, {
-          content: '默认样式的节点',
-          timestamp: '2018-04-03 20:46'
-        }]
+      flowRecordList: [], // 流程流转数据
+      dialogVisible: false,
+      activities: [
+        {
+          content: "支持使用图标",
+          timestamp: "2018-04-12 20:46",
+          //   size: 'large',
+          //   type: 'primary',
+          color: "#0bbd87",
+          //   icon: 'el-icon-success'
+        },
+        {
+          content: "支持自定义颜色",
+          timestamp: "2018-04-03 20:46",
+          color: "#0bbd87",
+          size: "large",
+          icon: "el-icon-circle-check",
+        },
+        {
+          content: "支持自定义尺寸",
+          timestamp: "2018-04-03 20:46",
+          size: "large",
+        },
+        {
+          content: "默认样式的节点",
+          timestamp: "2018-04-03 20:46",
+        },
+      ],
     };
   },
+  created() {
+  },
   methods: {
+    setIcon(val) {
+      if (val) {
+        return "el-icon-check";
+      } else {
+        return "el-icon-time";
+      }
+    },
+    setColor(val) {
+      if (val) {
+        return "#2bc418";
+      } else {
+        return "#b3bdbb";
+      }
+    },
     handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then((_) => {
-          done();
-        })
-        .catch((_) => {});
+      this.$props.data.dialogVisible = false
+      // this.$confirm("确认关闭？")
+      //   .then((_) => {
+      //     done();
+      //   })
+      //   .catch((_) => {});
     },
   },
 };

@@ -2,6 +2,9 @@ package com.ruoyi.government.mapper;
 
 import java.util.List;
 import com.ruoyi.government.domain.DmAdministrativeBoundary;
+import com.ruoyi.government.domain.DmAdministrativeDivisions;
+import com.ruoyi.government.domain.vo.ExportFileDmAdministrativeBoundary;
+
 
 /**
  * 行政界线Mapper接口
@@ -11,6 +14,23 @@ import com.ruoyi.government.domain.DmAdministrativeBoundary;
  */
 public interface DmAdministrativeBoundaryMapper 
 {
+    /**
+     * 按界线等级统计
+     */
+    public List<ExportFileDmAdministrativeBoundary> selectRankStatistics();
+
+    /**
+     * 按界线区划统计
+     */
+    public  List<ExportFileDmAdministrativeBoundary> selectDivisionStatistics();
+
+
+    /**
+     * 查询总条数
+     *
+     */
+    public Integer selectDmAdministrativeBoundaryCount(DmAdministrativeBoundary dmAdministrativeBoundary);
+
     /**
      * 查询行政界线
      * 

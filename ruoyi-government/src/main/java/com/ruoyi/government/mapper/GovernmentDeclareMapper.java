@@ -2,6 +2,7 @@ package com.ruoyi.government.mapper;
 
 import java.util.List;
 import com.ruoyi.government.domain.GovernmentDeclare;
+import com.ruoyi.government.domain.StatusCount;
 
 /**
  * 地名申报Mapper接口
@@ -18,6 +19,19 @@ public interface GovernmentDeclareMapper
      * @return 地名申报
      */
     public GovernmentDeclare selectGovernmentDeclareByDeclareId(Long declareId);
+
+
+    public List<StatusCount> selectGovernmentDeclareStatusCount();
+
+
+
+    /**
+     * 查询地名申报
+     *
+     * @param procInsId 流程实例ID
+     * @return 地名申报
+     */
+    public GovernmentDeclare selectGovernmentDeclareByProcInsId(String procInsId);
 
     /**
      * 查询地名申报列表

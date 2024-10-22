@@ -1,6 +1,8 @@
 package com.ruoyi.government.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.government.domain.GovernmentRecord;
 
 /**
@@ -19,6 +21,15 @@ public interface IGovernmentRecordService
      */
     public GovernmentRecord selectGovernmentRecordByRecordId(Long recordId);
 
+
+    /**
+     * 查询地名备案
+     *
+     * @param procInsId 流程实例ID
+     * @return 地名备案
+     */
+    GovernmentRecord selectGovernmentRecordByProcInsId(String procInsId);
+
     /**
      * 查询地名备案列表
      * 
@@ -33,7 +44,7 @@ public interface IGovernmentRecordService
      * @param governmentRecord 地名备案
      * @return 结果
      */
-    public int insertGovernmentRecord(GovernmentRecord governmentRecord);
+    public AjaxResult insertGovernmentRecord(GovernmentRecord governmentRecord);
 
     /**
      * 修改地名备案

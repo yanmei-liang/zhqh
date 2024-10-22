@@ -6,7 +6,9 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.flowable.domain.vo.FlowTaskVo;
 import com.ruoyi.flowable.service.IFlowDefinitionService;
 import com.ruoyi.flowable.service.IFlowTaskService;
+import com.ruoyi.government.domain.GovernmentInquiry;
 import com.ruoyi.government.service.GFlowableService;
+import com.ruoyi.government.service.IGovernmentInquiryService;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
@@ -59,10 +61,13 @@ public class TestController extends BaseController
     private HistoryService historyService;
 
     @Resource
-    private IFlowTaskService flowTaskService;
+    private IGovernmentInquiryService governmentInquiryService;
 
     @Resource
     private IFlowDefinitionService flowDefinitionService;
+
+    @Resource
+    private IFlowTaskService flowTaskService;
 
     @Resource
     private GFlowableService gFlowableService;
@@ -71,14 +76,20 @@ public class TestController extends BaseController
     @ApiOperation("测试")
     @GetMapping("/test")
     public AjaxResult testFlow() {
-//        FlowTaskVo flowTaskVo = new FlowTaskVo();
-//        flowTaskVo.setDeploymentId("10041");
-//        flowTaskService.getNextFlowNodeByStart(flowTaskVo);
-//
-//        Map map = new HashMap();
-//        AjaxResult ajaxResult = flowDefinitionService.startProcessInstanceById("toponym_inquiry:1:10044", map);
-        AjaxResult ajaxResult = gFlowableService.flowTaskStart();
-        return ajaxResult;
+//        AjaxResult ajaxResult = gFlowableService.flowTaskStart();
+//        return ajaxResult;
+        return AjaxResult.success();
+    }
+
+    @ApiOperation("带参数测试")
+    @ApiImplicitParam(name = "Id", value = "ID", required = true, dataType = "String", paramType = "path", dataTypeClass = Integer.class)
+    @GetMapping("/testNum/{Id}")
+    public AjaxResult testFlowNum(@PathVariable String Id) {
+        FlowTaskVo flowTaskVo = new FlowTaskVo();
+        flowTaskVo.setTaskId(Id);
+        flowTaskVo.setComment("驳回");
+        flowTaskService.taskReject(flowTaskVo);
+        return AjaxResult.success();
     }
 
 

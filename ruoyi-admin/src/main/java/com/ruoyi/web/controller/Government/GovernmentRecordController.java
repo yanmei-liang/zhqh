@@ -77,7 +77,8 @@ public class GovernmentRecordController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody GovernmentRecord governmentRecord)
     {
-        return toAjax(governmentRecordService.insertGovernmentRecord(governmentRecord));
+        governmentRecord.setCreateBy(getUsername());
+        return governmentRecordService.insertGovernmentRecord(governmentRecord);
     }
 
     /**
@@ -88,6 +89,7 @@ public class GovernmentRecordController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody GovernmentRecord governmentRecord)
     {
+        governmentRecord.setUpdateBy(getUsername());
         return toAjax(governmentRecordService.updateGovernmentRecord(governmentRecord));
     }
 
