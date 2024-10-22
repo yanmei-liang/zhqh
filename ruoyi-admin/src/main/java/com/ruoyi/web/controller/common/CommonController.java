@@ -97,7 +97,7 @@ public class CommonController
             ajax.put("originalFilename", file.getOriginalFilename());
             String fileId = IdUtils.randomUUID();
             SysFileInfo info = new SysFileInfo(fileId, fileName, url,file.getContentType(), file.getOriginalFilename());
-            sysFileInfoService.save(info);
+            sysFileInfoService.saveFileInfo(info);
             return ajax;
         }
         catch (Exception e)
@@ -132,8 +132,8 @@ public class CommonController
                 originalFilenames.add(file.getOriginalFilename());
                 SysFileInfo fileInfo = new SysFileInfo(IdUtils.randomUUID(), fileName, url , file.getContentType(), file.getOriginalFilename());
                 sysFileInfoList.add(fileInfo);
+                sysFileInfoService.saveFileInfo(fileInfo);
             }
-            sysFileInfoService.saveBatch(sysFileInfoList);
             AjaxResult ajax = AjaxResult.success();
             ajax.put("urls", StringUtils.join(urls, FILE_DELIMETER));
             ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMETER));

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gis.mapper.GeographicalNamesMapper">
+
+    <resultMap type="GeographicalNames" id="GeographicalNamesResult">
+        <result column="ID"    property="ID"    />
+        <result column="SHAPE"    property="SHAPE"    />
+        <result column="CODE"    property="CODE"    />
+        <result column="MAP_NAME"    property="mapName"    />
+        <result column="TYPE"    property="TYPE"    />
+        <result column="USE_TIME"    property="useTime"    />
+        <result property="is_deleted"    column="is_deleted"    />
+        <result property="createBy"   column="create_by"   />
+        <result property="createTime" column="create_time" />
+        <result property="updateBy"   column="update_by"   />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectGeographicalNamesVo">
+        select ID, SHAPE, CODE, MAP_NAME, TYPE, USE_TIME, create_by, create_time, update_by, update_time, is_deleted from GEOGRAPHICAL_NAMES
+    </sql>
+
+    <select id="selectGeographicalNamesList" parameterType="GeographicalNames" resultMap="GeographicalNamesResult">
+        <include refid="selectGeographicalNamesVo"/>
+        where is_deleted = '0'
+            <if test="SHAPE != null  and SHAPE != ''"> and SHAPE = #{SHAPE}</if>
+            <if test="CODE != null  and CODE != ''"> and CODE = #{CODE}</if>
+            <if test="mapName != null  and mapName != ''"> and MAP_NAME like concat('%', #{mapName}, '%')</if>
+            <if test="TYPE != null  and TYPE != ''"> and TYPE = #{TYPE}</if>
+            <if test="useTime != null  and useTime != ''"> and USE_TIME = #{useTime}</if>
+    </select>
+
+    <select id="selectGeographicalNamesByOBJECTID" parameterType="Integer" resultMap="GeographicalNamesResult">
+        <include refid="selectGeographicalNamesVo"/>
+        where is_deleted = '0' and ID = #{ID}
+    </select>
+
+    <insert id="insertGeographicalNames" parameterType="GeographicalNames" useGeneratedKeys="true" keyProperty="ID">
+        insert into GEOGRAPHICAL_NAMES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="SHAPE != null">SHAPE,</if>
+            <if test="CODE != null">CODE,</if>
+            <if test="mapName != null">MAP_NAME,</if>
+            <if test="TYPE != null">TYPE,</if>
+            <if test="useTime != null">USE_TIME,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="SHAPE != null">#{SHAPE},</if>
+            <if test="CODE != null">#{CODE},</if>
+            <if test="mapName != null">#{mapName},</if>
+            <if test="TYPE != null">#{TYPE},</if>
+            <if test="useTime != null">#{useTime},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            sysdate()
+        </trim>
+    </insert>
+
+    <update id="updateGeographicalNames" parameterType="GeographicalNames">
+        update GEOGRAPHICAL_NAMES
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="SHAPE != null">SHAPE = #{SHAPE},</if>
+            <if test="CODE != null">CODE = #{CODE},</if>
+            <if test="mapName != null">MAP_NAME = #{mapName},</if>
+            <if test="TYPE != null">TYPE = #{TYPE},</if>
+            <if test="useTime != null">USE_TIME = #{useTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            update_time = sysdate()
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteGeographicalNamesByOBJECTID" parameterType="Integer">
+        update GEOGRAPHICAL_NAMES set is_deleted = '1' where ID = #{ID}
+    </delete>
+
+    <delete id="deleteGeographicalNamesByOBJECTIDs" parameterType="String">
+        update GEOGRAPHICAL_NAMES set is_deleted = '1' where ID in
+        <foreach item="IDS" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+
+</mapper>

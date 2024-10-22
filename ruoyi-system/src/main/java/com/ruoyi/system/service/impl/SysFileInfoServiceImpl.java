@@ -1,10 +1,11 @@
 package com.ruoyi.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.system.domain.SysFileInfo;
 import com.ruoyi.system.mapper.SysFileInfoMapper;
 import com.ruoyi.system.service.SysFileInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  * @author liangyanmei
@@ -13,5 +14,14 @@ import org.springframework.stereotype.Service;
  * @date 2024/10/1614:50
  */
 @Service
-public class SysFileInfoServiceImpl extends ServiceImpl<SysFileInfoMapper, SysFileInfo> implements SysFileInfoService {
+public class SysFileInfoServiceImpl implements SysFileInfoService {
+
+    @Autowired
+    private SysFileInfoMapper sysFileInfoMapper;
+
+    @Override
+    public int saveFileInfo(SysFileInfo vo) {
+        return sysFileInfoMapper.insertVo(vo);
+    }
+
 }

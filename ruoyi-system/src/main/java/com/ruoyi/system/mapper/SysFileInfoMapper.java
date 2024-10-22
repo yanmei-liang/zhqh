@@ -1,7 +1,9 @@
 package com.ruoyi.system.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import com.ruoyi.system.domain.SysFileInfo;
+
+import java.util.List;
 
 /**
  * @author liangyanmei
@@ -10,5 +12,8 @@ import com.ruoyi.system.domain.SysFileInfo;
  * @date 2024/10/1614:32
  */
 
-public interface SysFileInfoMapper extends BaseMapper<SysFileInfo> {
+public interface SysFileInfoMapper {
+
+    int insertVo(SysFileInfo vo);
+
 }

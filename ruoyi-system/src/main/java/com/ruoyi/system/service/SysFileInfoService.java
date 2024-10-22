@@ -1,7 +1,8 @@
 package com.ruoyi.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.ruoyi.system.domain.SysFileInfo;
+
+import java.util.List;
 
 /**
  * @author liangyanmei
@@ -9,5 +10,8 @@ import com.ruoyi.system.domain.SysFileInfo;
  * @Description:
  * @date 2024/10/1614:47
  */
-public interface SysFileInfoService extends IService<SysFileInfo> {
+public interface SysFileInfoService  {
+
+    int saveFileInfo(SysFileInfo vo);
+
 }
