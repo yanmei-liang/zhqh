@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.gis.mapper.GeographicalNamesMapper">
+<mapper namespace="com.ruoyi.gis.mapper.GeographicalPointsMapper">
 
-    <resultMap type="com.ruoyi.gis.domain.GeographicalNames" id="GeographicalNamesResult">
+    <resultMap type="com.ruoyi.gis.domain.GeographicalPoints" id="GeographicalPointsResult">
         <result column="ID"    property="ID"    />
         <result column="SHAPE"    property="SHAPE"    />
         <result column="CODE"    property="CODE"    />
@@ -18,12 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime" column="update_time" />
     </resultMap>
 
-    <sql id="selectGeographicalNamesVo">
-        select ID, SHAPE, CODE, MAP_NAME, TYPE, USE_TIME, create_by, create_time, update_by, update_time, is_deleted from GEOGRAPHICAL_NAMES
+    <sql id="selectGeographicalPointsVo">
+        select ID, SHAPE, CODE, MAP_NAME, TYPE, USE_TIME, create_by, create_time, update_by, update_time, is_deleted from GEOGRAPHICAL_POINTS
     </sql>
 
-    <select id="selectGeographicalNamesList" parameterType="com.ruoyi.gis.domain.GeographicalNames" resultMap="GeographicalNamesResult">
-        <include refid="selectGeographicalNamesVo"/>
+    <select id="selectGeographicalPointsList" parameterType="com.ruoyi.gis.domain.GeographicalPoints" resultMap="GeographicalPointsResult">
+        <include refid="selectGeographicalPointsVo"/>
         where is_deleted = 0
             <if test="SHAPE != null  and SHAPE != ''"> and SHAPE = #{SHAPE}</if>
             <if test="CODE != null  and CODE != ''"> and CODE = #{CODE}</if>
@@ -32,13 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="useTime != null  and useTime != ''"> and USE_TIME = #{useTime}</if>
     </select>
 
-    <select id="selectGeographicalNamesByOBJECTID" parameterType="Integer" resultMap="GeographicalNamesResult">
-        <include refid="selectGeographicalNamesVo"/>
+    <select id="selectGeographicalPointsByOBJECTID" parameterType="Integer" resultMap="GeographicalPointsResult">
+        <include refid="selectGeographicalPointsVo"/>
         where is_deleted = 0 and ID = #{ID}
     </select>
 
-    <insert id="insertGeographicalNames" parameterType="com.ruoyi.gis.domain.GeographicalNames" useGeneratedKeys="true" keyProperty="ID">
-        insert into GEOGRAPHICAL_NAMES
+    <insert id="insertGeographicalPoints" parameterType="com.ruoyi.gis.domain.GeographicalPoints" useGeneratedKeys="true" keyProperty="ID">
+        insert into GEOGRAPHICAL_POINTS
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="SHAPE != null">SHAPE,</if>
             <if test="CODE != null">CODE,</if>
@@ -59,8 +59,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
     </insert>
 
-    <update id="updateGeographicalNames" parameterType="com.ruoyi.gis.domain.GeographicalNames">
-        update GEOGRAPHICAL_NAMES
+    <update id="updateGeographicalPoints" parameterType="com.ruoyi.gis.domain.GeographicalPoints">
+        update GEOGRAPHICAL_POINTS
         <trim prefix="SET" suffixOverrides=",">
             <if test="SHAPE != null">SHAPE = #{SHAPE},</if>
             <if test="CODE != null">CODE = #{CODE},</if>
@@ -73,12 +73,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where ID = #{ID}
     </update>
 
-    <delete id="deleteGeographicalNamesByOBJECTID" parameterType="Integer">
-        update GEOGRAPHICAL_NAMES set is_deleted = 1 where ID = #{ID}
+    <delete id="deleteGeographicalPointsByOBJECTID" parameterType="Integer">
+        update GEOGRAPHICAL_POINTS set is_deleted = 1 where ID = #{ID}
     </delete>
 
-    <delete id="deleteGeographicalNamesByOBJECTIDs" parameterType="String">
-        update GEOGRAPHICAL_NAMES set is_deleted = 1 where ID in
+    <delete id="deleteGeographicalPointsByOBJECTIDs" parameterType="String">
+        update GEOGRAPHICAL_POINTS set is_deleted = 1 where ID in
         <foreach item="IDS" collection="array" open="(" separator="," close=")">
             #{ID}
         </foreach>

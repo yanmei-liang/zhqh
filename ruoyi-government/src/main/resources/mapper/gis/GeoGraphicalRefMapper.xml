@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gis.mapper.GeoGraphicalRefMapper">
+
+    <resultMap type="com.ruoyi.gis.domain.GeoGraphicalRef" id="GeoGraphicalRefResult">
+        <result column="ID"    property="ID"    />
+        <result column="geom_code"    property="geomCode"    />
+        <result column="grap_code"    property="grapCode"    />
+        <result property="is_deleted"    column="is_deleted"    />
+        <result property="createBy"   column="create_by"   />
+        <result property="createTime" column="create_time" />
+        <result property="updateBy"   column="update_by"   />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectGeoGraphicalRefVo">
+        select ID, geom_code, grap_code, create_by, create_time, update_by, update_time, is_deleted from GEO_GRAPHICAL_REF
+    </sql>
+
+    <select id="selectGeoGraphicalRefList" parameterType="com.ruoyi.gis.domain.GeoGraphicalRef" resultMap="GeoGraphicalRefResult">
+        <include refid="selectGeoGraphicalRefVo"/>
+        where is_deleted = 0
+            <if test="geomCode != null  and geomCode != ''"> and geom_code = #{geomCode}</if>
+            <if test="grapCode != null  and grapCode != ''"> and grap_code = #{grapCode}</if>
+    </select>
+
+    <select id="selectGeoGraphicalRefByOBJECTID" parameterType="Integer" resultMap="GeoGraphicalRefResult">
+        <include refid="selectGeoGraphicalRefVo"/>
+        where is_deleted = 0 and ID = #{ID}
+    </select>
+
+    <insert id="insertGeoGraphicalRef" parameterType="com.ruoyi.gis.domain.GeoGraphicalRef" useGeneratedKeys="true" keyProperty="ID">
+        insert into GEO_GRAPHICAL_REF
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="geomCode != null">geom_code,</if>
+            <if test="grapCode != null">grap_code,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="geomCode != null">#{geom_code},</if>
+            <if test="grapCode != null">#{grap_code},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            sysdate()
+        </trim>
+    </insert>
+
+    <update id="updateGeoGraphicalRef" parameterType="com.ruoyi.gis.domain.GeoGraphicalRef">
+        update GEO_GRAPHICAL_REF
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="geomCode != null">geom_code = #{geomCode},</if>
+            <if test="grapCode != null">grap_code = #{grapCode},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            update_time = sysdate()
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteGeoGraphicalRefByOBJECTID" parameterType="Integer">
+        update GEO_GRAPHICAL_REF set is_deleted = 1 where ID = #{ID}
+    </delete>
+
+    <delete id="deleteGeoGraphicalRefByOBJECTIDs" parameterType="String">
+        update GEO_GRAPHICAL_REF set is_deleted = 1 where ID in
+        <foreach item="IDS" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+
+</mapper>
