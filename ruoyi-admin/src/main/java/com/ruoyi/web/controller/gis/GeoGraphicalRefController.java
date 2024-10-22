@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Api(tags = "地理空间数据-地图空间数据和地名关联对象")
 @RestController
-@RequestMapping("/gis/geomPoints")
+@RequestMapping("/gis/geomDMRef")
 public class GeoGraphicalRefController extends BaseController
 {
     @Autowired
