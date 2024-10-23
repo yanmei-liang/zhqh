@@ -1,5 +1,11 @@
 <template>
-  <el-dialog title="新增行政区划" :visible.sync="addVisible" :before-close="handleClose">
+  <el-dialog
+    class="addDialog"
+    title="新增行政区划"
+    :visible.sync="addVisible"
+    width="60%"
+    :before-close="handleClose"
+  >
     <h3 style="color:#000">核心信息</h3>
     <el-divider></el-divider>
     <Form :model="formData" :rules="rules">
@@ -53,9 +59,9 @@
     </Form>
     <h3 style="color:#000">相关附件</h3>
     <el-divider></el-divider>
-    <div slot="footer" class="dialog-footer">
+    <div slot="footer">
       <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submit">确 定</el-button>
+      <el-button type="primary" @click="submit">提交</el-button>
     </div>
   </el-dialog>
 </template>
@@ -83,5 +89,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss' scoped>
+.addDialog {
+  .dialog {
+    .el-dialog__footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
 </style>
