@@ -3,6 +3,7 @@ package com.ruoyi.web.controller.Dm;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author ruoyi
  * @date 2024-10-21
  */
+@Api(tags = "界桩管理")
 @RestController
 @RequestMapping("/government/MARK")
 public class DmLimitMarkController extends BaseController
@@ -39,6 +41,7 @@ public class DmLimitMarkController extends BaseController
     /**
      * 查询界桩列表
      */
+    @ApiOperation("查询界桩")
     @PreAuthorize("@ss.hasPermi('government:MARK:list')")
     @GetMapping("/list")
     public TableDataInfo list(@RequestBody(required = false) DmLimitMark dmLimitMark)
