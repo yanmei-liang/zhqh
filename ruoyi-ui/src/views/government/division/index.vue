@@ -53,7 +53,7 @@
           </el-row>
           <!-- 按钮组 -->
           <div>
-            <el-button type="primary" @click="dialogVisible = true">新增</el-button>
+            <el-button type="primary" @click="addVisible = true">新增</el-button>
             <el-button type="danger" :disabled="!selectList.length" @click="handleAllDelete">删除</el-button>
             <el-button type="info">导入</el-button>
           </div>
@@ -114,7 +114,7 @@
         </el-col>
       </el-row>
     </div>
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
+    <!-- <el-dialog title="提示" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
       <p>核心信息</p>
       <el-divider></el-divider>
       <Form :model="formData" :rules="rules">
@@ -168,7 +168,9 @@
       </Form>
       <p>相关附件</p>
       <el-divider></el-divider>
-    </el-dialog>
+    </el-dialog>-->
+    <!-- 新增弹窗 -->
+    <AddDialog :addVisible.sync="addVisible" />
     <DialogDelete :data="dialogData" />
   </div>
 </template>
@@ -178,6 +180,7 @@ import RightTop from "@/components/ManageLayout/RightTop.vue";
 import Table from "@/components/Table/index.vue";
 import Form from "@/components/form/index.vue";
 import DialogDelete from "@/components/DialogDelete/index.vue";
+import AddDialog from "./components/addDialog.vue";
 import * as echarts from "echarts";
 import Axios from "axios";
 import {
@@ -190,7 +193,7 @@ import {
   optionsList
 } from "@/api/government/DIVISION";
 export default {
-  components: { Table, Form, DialogDelete, LeftTop, RightTop },
+  components: { Table, Form, DialogDelete, LeftTop, RightTop, AddDialog },
   data() {
     return {
       optionslist: [
@@ -222,7 +225,8 @@ export default {
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
         ]
       },
-      dialogVisible: false,
+      // dialogVisible: false,
+      addVisible: false,
       mapList: "",
       tableList: {
         data: [],
@@ -336,11 +340,6 @@ export default {
       console.log(index, row);
     },
     handleDelete(index, row) {
-      // this.dialogData = {
-      //   title: "删除确认",
-      //   content: "是否确认删除当前项？",
-      //   dialogVisible: true
-      // };
       this.$confirm("是否确认删除当前项", "删除确认", {
         confirmButtonText: "删除",
         cancelButtonText: "取消",
