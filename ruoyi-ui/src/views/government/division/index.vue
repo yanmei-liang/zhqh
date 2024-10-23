@@ -35,7 +35,13 @@
 
             <el-col :span="7">
               <span>更新时间</span>
-              <el-date-picker size="small" v-model="value1" type="datetime" placeholder="选择日期时间"></el-date-picker>
+              <el-date-picker
+                size="small"
+                v-model="formData.updateTime"
+                type="datetime"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                placeholder="选择日期时间"
+              ></el-date-picker>
             </el-col>
 
             <el-col :span="2">
@@ -48,7 +54,7 @@
           <!-- 按钮组 -->
           <div>
             <el-button type="primary" @click="dialogVisible = true">新增</el-button>
-            <el-button type="danger" @click="handleAllDelete">删除</el-button>
+            <el-button type="danger" :disabled="!selectList.length" @click="handleAllDelete">删除</el-button>
             <el-button type="info">导入</el-button>
           </div>
           <el-divider></el-divider>
@@ -188,10 +194,12 @@ export default {
   data() {
     return {
       optionslist: [
-        { label: "乡级", value: "1" },
-        { label: "县级", value: "2" },
-        { label: "市级", value: "3" }
+        { label: "乡级", value: "乡级" },
+        { label: "县级", value: "县级" },
+        { label: "市级", value: "市级" }
       ],
+      selectList: "",
+      ids: "",
       imgUrl:
         "http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=12&layers=vec_c,eva_c&markers=116.39127,39.90712&markerStyles=-1,A,&tk=525ecf8803a6268acc612ba1ae3e3065",
       LeftTop: {
@@ -207,8 +215,7 @@ export default {
       formData: {
         administrativeDivisionName: "", //行政区划
         administrativeLevel: "", //行政级别
-        beginDate: "", //开始时间
-        endDate: "" //结束时间
+        updateTime: "" //更新时间
       },
       rules: {
         name: [
@@ -293,8 +300,8 @@ export default {
         data: { list, total }
       } = await listDIVISION(this.formData);
       this.tableList.data = list;
-      this.tabList.dataLength = total;
-      console.log(list, total, "列表++++++++++++++++++++++");
+      // this.tabList.dataLength = total;
+      // console.log(list, total, "列表++++++++++++++++++++++");
     },
     // 获取行政级别
     async getoptionlist() {
@@ -321,27 +328,64 @@ export default {
     // 搜索按钮
     handleQuery() {
       this.getList();
+      // this.formData = {};
     },
     handleSelectionChange(val) {
-      console.log(val);
+      this.selectList = val;
+      // console.log(val);
     },
     handleEdit(index, row) {
       console.log(index, row);
     },
     handleDelete(index, row) {
-      this.dialogData = {
-        title: "删除确认",
-        content: "是否确认删除当前项？",
-        dialogVisible: true
-      };
+      // this.dialogData = {
+      //   title: "删除确认",
+      //   content: "是否确认删除当前项？",
+      //   dialogVisible: true
+      // };
+      this.$confirm("是否确认删除当前项", "删除确认", {
+        confirmButtonText: "删除",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(async () => {
+          const res = await delDIVISION(row.id);
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+      this.getList();
       console.log(this.dialogData);
     },
     handleAllDelete() {
-      this.dialogData = {
-        title: "批量删除",
-        content: "是否确认删除已选中项？",
-        dialogVisible: true
-      };
+      this.ids = this.selectList.map(item => item.id);
+      console.log(this.ids, "选中id");
+      this.$confirm("是否确定删除已选中的项", "批量删除", {
+        confirmButtonText: "删除",
+        cancelButtonText: "取消",
+        type: "waring"
+      })
+        .then(async () => {
+          const res = await delDIVISION(this.ids);
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+      this.getList();
     },
     SetChart(value) {
       var chartDom = document.getElementById(value);
