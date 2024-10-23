@@ -47,7 +47,7 @@ public class DmDmbzController extends BaseController
     @ApiOperation("获取数据列表")
     @PreAuthorize("@ss.hasPermi('government:DMBZ:list')")
     @GetMapping("/list")
-    public AjaxResult list(@RequestBody(required = false) DmDmbz dmDmbz)
+    public AjaxResult list(DmDmbz dmDmbz)
     {
         Map<String,Object> map=new HashMap<>();
         startPage();
@@ -65,6 +65,7 @@ public class DmDmbzController extends BaseController
     /**
      * 导出地名标志列表
      */
+    @ApiOperation("导出地名标志列表")
     @PreAuthorize("@ss.hasPermi('government:DMBZ:export')")
     @Log(title = "地名标志", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -88,6 +89,7 @@ public class DmDmbzController extends BaseController
     /**
      * 新增地名标志
      */
+    @ApiOperation("新增地名标志")
     @PreAuthorize("@ss.hasPermi('government:DMBZ:add')")
     @Log(title = "地名标志", businessType = BusinessType.INSERT)
     @PostMapping("addDmbz")
@@ -99,6 +101,7 @@ public class DmDmbzController extends BaseController
     /**
      * 修改地名标志
      */
+    @ApiOperation("修改地名标志")
     @PreAuthorize("@ss.hasPermi('government:DMBZ:edit')")
     @Log(title = "地名标志", businessType = BusinessType.UPDATE)
     @PutMapping("/editDmbz")

@@ -44,7 +44,7 @@ public class DmLimitMarkController extends BaseController
     @ApiOperation("查询界桩")
     @PreAuthorize("@ss.hasPermi('government:MARK:list')")
     @GetMapping("/list")
-    public TableDataInfo list(@RequestBody(required = false) DmLimitMark dmLimitMark)
+    public TableDataInfo list(DmLimitMark dmLimitMark)
     {
         startPage();
         List<DmLimitMark> list = dmLimitMarkService.selectDmLimitMarkList(dmLimitMark);
