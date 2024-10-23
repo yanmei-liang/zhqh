@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.DmDmtmMapper">
+
+    <resultMap type="DmDmtm" id="DmDmtmResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="dmlbCode"    column="dmlb_code"    />
+        <result property="dmlbName"    column="dmlb_name"    />
+    </resultMap>
+
+    <sql id="selectDmDmtmVo">
+        select id, name, dmlb_code, dmlb_name from DM_DMTM
+    </sql>
+
+    <select id="selectDmDmtmList" parameterType="DmDmtm" resultMap="DmDmtmResult">
+        <include refid="selectDmDmtmVo"/>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="dmlbCode != null  and dmlbCode != ''"> and dmlb_code = #{dmlbCode}</if>
+            <if test="dmlbName != null  and dmlbName != ''"> and dmlb_name like concat('%', #{dmlbName}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectDmDmtmById" parameterType="Integer" resultMap="DmDmtmResult">
+        <include refid="selectDmDmtmVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDmDmtm" parameterType="DmDmtm" useGeneratedKeys="true" keyProperty="id">
+        insert into DM_DMTM
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="dmlbCode != null">dmlb_code,</if>
+            <if test="dmlbName != null">dmlb_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="dmlbCode != null">#{dmlbCode},</if>
+            <if test="dmlbName != null">#{dmlbName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmDmtm" parameterType="DmDmtm">
+        update DM_DMTM
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="dmlbCode != null">dmlb_code = #{dmlbCode},</if>
+            <if test="dmlbName != null">dmlb_name = #{dmlbName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDmDmtmById" parameterType="Integer">
+        delete from DM_DMTM where id = #{id}
+    </delete>
+
+    <delete id="deleteDmDmtmByIds" parameterType="String">
+        delete from DM_DMTM where Id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
