@@ -11,7 +11,7 @@
               <el-input
                 v-model="formData.administrativeDivisionName"
                 placeholder="请输入内容"
-                size="small"
+                size="mini"
                 @keyup.enter.native="handleQuery"
               ></el-input>
             </el-col>
@@ -25,7 +25,7 @@
                 placeholder="请选择"
               >
                 <el-option
-                  v-for="item in options"
+                  v-for="item in optionslist"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -180,12 +180,18 @@ import {
   levelTypes,
   delDIVISION,
   selLevel,
-  aelArea
+  aelArea,
+  optionsList
 } from "@/api/government/DIVISION";
 export default {
   components: { Table, Form, DialogDelete, LeftTop, RightTop },
   data() {
     return {
+      optionslist: [
+        { label: "乡级", value: "1" },
+        { label: "县级", value: "2" },
+        { label: "市级", value: "3" }
+      ],
       imgUrl:
         "http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=12&layers=vec_c,eva_c&markers=116.39127,39.90712&markerStyles=-1,A,&tk=525ecf8803a6268acc612ba1ae3e3065",
       LeftTop: {
@@ -271,14 +277,14 @@ export default {
     const m =
       "http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=10&layers=vec_c,eva_c&tk=525ecf8803a6268acc612ba1ae3e3065";
     Axios.get(m).then(res => {
-      console.log(res);
+      // console.log(res);
     });
     this.getList();
     this.getmapList();
   },
   created() {
     this.getList();
-    // this.getLevellist();
+    this.getoptionlist();
   },
   methods: {
     // 行政区划列表
@@ -290,10 +296,10 @@ export default {
       this.tabList.dataLength = total;
       console.log(list, total, "列表++++++++++++++++++++++");
     },
-    // 获取行政级别列表
-    async getLevellist() {
-      const res = await levelTypes();
-      console.log(res, "123465");
+    // 获取行政级别
+    async getoptionlist() {
+      const { data } = await optionsList();
+      console.log(data, "行政级别列表");
     },
     // 面积统计
     async getmapList() {

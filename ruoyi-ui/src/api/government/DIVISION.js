@@ -48,3 +48,11 @@ export function selArea(administrativeDivisionCode) {
         method: 'get'
     })
 }
+
+// 行政级别下拉框  
+export function optionsList() {
+    return request({
+        url: '/government/DIVISIONS/selStatisticallevel',
+        method: 'get'
+    })
+}
