@@ -41,6 +41,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
     </select>
+    <select id="listByUserId" resultType="com.ruoyi.system.domain.SysNotice">
+        SELECT  * from sys_notice where msg_type = 'ALL' and status  = '0' and send_status = '1' and notice_id not in (
+        select notice_id from sys_notice_send where user_id = #{userId}
+        )
+    </select>
+    <select id="querySysNoticeByUserId" resultType="com.ruoyi.system.domain.SysNotice">
+        SELECT  * from sys_notice where user_id = #{userId} and notice_type = #{msgCategory}
+    </select>
+
 
     <insert id="insertNotice" parameterType="SysNotice">
         insert into sys_notice (
