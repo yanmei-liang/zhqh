@@ -211,7 +211,6 @@ export default {
       dialogData: {
         dialogVisible: false
       },
-      livelList: [],
       formData: {
         administrativeDivisionName: "", //行政区划
         administrativeLevel: "", //行政级别
@@ -286,8 +285,7 @@ export default {
     Axios.get(m).then(res => {
       // console.log(res);
     });
-    this.getList();
-    this.getmapList();
+    // this.getmapList();
   },
   created() {
     this.getList();
@@ -303,15 +301,15 @@ export default {
       // this.tabList.dataLength = total;
       // console.log(list, total, "列表++++++++++++++++++++++");
     },
-    // 获取行政级别
+    // 获取行政级别下拉框
     async getoptionlist() {
       const { data } = await optionsList();
       console.log(data, "行政级别列表");
     },
-    // 面积统计
-    async getmapList() {
+    // 导出面积统计
+    async exportmapList() {
       const res = await mapStatistics();
-      // console.log(res,'面积统计')
+      console.log(res, "面积统计");
     },
     // 删除行政区域
     async delDIVISION() {},

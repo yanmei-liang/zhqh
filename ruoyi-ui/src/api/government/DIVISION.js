@@ -8,10 +8,10 @@ export function listDIVISION(query) {
     })
 }
 
-// 面积统计
+// 导出面积统计
 export function mapStatistics(data) {
     return request({
-        url: "",
+        url: "/government/DIVISIONS/exportselAreaRadius",
         method: 'post',
         data
     })
@@ -33,8 +33,8 @@ export function delDIVISION(divisionID) {
         method: 'delete'
     })
 }
-// 统计级别  /government/DIVISIONS/selAdministrativeLevel/{administrativeDivisionCode}
-export function selLevel(DivisionCode) {
+// 统计级别  
+export function selLevel(administrativeDivisionCode) {
     return request({
         url: '/government/DIVISIONS/selAdministrativeLevel/' + { administrativeDivisionCode },
         method: 'get'
