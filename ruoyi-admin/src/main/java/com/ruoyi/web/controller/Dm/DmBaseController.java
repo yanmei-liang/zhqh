@@ -92,6 +92,35 @@ public class DmBaseController extends BaseController
         ExcelUtil<DmBase> util = new ExcelUtil<DmBase>(DmBase.class);
         util.exportExcel(response, list, "标准地名数据");
     }
+    /**
+     *
+     * 导出地名标志类别统计
+     */
+    @PreAuthorize("@ss.hasPermi('government:BASE:export')")
+    @Log(title = "标准地名", businessType = BusinessType.EXPORT)
+    @PostMapping("/exportDmbz")
+    public void exportDmbz(HttpServletResponse response)
+    {
+        List<ExportFile> exportFiles = dmBaseService.selectDmBaseByDmStatistics();
+        ExcelUtil<ExportFile> util = new ExcelUtil<ExportFile>(ExportFile.class);
+        util.exportExcel(response, exportFiles, "地名标志类别统计");
+    }
+
+    /**
+     *
+     * 导出地名标志区划统计
+     */
+    @PreAuthorize("@ss.hasPermi('government:BASE:export')")
+    @Log(title = "标准地名", businessType = BusinessType.EXPORT)
+    @PostMapping("/exportDmbzqh")
+    public void exportDmbzqh(HttpServletResponse response)
+    {
+        List<ExportFile> exportFiles = dmBaseService.selectDmBaseDivisionStatistics();
+        ExcelUtil<ExportFile> util = new ExcelUtil<ExportFile>(ExportFile.class);
+        util.exportExcel(response, exportFiles, "地名标志区划统计");
+    }
+
+
 
     /**
      * 获取标准地名详细信息
