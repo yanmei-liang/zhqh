@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ruoyi.government.domain.vo.ExportFileDmAdministrativeBoundary;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import liquibase.pro.packaged.A;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +48,7 @@ public class DmAdministrativeBoundaryController extends BaseController
     @ApiOperation("获取数据列表")
     @PreAuthorize("@ss.hasPermi('government:BOUNDARY:list')")
     @GetMapping("/list")
-    public TableDataInfo list(@RequestBody(required = false) DmAdministrativeBoundary dmAdministrativeBoundary)
+    public AjaxResult list(DmAdministrativeBoundary dmAdministrativeBoundary)
     {
         Map<String,Object> map=new HashMap<>();
         startPage();
@@ -59,7 +60,7 @@ public class DmAdministrativeBoundaryController extends BaseController
         map.put("list",list);
         map.put("RankStatistics",RankStatistics);
         map.put("DivisionStatistics",DivisionStatistics);
-        return getDataTable(list);
+        return AjaxResult.success(map);
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.ruoyi.government.domain;
 
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -29,91 +31,124 @@ public class DmDmbz extends BaseEntity
 
     /** 设置单位 */
     @Excel(name = "设置单位")
+    @Schema(description="设置单位",example="string")
     private String setUnit;
 
     /** 设立年份 */
     @Excel(name = "设立年份")
-    @Schema(description="设置年份",example="2020-01-01")
+    @Schema(description="设立年份",example="2020-01-01")
     private String establishmentYear;
 
     /** 数据来源：字典；平台录入、市级推送、县级推送、其他 */
     @Excel(name = "数据来源：字典；平台录入、市级推送、县级推送、其他")
+    @Schema(description="数据来源：字典；平台录入、市级推送、县级推送、其他",example="string")
     private String dataSource;
 
     /** 标志代码 */
     @Excel(name = "标志代码")
+    @Schema(description="标志代码",example="string")
     private String flagCode;
 
     /** 空间数据标识码 */
     @Excel(name = "空间数据标识码")
+    @Schema(description="空间数据标识码",example="string")
     private String kjCode;
 
     /** 地名标志代码 */
     @Excel(name = "地名标志代码")
+    @Schema(description="地名标志代码",example="string")
     private String dmbzCode;
 
     /** 罗马字母拼写 */
     @Excel(name = "罗马字母拼写")
+    @Schema(description="罗马字母拼写",example="string")
+    @JSONField(name = "TMLMZMPX")
+    @JsonProperty("TMLMZMPX")
     private String TMLMZMPX;
 
     /** 行政区划名称 */
     @Excel(name = "行政区划名称")
+    @Schema(description="行政区划名称",example="string")
     private String xzqhName;
 
     /** 行政区划代码 */
     @Excel(name = "行政区划代码")
+    @Schema(description="行政区划代码",example="string")
     private String xzqhCode;
 
     /** 民族文字 */
     @Excel(name = "民族文字")
+    @Schema(description="民族文字",example="string")
     private String nationalScript;
 
     /** 所在（跨）行政区 */
-    @Excel(name = "所在", readConverterExp = "跨=")
+    @Excel(name = "所在（跨）行政区", readConverterExp = "跨=")
+    @Schema(description="所在（跨）行政区",example="string")
     private String szkxzqhName;
 
     /** 东经 */
     @Excel(name = "东经")
+    @Schema(description="东经",example="string")
     private String eastLongitude;
 
     /** 北纬 */
     @Excel(name = "北纬")
+    @Schema(description="北纬",example="string")
     private String northLatitude;
 
     /** 设置时间 */
     @Excel(name = "设置时间")
+    @Schema(description="设置时间",example="string")
     private String setTime;
 
     /** 生产厂家 */
     @Excel(name = "生产厂家")
+    @Schema(description="生产厂家",example="string")
+    @JSONField(name = "MANUFACTURER")
+    @JsonProperty("MANUFACTURER")
     private String MANUFACTURER;
 
     /** 材质 */
     @Excel(name = "材质")
+    @Schema(description="材质",example="string")
+    @JSONField(name = "MATERIAL")
+    @JsonProperty("MATERIAL")
     private String MATERIAL;
 
     /** 规格 */
     @Excel(name = "规格")
+    @Schema(description="规格",example="string")
+    @JSONField(name = "SPECIFICATION")
+    @JsonProperty("SPECIFICATION")
     private String SPECIFICATION;
 
     /** 标志照片文件名 */
     @Excel(name = "标志照片文件名")
+    @Schema(description="标志照片文件名",example="string")
     private String fileName;
 
     /** 登记时间 */
     @Excel(name = "登记时间")
+    @Schema(description="登记时间",example="string")
     private String signinTime;
 
     /** 登记人 */
     @Excel(name = "登记人")
+    @Schema(description="登记人",example="string")
+    @JSONField(name = "REGISTRANT")
+    @JsonProperty("REGISTRANT")
     private String REGISTRANT;
 
     /** 登记单位 */
     @Excel(name = "登记单位")
+    @Schema(description="登记单位",example="string")
     private String registrationUnit;
 
     /** 审核人 */
     @Excel(name = "审核人")
+    @Schema(description="审核人",example="string")
+    @JSONField(name = "AUDITOR")
+    @JsonProperty("AUDITOR")
     private String AUDITOR;
 
 

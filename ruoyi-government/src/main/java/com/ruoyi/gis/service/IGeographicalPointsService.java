@@ -14,6 +14,8 @@ import java.util.List;
 public interface IGeographicalPointsService
 {
 
+    List<GeographicalPoints> queryByXZQHCode(String code);
+
     /**
      * 查询点状标志
      *

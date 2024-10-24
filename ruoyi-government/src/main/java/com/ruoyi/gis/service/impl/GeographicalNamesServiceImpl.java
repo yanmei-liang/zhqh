@@ -20,6 +20,11 @@ public class GeographicalNamesServiceImpl implements IGeographicalNamesService
     @Autowired
     private GeographicalNamesMapper geographicalNamesMapper;
 
+    @Override
+    public List<GeographicalNames> queryByXZQHCode(String code) {
+        return geographicalNamesMapper.queryByXZQHCode(code);
+    }
+
     /**
      * 查询地名标志
      *

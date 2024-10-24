@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysNoticeMapper">
 
-    <resultMap type="SysNotice" id="SysNoticeResult">
+    <resultMap type="com.ruoyi.system.domain.SysNotice" id="SysNoticeResult">
         <result property="noticeId"       column="notice_id"       />
         <result property="noticeTitle"    column="notice_title"    />
         <result property="noticeType"     column="notice_type"     />
@@ -15,10 +15,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"       column="update_by"       />
         <result property="updateTime"     column="update_time"     />
         <result property="remark"         column="remark"          />
+        <result property="msgType" column="msg_type"/>
+        <result property="cancelTime" column="cancel_time"/>
+        <result property="sender" column="sender"/>
+        <result property="priority" column="priority"/>
+        <result property="sendStatus" column="send_status"/>
+        <result property="sendTime" column="send_time"/>
     </resultMap>
 
     <sql id="selectNoticeVo">
-        select notice_id, notice_title, notice_type, cast(notice_content as blob) as notice_content, status, create_by, create_time, update_by, update_time, remark
+        select notice_id, notice_title, notice_type, cast(notice_content as blob) as notice_content, status, create_by, create_time, update_by, update_time, remark, msg_type,
+        sender, priority, cancel_time, send_status, send_time
 		from sys_notice
     </sql>
 
@@ -41,6 +48,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
     </select>
+    <select id="listByUserId" resultType="com.ruoyi.system.domain.SysNotice">
+        SELECT  * from sys_notice where msg_type = 'ALL' and status  = '0' and send_status = '1' and notice_id not in (
+        select notice_id from sys_notice_send where user_id = #{userId}
+        )
+    </select>
+    <select id="querySysNoticeByUserId" resultType="com.ruoyi.system.domain.SysNotice">
+                select * from sys_notice
+        	   where send_status = '1'
+        	   and status = '0'
+         	   and notice_type = #{type}
+        	   and notice_id IN ( select notice_id from sys_notice_send where user_id = #{userId} and read_flag = '0')
+        	   order by create_time DESC
+    </select>
+
 
     <insert id="insertNotice" parameterType="SysNotice">
         insert into sys_notice (

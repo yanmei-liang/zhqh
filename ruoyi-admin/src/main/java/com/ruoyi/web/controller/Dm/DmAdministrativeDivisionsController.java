@@ -66,6 +66,7 @@ public class DmAdministrativeDivisionsController extends BaseController
     /**
      * 返回行政级别下拉框
      */
+    @ApiOperation("行政级别下拉框")
     @PreAuthorize("@ss.hasPermi('government:DIVISIONS:list')")
     @GetMapping("/selStatisticallevel")
     public AjaxResult selStatisticallevel()
@@ -79,7 +80,7 @@ public class DmAdministrativeDivisionsController extends BaseController
     @ApiOperation("获取数据列表")
     @PreAuthorize("@ss.hasPermi('government:DIVISIONS:list')")
     @GetMapping("/list")
-    public AjaxResult list(@RequestBody(required = false) DmAdministrativeDivisions obj)
+    public AjaxResult list(DmAdministrativeDivisions obj)
     {
         Map<String,Object> map=new HashMap<>();
         startPage();
@@ -132,6 +133,7 @@ public class DmAdministrativeDivisionsController extends BaseController
     /**
      * 导出行政区划列表
      */
+    @ApiOperation("导出行政区划列表")
     @PreAuthorize("@ss.hasPermi('government:DIVISIONS:export')")
     @Log(title = "行政区划", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -155,6 +157,7 @@ public class DmAdministrativeDivisionsController extends BaseController
     /**
      * 新增行政区划
      */
+    @ApiOperation("新增行政区划")
     @PreAuthorize("@ss.hasPermi('government:DIVISIONS:add')")
     @Log(title = "行政区划", businessType = BusinessType.INSERT)
     @PostMapping("/addAdministrativeDivisions")

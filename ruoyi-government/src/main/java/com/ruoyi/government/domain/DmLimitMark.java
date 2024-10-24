@@ -1,7 +1,10 @@
 package com.ruoyi.government.domain;
 
 import java.util.Date;
+
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -23,285 +26,356 @@ public class DmLimitMark extends BaseEntity
 
     /** 界桩编号 */
     @Excel(name = "界桩编号")
+    @Schema(description="界桩编号",example="string")
     private String boundarypostNo;
 
     /** 界桩代码 */
     @Excel(name = "界桩代码")
+    @Schema(description="界桩代码",example="string")
     private String boundarypostCode;
 
     /** 空间数据标识码 */
     @Excel(name = "空间数据标识码")
+    @Schema(description="空间数据标识码",example="string")
     private String spatialdataCode;
 
     /** 界桩名称 */
     @Excel(name = "界桩名称")
+    @Schema(description="界桩名称",example="string")
     private String boundarypostName;
 
     /** 界桩等级(字典，省级、市级、县级、乡级、村级) */
     @Excel(name = "界桩等级(字典，省级、市级、县级、乡级、村级)")
+    @Schema(description="界桩等级(字典，省级、市级、县级、乡级、村级)",example="村级")
     private String boundarypostLv;
 
     /** 界桩类型(单立双面性、单立三面型) */
     @Excel(name = "界桩类型(单立双面性、单立三面型)")
+    @Schema(description="界桩类型(单立双面性、单立三面型)",example="单立三面型")
     private String boundarypostType;
 
     /** 界桩类型(物联网界桩、非物联网界桩) */
     @Excel(name = "界桩类型(物联网界桩、非物联网界桩)")
+    @Schema(description="界桩类型(物联网界桩、非物联网界桩)",example="非物联网界桩")
     private String boundarypostTypeTwo;
 
     /** 界桩材质 */
     @Excel(name = "界桩材质")
+    @Schema(description="界桩材质",example="大理石")
     private String boundarypostMaterial;
 
     /** 数据类型 */
     @Excel(name = "数据类型")
+    @Schema(description="数据类型",example="string")
     private String informationType;
 
     /** 界限代码 ---    关联界限 */
     @Excel(name = "界限代码 ---    关联界限")
+    @Schema(description="界限代码",example="string")
     private String limitCode;
 
     /** 是否公开 */
     @Excel(name = "是否公开")
+    @Schema(description="是否公开,0 不公开，1公开",example="1")
     private Integer whetherPublicity;
 
     /** 界线标志区划代码-关联行政区划 */
     @Excel(name = "界线标志区划代码-关联行政区划")
+    @Schema(description="界线标志区划代码-关联行政区划",example="string")
     private String boundarymarkerCode;
 
     /** 高程 */
     @Excel(name = "高程")
+    @Schema(description="高程",example="string")
+    @JSONField(name = "ELEVATION")
+    @JsonProperty("ELEVATION")
     private String ELEVATION;
 
     /** 一号方位物理位置/名称 */
     @Excel(name = "一号方位物理位置/名称")
+    @Schema(description="一号方位物理位置/名称",example="string")
     private String onePhysicalposition;
 
     /** 一号方位物坐标方位角 */
     @Excel(name = "一号方位物坐标方位角")
+    @Schema(description="一号方位物坐标方位角",example="string")
     private String oneAzimuthangle;
 
     /** 一号方位物距离 */
     @Excel(name = "一号方位物距离")
+    @Schema(description="一号方位物距离",example="string")
     private String oneAzimuthDistance;
 
     /** 二号方位物理位置/名称 */
     @Excel(name = "二号方位物理位置/名称")
+    @Schema(description="二号方位物理位置/名称",example="string")
     private String twoPhysicalposition;
 
     /** 二号方位物坐标方位角 */
     @Excel(name = "二号方位物坐标方位角")
+    @Schema(description="二号方位物坐标方位角",example="string")
     private String twoAzimuthangle;
 
     /** 二号方位物距离 */
     @Excel(name = "二号方位物距离")
+    @Schema(description="二号方位物距离",example="string")
     private String twoAzimuthDistance;
 
     /** 三号方位物理位置/名称 */
     @Excel(name = "三号方位物理位置/名称")
+    @Schema(description="三号方位物理位置/名称",example="string")
     private String threePhysicalposition;
 
     /** 三号方位物坐标方位角 */
     @Excel(name = "三号方位物坐标方位角")
+    @Schema(description="三号方位物坐标方位角",example="string")
     private String threeAzimuthangle;
 
     /** 三号方位物距离 */
     @Excel(name = "三号方位物距离")
+    @Schema(description="三号方位物距离",example="string")
     private String threeAzimuthDistance;
 
     /** 界桩变更历史记录 */
     @Excel(name = "界桩变更历史记录")
+    @Schema(description="界桩变更历史记录",example="string")
     private String boundarypostHistoricalrecord;
 
     /** 界桩成果表 */
     @Excel(name = "界桩成果表")
+    @Schema(description="界桩成果表",example="string")
     private String boundarypostTable;
 
     /** 位置描述 */
     @Excel(name = "位置描述")
+    @Schema(description="位置描述",example="string")
     private String positionDescription;
 
     /** 所在地1 */
     @Excel(name = "所在地1")
+    @Schema(description="所在地1",example="string")
     private String oneLocation;
 
     /** 所在地2 */
     @Excel(name = "所在地2")
+    @Schema(description="所在地2",example="string")
     private String twoLocation;
 
     /** 所在地3 */
     @Excel(name = "所在地3")
+    @Schema(description="所在地3",example="string")
     private String threeLocation;
 
     /** 技术负责1 */
     @Excel(name = "技术负责1")
+    @Schema(description="技术负责1",example="string")
     private String oneTechnicalresponsibility;
 
     /** 技术负责2 */
     @Excel(name = "技术负责2")
+    @Schema(description="技术负责2",example="string")
     private String twoTechnicalresponsibility;
 
     /** 技术负责3 */
     @Excel(name = "技术负责3")
+    @Schema(description="技术负责3",example="string")
     private String threeTechnicalresponsibility;
 
     /** 等级时间1 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="等级时间1",example="2020-10-02")
     @Excel(name = "等级时间1", width = 30, dateFormat = "yyyy-MM-dd")
     private Date oneGradetime;
 
     /** 等级时间2 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="等级时间2",example="2020-10-02")
     @Excel(name = "等级时间2", width = 30, dateFormat = "yyyy-MM-dd")
     private Date twoGradetime;
 
     /** 等级时间3 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="等级时间3",example="2020-10-02")
     @Excel(name = "等级时间3", width = 30, dateFormat = "yyyy-MM-dd")
     private Date threeGradetime;
 
     /** 行政区1 */
     @Excel(name = "行政区1")
+    @Schema(description="行政区1",example="string")
     private String oneAdministrativeregion;
 
     /** 行政区2 */
     @Excel(name = "行政区2")
+    @Schema(description="行政区2",example="string")
     private String twoAdministrativeregion;
 
     /** 行政区3 */
     @Excel(name = "行政区3")
+    @Schema(description="行政区3",example="string")
     private String threeAdministrativeregion;
 
     /** 纵坐标 */
     @Excel(name = "纵坐标")
+    @Schema(description="纵坐标",example="string")
     private String ordinate;
 
     /** 横坐标 */
     @Excel(name = "横坐标")
+    @Schema(description="横坐标",example="string")
     private String abscissa;
 
     /** 经度 */
     @Excel(name = "经度")
+    @Schema(description="经度",example="string")
     private String longitude;
 
     /** 纬度 */
     @Excel(name = "纬度")
+    @Schema(description="纬度",example="string")
     private String latitude;
 
     /** 物联网设备编号 */
     @Excel(name = "物联网设备编号")
+    @Schema(description="物联网设备编号",example="string")
     private String equipmentNo;
 
     /** 物联网设备名称 */
     @Excel(name = "物联网设备名称")
+    @Schema(description="物联网设备名称",example="string")
     private String equipmentName;
 
     /** 设备状态	离线、在线 */
     @Excel(name = "设备状态	离线、在线")
+    @Schema(description="设备状态	0离线、1在线",example="1")
     private Integer equipmentState;
 
     /** 最新报文时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="最新报文时间",example="2020-10-10")
     @Excel(name = "最新报文时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date lastmessageTime;
 
     /** 是否倾斜 */
     @Excel(name = "是否倾斜")
+    @Schema(description="是否倾斜",example="string")
     private Integer tiltNot;
 
     /** 是否低电量 */
     @Excel(name = "是否低电量")
+    @Schema(description="是否低电量",example="1")
     private Integer notPowerfailure;
 
     /** 漂移距离 */
     @Excel(name = "漂移距离")
+    @Schema(description="漂移距离",example="10.1")
     private Double driftDistance;
 
     /** 提示位置 */
     @Excel(name = "提示位置")
+    @Schema(description="提示位置",example="string")
     private String promptLocation;
 
     /** 是否托管 */
     @Excel(name = "是否托管")
+    @Schema(description="是否托管",example="1")
     private Integer notTrusteeship;
 
     /** 托管单位 */
     @Excel(name = "托管单位")
+    @Schema(description="托管单位",example="string")
     private String trusteeshipUnit;
 
     /** 界桩位置略图 */
     @Excel(name = "界桩位置略图")
+    @Schema(description="界桩位置略图",example="string")
     private String stakepositionPicture;
 
     /** 界桩登记表 */
     @Excel(name = "界桩登记表")
+    @Schema(description="界桩登记表",example="string")
     private String boundarypostRegistrationform;
 
     /** 界桩照片 */
     @Excel(name = "界桩照片")
+    @Schema(description="界桩照片",example="string")
     private String boundarypostPicture;
 
     /** 界桩影像 */
     @Excel(name = "界桩影像")
+    @Schema(description="界桩影像",example="string")
     private String boundarypostVideo;
 
     /** 三交点协议 */
     @Excel(name = "三交点协议")
+    @Schema(description="三交点协议",example="string")
     private String threeIntersectionprotocol;
 
     /** 三交点图片 */
     @Excel(name = "三交点图片")
+    @Schema(description="三交点图片",example="string")
     private String threeIntersectionpicture;
 
     /** 三交点纪要 */
     @Excel(name = "三交点纪要")
+    @Schema(description="三交点纪要",example="string")
     private String threeIntersectionminutes;
 
     /** A方技术人员签字 */
     @Excel(name = "A方技术人员签字")
+    @Schema(description="A方技术人员签字",example="string")
     private String aTechnicalsignature;
 
     /** A方勘界办人员签字 */
     @Excel(name = "A方勘界办人员签字")
+    @Schema(description="A方勘界办人员签字",example="string")
     private String aBoundarysettlement;
 
     /** A方签字时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="A方签字时间",example="2020-12-12")
     @Excel(name = "A方签字时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date aSignaturetime;
 
     /** B方技术人员签字 */
     @Excel(name = "B方技术人员签字")
+    @Schema(description="B方技术人员签字",example="string")
     private String bTechnicalsignature;
 
     /** B方勘界办人员签字 */
     @Excel(name = "B方勘界办人员签字")
+    @Schema(description="B方勘界办人员签字",example="string")
     private String bBoundarysettlement;
 
     /** B方签字时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="B方签字时间",example="string")
     @Excel(name = "B方签字时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date bSignaturetime;
 
     /** C方技术人员签字 */
     @Excel(name = "C方技术人员签字")
+    @Schema(description="C方技术人员签字",example="string")
     private String cTechnicalsignature;
 
     /** C方勘界办人员签字 */
     @Excel(name = "C方勘界办人员签字")
+    @Schema(description="C方勘界办人员签字",example="string")
     private String cBoundarysettlement;
 
     /** C方签字时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(description="C方签字时间",example="string")
     @Excel(name = "C方签字时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date cSignaturetime;
 
     /** 其他附件 */
     @Excel(name = "其他附件")
+    @Schema(description="其他附件",example="string")
     private String otherAccessories;
 
     /** 其他信息 */
     @Excel(name = "其他信息")
+    @Schema(description="其他信息",example="string")
     private String otherInformation;
 
 

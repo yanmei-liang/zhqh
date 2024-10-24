@@ -20,6 +20,11 @@ public class GeographicalPointsServiceImpl implements IGeographicalPointsService
     @Autowired
     private GeographicalPointsMapper geographicalPointsMapper;
 
+    @Override
+    public List<GeographicalPoints> queryByXZQHCode(String code) {
+        return geographicalPointsMapper.queryByXZQHCode(code);
+    }
+
     /**
      * 查询点状标志
      *
