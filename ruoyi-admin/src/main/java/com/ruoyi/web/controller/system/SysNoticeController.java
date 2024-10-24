@@ -118,9 +118,9 @@ public class SysNoticeController extends BaseController
         if(notices.size()>0) {
             for(int i=0;i<notices.size();i++) {
                 //因为websocket没有判断是否存在这个用户，要是判断会出现问题，故在此判断逻辑
-                LambdaQueryWrapper<SysNoticeSend> query = new LambdaQueryWrapper<>();
-                query.eq(SysNoticeSend::getNoticeId,notices.get(i).getNoticeId());
-                query.eq(SysNoticeSend::getUserId,userId);
+//                LambdaQueryWrapper<SysNoticeSend> query = new LambdaQueryWrapper<>();
+//                query.eq(SysNoticeSend::getNoticeId,notices.get(i).getNoticeId());
+//                query.eq(SysNoticeSend::getUserId,userId);
                 SysNoticeSend one = noticeSendService.getByUserIdNoticeId(userId, notices.get(i).getNoticeId());
                 if(null==one){
                     SysNoticeSend noticeSend = new SysNoticeSend();
@@ -131,15 +131,17 @@ public class SysNoticeController extends BaseController
                 }
             }
         }
+        String noticeType = "1";
         // 2.查询用户未读的系统消息
         startPage();
-        List<SysNotice> sysNoticeList = noticeService.querySysNoticeByUserId(userId,"1");//通知公告消息
+        List<SysNotice> sysNoticeList = noticeService.querySysNoticeByUserId(noticeType,userId);//通知公告消息
         TableDataInfo tableDataInfoAnnt = getDataTable(sysNoticeList);
         startPage();
-        List<SysNotice> sysMsgList = noticeService.querySysNoticeByUserId(userId,"2");//系统消息
+        noticeType  = "2";
+        List<SysNotice> sysMsgList = noticeService.querySysNoticeByUserId(noticeType,userId);//系统消息
         TableDataInfo tableDataInfoMsg = getDataTable(sysMsgList);
         startPage();
-        List<SysNotice> todealMsgList = noticeService.querySysNoticeByUserId(userId,"3");//待办消息
+        List<SysNotice> todealMsgList = noticeService.querySysNoticeByUserId(noticeType, userId);//待办消息
         TableDataInfo tableDataInfoDeal = getDataTable(todealMsgList);
         Map<String,Object> sysMsgMap = new HashMap<String, Object>();
         sysMsgMap.put("sysMsgList", tableDataInfoMsg.getRows());

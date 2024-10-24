@@ -60,5 +60,5 @@ public interface ISysNoticeService
 
     List<SysNotice> listByUserId(Long userId);
 
-    List<SysNotice> querySysNoticeByUserId(Long userId, String msgCategory);
+    List<SysNotice> querySysNoticeByUserId( String noticeType, Long userId);
 }
