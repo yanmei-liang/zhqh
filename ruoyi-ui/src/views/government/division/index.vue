@@ -565,7 +565,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.dialogVisible = fasle;
+          this.dialogVisible = false;
         })
         .catch(() => {
           this.dialogVisible = true;
