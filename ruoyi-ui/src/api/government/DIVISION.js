@@ -56,3 +56,12 @@ export function optionsList() {
         method: 'get'
     })
 }
+
+// 新增行政级别
+export function addDivision(data) {
+    return request({
+        url: "/government/DIVISIONS/addAdministrativeDivisions",
+        method: "post",
+        data
+    })
+}

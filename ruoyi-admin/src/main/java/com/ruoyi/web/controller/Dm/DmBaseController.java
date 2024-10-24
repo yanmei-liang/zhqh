@@ -47,7 +47,7 @@ public class DmBaseController extends BaseController
     @ApiOperation("获取数据列表")
     @PreAuthorize("@ss.hasPermi('government:BASE:list')")
     @GetMapping("/list")
-    public AjaxResult list(@RequestBody(required = false) DmBase dmBase)
+    public AjaxResult list(DmBase dmBase)
     {
         Map<String,Object> map=new HashMap<>();
         startPage();

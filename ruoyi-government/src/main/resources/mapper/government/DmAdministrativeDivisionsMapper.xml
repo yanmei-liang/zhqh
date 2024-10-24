@@ -8,15 +8,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="ID"    column="ID"    />
         <result property="administrativeDivisionName"    column="ADMINISTRATIVE_DIVISION_NAME"    />
         <result property="administrativeDivisionCode"    column="ADMINISTRATIVE_DIVISION_CODE"    />
-        <result property="ADDRESS"    column="ADDRESS"    />
-        <result property="AREA"    column="AREA"    />
+        <result property="address"    column="ADDRESS"    />
+        <result property="area"    column="AREA"    />
         <result property="postalCode"    column="POSTAL_CODE"    />
         <result property="administrativeLevel"    column="ADMINISTRATIVE_LEVEL"    />
         <result property="superiorsName"    column="SUPERIORS_NAME"    />
         <result property="superiorsCode"    column="SUPERIORS_CODE"    />
         <result property="unitWebsite"    column="UNIT_WEBSITE"    />
         <result property="contactNumber"    column="CONTACT_NUMBER"    />
-        <result property="ATTACHMENTS"    column="ATTACHMENTS"    />
+        <result property="attachments"    column="ATTACHMENTS"    />
         <result property="multimediaVideo"    column="MULTIMEDIA_VIDEO"    />
         <result property="originalPronunciation"    column="ORIGINAL_PRONUNCIATION"    />
         <result property="otherAccessories"    column="OTHER_ACCESSORIES"    />
@@ -111,15 +111,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="administrativeDivisionName != null  and administrativeDivisionName != ''"> and ADMINISTRATIVE_DIVISION_NAME like concat('%', #{administrativeDivisionName}, '%')</if>
             <if test="administrativeDivisionCode != null  and administrativeDivisionCode != ''"> and ADMINISTRATIVE_DIVISION_CODE = #{administrativeDivisionCode}</if>
-            <if test="ADDRESS != null  and ADDRESS != ''"> and ADDRESS = #{ADDRESS}</if>
-            <if test="AREA != null "> and AREA = #{AREA}</if>
+            <if test="address != null  and address != ''"> and ADDRESS = #{address}</if>
+            <if test="area != null "> and AREA = #{area}</if>
             <if test="postalCode != null  and postalCode != ''"> and POSTAL_CODE = #{postalCode}</if>
             <if test="administrativeLevel != null  and administrativeLevel != ''"> and ADMINISTRATIVE_LEVEL = #{administrativeLevel}</if>
             <if test="superiorsName != null  and superiorsName != ''"> and SUPERIORS_NAME like concat('%', #{superiorsName}, '%')</if>
             <if test="superiorsCode != null  and superiorsCode != ''"> and SUPERIORS_CODE = #{superiorsCode}</if>
             <if test="unitWebsite != null  and unitWebsite != ''"> and UNIT_WEBSITE = #{unitWebsite}</if>
             <if test="contactNumber != null  and contactNumber != ''"> and CONTACT_NUMBER = #{contactNumber}</if>
-            <if test="ATTACHMENTS != null  and ATTACHMENTS != ''"> and ATTACHMENTS = #{ATTACHMENTS}</if>
+            <if test="attachments != null  and attachments != ''"> and ATTACHMENTS = #{attachments}</if>
             <if test="multimediaVideo != null  and multimediaVideo != ''"> and MULTIMEDIA_VIDEO = #{multimediaVideo}</if>
             <if test="originalPronunciation != null  and originalPronunciation != ''"> and ORIGINAL_PRONUNCIATION = #{originalPronunciation}</if>
             <if test="otherAccessories != null  and otherAccessories != ''"> and OTHER_ACCESSORIES = #{otherAccessories}</if>
@@ -142,15 +142,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="administrativeDivisionName != null">ADMINISTRATIVE_DIVISION_NAME,</if>
             <if test="administrativeDivisionCode != null">ADMINISTRATIVE_DIVISION_CODE,</if>
-            <if test="ADDRESS != null">ADDRESS,</if>
-            <if test="AREA != null">AREA,</if>
+            <if test="address != null">ADDRESS,</if>
+            <if test="area != null">AREA,</if>
             <if test="postalCode != null">POSTAL_CODE,</if>
             <if test="administrativeLevel != null">ADMINISTRATIVE_LEVEL,</if>
             <if test="superiorsName != null">SUPERIORS_NAME,</if>
             <if test="superiorsCode != null">SUPERIORS_CODE,</if>
             <if test="unitWebsite != null">UNIT_WEBSITE,</if>
             <if test="contactNumber != null">CONTACT_NUMBER,</if>
-            <if test="ATTACHMENTS != null">ATTACHMENTS,</if>
+            <if test="attachments != null">ATTACHMENTS,</if>
             <if test="multimediaVideo != null">MULTIMEDIA_VIDEO,</if>
             <if test="originalPronunciation != null">ORIGINAL_PRONUNCIATION,</if>
             <if test="otherAccessories != null">OTHER_ACCESSORIES,</if>
@@ -164,15 +164,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="administrativeDivisionName != null">#{administrativeDivisionName},</if>
             <if test="administrativeDivisionCode != null">#{administrativeDivisionCode},</if>
-            <if test="ADDRESS != null">#{ADDRESS},</if>
-            <if test="AREA != null">#{AREA},</if>
+            <if test="address != null">#{address},</if>
+            <if test="area != null">#{area},</if>
             <if test="postalCode != null">#{postalCode},</if>
             <if test="administrativeLevel != null">#{administrativeLevel},</if>
             <if test="superiorsName != null">#{superiorsName},</if>
             <if test="superiorsCode != null">#{superiorsCode},</if>
             <if test="unitWebsite != null">#{unitWebsite},</if>
             <if test="contactNumber != null">#{contactNumber},</if>
-            <if test="ATTACHMENTS != null">#{ATTACHMENTS},</if>
+            <if test="attachments != null">#{attachments},</if>
             <if test="multimediaVideo != null">#{multimediaVideo},</if>
             <if test="originalPronunciation != null">#{originalPronunciation},</if>
             <if test="otherAccessories != null">#{otherAccessories},</if>
@@ -190,15 +190,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="administrativeDivisionName != null">ADMINISTRATIVE_DIVISION_NAME = #{administrativeDivisionName},</if>
             <if test="administrativeDivisionCode != null">ADMINISTRATIVE_DIVISION_CODE = #{administrativeDivisionCode},</if>
-            <if test="ADDRESS != null">ADDRESS = #{ADDRESS},</if>
-            <if test="AREA != null">AREA = #{AREA},</if>
+            <if test="address != null">ADDRESS = #{address},</if>
+            <if test="area != null">AREA = #{area},</if>
             <if test="postalCode != null">POSTAL_CODE = #{postalCode},</if>
             <if test="administrativeLevel != null">ADMINISTRATIVE_LEVEL = #{administrativeLevel},</if>
             <if test="superiorsName != null">SUPERIORS_NAME = #{superiorsName},</if>
             <if test="superiorsCode != null">SUPERIORS_CODE = #{superiorsCode},</if>
             <if test="unitWebsite != null">UNIT_WEBSITE = #{unitWebsite},</if>
             <if test="contactNumber != null">CONTACT_NUMBER = #{contactNumber},</if>
-            <if test="ATTACHMENTS != null">ATTACHMENTS = #{ATTACHMENTS},</if>
+            <if test="attachments != null">ATTACHMENTS = #{attachments},</if>
             <if test="multimediaVideo != null">MULTIMEDIA_VIDEO = #{multimediaVideo},</if>
             <if test="originalPronunciation != null">ORIGINAL_PRONUNCIATION = #{originalPronunciation},</if>
             <if test="otherAccessories != null">OTHER_ACCESSORIES = #{otherAccessories},</if>

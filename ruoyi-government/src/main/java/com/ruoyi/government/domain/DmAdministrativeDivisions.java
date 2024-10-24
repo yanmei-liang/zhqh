@@ -28,18 +28,22 @@ public class DmAdministrativeDivisions extends BaseEntity
 
     /** 行政区划代码 */
     @Excel(name = "行政区划代码")
+    @Schema(description="行政区划代码",example="420000")
     private String administrativeDivisionCode;
 
     /** 驻地地址 */
     @Excel(name = "驻地地址")
-    private String ADDRESS;
+    @Schema(description="驻地地址",example="湖北省")
+    private String address;
 
     /** 面积（km2） */
     @Excel(name = "面积", readConverterExp = "k=m2")
-    private Double AREA;
+    @Schema(description="面积",example="42.1")
+    private Double area;
 
     /** 邮政编码 */
     @Excel(name = "邮政编码")
+    @Schema(description="邮政编码")
     private String postalCode;
 
     /** 行政级别(数据字典，地级市、区、县、乡、村) */
@@ -49,38 +53,47 @@ public class DmAdministrativeDivisions extends BaseEntity
 
     /** 上一级区划名称 */
     @Excel(name = "上一级区划名称")
+    @Schema(description="上一级区划名称")
     private String superiorsName;
 
     /** 上一级区划代码 */
     @Excel(name = "上一级区划代码")
+    @Schema(description="上一级区划代码")
     private String superiorsCode;
 
     /** 单位网站 */
     @Excel(name = "单位网站")
+    @Schema(description="单位网站",example="www.ss.com")
     private String unitWebsite;
 
     /** 联系电话 */
     @Excel(name = "联系电话")
+    @Schema(description="联系电话",example="181xxxx0212")
     private String contactNumber;
 
     /** 附件，多媒体照片 */
     @Excel(name = "附件，多媒体照片")
-    private String ATTACHMENTS;
+    @Schema(description="附件，多媒体照片",example="181xxxx0212")
+    private String attachments;
 
     /** 多媒体视频 */
     @Excel(name = "多媒体视频")
+    @Schema(description="多媒体视频",example="181xxxx0212")
     private String multimediaVideo;
 
     /** 原读音 */
     @Excel(name = "原读音")
+    @Schema(description="原读音",example="181xxxx0212")
     private String originalPronunciation;
 
     /** 其他附件 */
     @Excel(name = "其他附件")
+    @Schema(description="其他附件",example="181xxxx0212")
     private String otherAccessories;
 
     /** 地理位置信息 */
     @Excel(name = "地理位置信息")
+    @Schema(description="地理位置信息",example="181xxxx0212")
     private String geographicalpositionMsg;
 
     /** 开始时间yyyy-MM-dd */
@@ -92,9 +105,6 @@ public class DmAdministrativeDivisions extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Schema(description="结束时间yyyy-MM-dd",example="2020-10-30")
     private Date endDate;
-
-
-
 
     public void setID(Long ID)
     {
@@ -125,21 +135,21 @@ public class DmAdministrativeDivisions extends BaseEntity
     }
     public void setADDRESS(String ADDRESS) 
     {
-        this.ADDRESS = ADDRESS;
+        this.address = ADDRESS;
     }
 
     public String getADDRESS() 
     {
-        return ADDRESS;
+        return address;
     }
     public void setAREA(Double AREA) 
     {
-        this.AREA = AREA;
+        this.area = AREA;
     }
 
     public Double getAREA() 
     {
-        return AREA;
+        return area;
     }
     public void setPostalCode(String postalCode) 
     {
@@ -197,12 +207,12 @@ public class DmAdministrativeDivisions extends BaseEntity
     }
     public void setATTACHMENTS(String ATTACHMENTS) 
     {
-        this.ATTACHMENTS = ATTACHMENTS;
+        this.attachments = ATTACHMENTS;
     }
 
     public String getATTACHMENTS() 
     {
-        return ATTACHMENTS;
+        return attachments;
     }
     public void setMultimediaVideo(String multimediaVideo) 
     {

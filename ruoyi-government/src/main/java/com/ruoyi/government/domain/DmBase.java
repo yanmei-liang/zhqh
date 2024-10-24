@@ -23,6 +23,7 @@ public class DmBase extends BaseEntity
 
     /** 地名代码 */
     @Excel(name = "地名代码")
+    @Schema(description="地名代码",example="string")
     private String code;
 
     /** 标准名称 */
@@ -32,157 +33,194 @@ public class DmBase extends BaseEntity
 
     /** 别名 */
     @Excel(name = "别名")
+    @Schema(description="别名",example="string")
     private String alias;
 
     /** 简称 */
     @Excel(name = "简称")
+    @Schema(description="简称",example="string")
     private String simpleName;
 
     /** 曾用名 */
     @Excel(name = "曾用名")
+    @Schema(description="曾用名",example="string")
     private String historyName;
 
     /** 汉子书写 */
     @Excel(name = "汉子书写")
+    @Schema(description="汉子书写",example="string")
     private String chineseName;
 
     /** 少数民族语言书写 */
     @Excel(name = "少数民族语言书写")
+    @Schema(description="少数民族语言书写",example="string")
     private String ssmzyy;
 
     /** 地名原读音(读音文件名) */
     @Excel(name = "地名原读音(读音文件名)")
+    @Schema(description="地名原读音",example="string")
     private String dmydy;
 
     /** 汉语普通话读音(读音文件名) */
     @Excel(name = "汉语普通话读音(读音文件名)")
+    @Schema(description="汉语普通话读音",example="string")
     private String hypthdy;
 
     /** 罗马字母拼写 */
     @Excel(name = "罗马字母拼写")
+    @Schema(description="罗马字母拼写",example="string")
     private String lmzmpx;
 
     /** 地名语种 */
     @Excel(name = "地名语种")
+    @Schema(description="地名语种",example="string")
     private String dmyz;
 
     /** 地名类别 */
     @Excel(name = "地名类别")
-    @Schema(description="标准名称",example="string")
+    @Schema(description="地名类别",example="string")
     private String dmlb;
 
     /** 东经(格式：_°_′_″ 第三段“秒”预留两位小数) */
     @Excel(name = "东经(格式：_°_′_″ 第三段“秒”预留两位小数)")
+    @Schema(description="东经",example="string")
     private String eastLongitude;
 
     /** 至东经(格式：_°_′_″ 第三段“秒”预留两位小数) */
     @Excel(name = "至东经(格式：_°_′_″ 第三段“秒”预留两位小数)")
+    @Schema(description="至东经",example="string")
     private String toEastLongitude;
 
     /** 北纬(格式：_°_′_″ 第三段“秒”预留两位小数) */
     @Excel(name = "北纬(格式：_°_′_″ 第三段“秒”预留两位小数)")
+    @Schema(description="北纬",example="string")
     private String northLatitude;
 
     /** 至北纬(格式：_°_′_″ 第三段“秒”预留两位小数) */
     @Excel(name = "至北纬(格式：_°_′_″ 第三段“秒”预留两位小数)")
+    @Schema(description="至北纬",example="string")
     private String toNorthLatitude;
 
     /** 地名普查状态 */
     @Excel(name = "地名普查状态")
+    @Schema(description="地名普查状态",example="string")
     private String dmpczt;
 
     /** 原图名称-填写该地名在地图上的名称 */
     @Excel(name = "原图名称-填写该地名在地图上的名称")
+    @Schema(description="原图名称",example="string")
     private String ytmc;
 
     /** 图号-所在图幅的图名、图号 */
     @Excel(name = "图号-所在图幅的图名、图号")
+    @Schema(description="图号",example="string")
     private String th;
 
     /** 比例尺 */
     @Excel(name = "比例尺")
+    @Schema(description="比例尺",example="string")
     private String scale;
 
     /** 使用时间 */
     @Excel(name = "使用时间")
+    @Schema(description="使用时间",example="string")
     private String useTime;
 
     /** 地名的来历 */
     @Excel(name = "地名的来历")
+    @Schema(description="地名的来历",example="string")
     private String dmll;
 
     /** 地名的含义 */
     @Excel(name = "地名的含义")
+    @Schema(description="地名的含义",example="string")
     private String dmhy;
 
     /** 地名的历史沿革 */
     @Excel(name = "地名的历史沿革")
+    @Schema(description="地名的历史沿革",example="string")
     private String dmlsyg;
 
     /** 地名典故 */
     @Excel(name = "地名典故")
+    @Schema(description="地名典故",example="string")
     private String dmdg;
 
     /** 密级 */
     @Excel(name = "密级")
+    @Schema(description="密级",example="string")
     private String mj;
 
     /** 坐标系-为2000国家大地坐标系 */
     @Excel(name = "坐标系-为2000国家大地坐标系")
+    @Schema(description="坐标系",example="string")
     private String zbx;
 
     /** 测量方法 */
     @Excel(name = "测量方法")
+    @Schema(description="测量方法",example="string")
     private String clff;
 
     /** 地理实体概况 */
     @Excel(name = "地理实体概况")
+    @Schema(description="地理实体概况",example="string")
     private String dlstgk;
 
     /** 资料来源 */
     @Excel(name = "资料来源")
+    @Schema(description="资料来源",example="string")
     private String zlly;
 
     /** 登记时间-格式yyyy-MM-dd */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "登记时间-格式yyyy-MM-dd", width = 30, dateFormat = "yyyy-MM-dd")
+    @Schema(description="登记时间",example="2021-12-12")
     private Date registerDate;
 
     /** 登记人 */
     @Excel(name = "登记人")
+    @Schema(description="登记人",example="string")
     private String registerName;
 
     /** 登记单位 */
     @Excel(name = "登记单位")
+    @Schema(description="登记单位",example="string")
     private String registerUnit;
 
     /** 通名罗马字母拼写 */
     @Excel(name = "通名罗马字母拼写")
+    @Schema(description="通名罗马字母拼写",example="string")
     private String tmlmzmpx;
 
     /** 设立年份 */
     @Excel(name = "设立年份")
+    @Schema(description="设立年份",example="string")
     private String slnf;
 
     /** 废止年份 */
     @Excel(name = "废止年份")
+    @Schema(description="废止年份",example="string")
     private String fznf;
 
     /** 是否公开 */
     @Excel(name = "是否公开")
+    @Schema(description="是否公开",example="string")
     private String sfgk;
 
     /** 多媒体信息 */
     @Excel(name = "多媒体信息")
+    @Schema(description="多媒体信息",example="string")
     private String dmtxx;
 
     /** 行政区划 */
     @Excel(name = "行政区划")
+    @Schema(description="行政区划",example="string")
     private String xzqh;
 
     /** 命名时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "命名时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @Schema(description="命名时间",example="2020-10-12")
     private Date mmsj;
 
     /** 开始时间yyyy-MM-dd */
