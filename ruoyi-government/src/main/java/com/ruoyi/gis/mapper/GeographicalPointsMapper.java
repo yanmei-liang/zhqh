@@ -62,4 +62,5 @@ public interface GeographicalPointsMapper
      */
     public int deleteGeographicalPointsByOBJECTIDs(Integer[] IDS);
 
+    List<GeographicalPoints> queryByXZQHCode(String code);
 }

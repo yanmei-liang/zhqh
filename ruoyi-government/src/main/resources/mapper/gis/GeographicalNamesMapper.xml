@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectGeographicalNamesVo">
-        select ID, SHAPE, CODE, MAP_NAME, TYPE, USE_TIME, create_by, create_time, update_by, update_time, is_deleted from GEOGRAPHICAL_NAMES
+        select ID, SYSGEO.DMGEO.ST_ASTEXT(SHAPE) as SHAPE, CODE, MAP_NAME, TYPE, USE_TIME, create_by, create_time, update_by, update_time, is_deleted from GEOGRAPHICAL_NAMES
     </sql>
 
     <select id="selectGeographicalNamesList" parameterType="com.ruoyi.gis.domain.GeographicalNames" resultMap="GeographicalNamesResult">
@@ -35,6 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectGeographicalNamesByOBJECTID" parameterType="Integer" resultMap="GeographicalNamesResult">
         <include refid="selectGeographicalNamesVo"/>
         where is_deleted = 0 and ID = #{ID}
+    </select>
+    <select id="queryByXZQHCode" resultType="com.ruoyi.gis.domain.GeographicalNames">
+        <include refid="selectGeographicalNamesVo"/>
+        WHERE code
+        IN (
+        SELECT GEOM_CODE FROM GEO_GRAPHICAL_REF WHERE GRAP_CODE LIKE concat(#{code}, '%')
+        )
     </select>
 
     <insert id="insertGeographicalNames" parameterType="com.ruoyi.gis.domain.GeographicalNames" useGeneratedKeys="true" keyProperty="ID">

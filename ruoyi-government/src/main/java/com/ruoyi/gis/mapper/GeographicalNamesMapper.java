@@ -61,4 +61,5 @@ public interface GeographicalNamesMapper
      */
     public int deleteGeographicalNamesByOBJECTIDs(Integer[] IDS);
 
+    List<GeographicalNames> queryByXZQHCode(String code);
 }

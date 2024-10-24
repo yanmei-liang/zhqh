@@ -21,6 +21,11 @@ public class GeographicalLinesServiceImpl implements IGeographicalLinesService
     @Autowired
     private GeographicalLinesMapper geographicalLinesMapper;
 
+    @Override
+    public List<GeographicalLines> queryByXZQHCode(String code) {
+        return geographicalLinesMapper.queryByXZQHCode(code);
+    }
+
     /**
      * 查询线状标志
      *

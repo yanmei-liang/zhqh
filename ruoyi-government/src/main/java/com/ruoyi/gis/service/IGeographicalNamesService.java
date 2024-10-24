@@ -13,6 +13,8 @@ import com.ruoyi.gis.domain.GeographicalNames;
 public interface IGeographicalNamesService
 {
 
+    List<GeographicalNames> queryByXZQHCode(String code);
+
     /**
      * 查询地名标志
      *
