@@ -2,7 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysNotice;
-import io.lettuce.core.dynamic.annotation.Param;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 通知公告表 数据层
@@ -61,5 +61,5 @@ public interface SysNoticeMapper
 
     List<SysNotice> listByUserId(long userId);
 
-    List<SysNotice> querySysNoticeByUserId(@Param("noticeType")String noticeType, @Param("userId")Long userId );
+    List<SysNotice> querySysNoticeByUserId(@Param("type")String type, @Param("userId")Long userId );
 }
