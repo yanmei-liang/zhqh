@@ -131,17 +131,15 @@ public class SysNoticeController extends BaseController
                 }
             }
         }
-        String noticeType = "1";
         // 2.查询用户未读的系统消息
         startPage();
-        List<SysNotice> sysNoticeList = noticeService.querySysNoticeByUserId(noticeType,userId);//通知公告消息
+        List<SysNotice> sysNoticeList = noticeService.querySysNoticeByUserId("1",userId);//通知公告消息
         TableDataInfo tableDataInfoAnnt = getDataTable(sysNoticeList);
         startPage();
-        noticeType  = "2";
-        List<SysNotice> sysMsgList = noticeService.querySysNoticeByUserId(noticeType,userId);//系统消息
+        List<SysNotice> sysMsgList = noticeService.querySysNoticeByUserId("2",userId);//系统消息
         TableDataInfo tableDataInfoMsg = getDataTable(sysMsgList);
         startPage();
-        List<SysNotice> todealMsgList = noticeService.querySysNoticeByUserId(noticeType, userId);//待办消息
+        List<SysNotice> todealMsgList = noticeService.querySysNoticeByUserId("3", userId);//待办消息
         TableDataInfo tableDataInfoDeal = getDataTable(todealMsgList);
         Map<String,Object> sysMsgMap = new HashMap<String, Object>();
         sysMsgMap.put("sysMsgList", tableDataInfoMsg.getRows());
