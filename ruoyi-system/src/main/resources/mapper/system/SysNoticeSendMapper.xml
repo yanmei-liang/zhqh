@@ -102,7 +102,7 @@
         //todo
     </select>
     <select id="getByUserIdNoticeId" resultType="com.ruoyi.system.domain.SysNoticeSend">
-        select * from sys_notice_send where user_id = #{userId} snd notice_id = #{noticeId}
+        select * from sys_notice_send where user_id = #{userId} and notice_id = #{noticeId}
     </select>
 
 </mapper>

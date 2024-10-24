@@ -98,7 +98,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
     }
 
     @Override
-    public List<SysNotice> querySysNoticeByUserId(Long userId, String msgCategory) {
-        return noticeMapper.querySysNoticeByUserId(userId, msgCategory);
+    public List<SysNotice> querySysNoticeByUserId(String noticeType, Long userId) {
+        return noticeMapper.querySysNoticeByUserId(noticeType, userId);
     }
 }
