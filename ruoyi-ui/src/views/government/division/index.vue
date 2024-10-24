@@ -7,7 +7,7 @@
           <!-- 搜索组 -->
           <el-row class="row">
             <el-col :span="6">
-              <span>区划名称</span>
+              <span class="text-ident">区划名称</span>
               <el-input
                 v-model="formData.administrativeDivisionName"
                 placeholder="请输入内容"
@@ -17,12 +17,13 @@
             </el-col>
 
             <el-col :span="7">
-              <span>行政级别</span>
+              <span class="text-ident">行政级别</span>
               <el-select
                 v-model="formData.administrativeLevel"
-                size="small"
+                size="mini"
                 clearable
                 placeholder="请选择"
+                @change="getList"
               >
                 <el-option
                   v-for="item in optionslist"
@@ -34,13 +35,14 @@
             </el-col>
 
             <el-col :span="7">
-              <span>更新时间</span>
+              <span class="text-ident">更新时间</span>
               <el-date-picker
                 size="small"
                 v-model="formData.updateTime"
                 type="datetime"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 placeholder="选择日期时间"
+                @change="getList"
               ></el-date-picker>
             </el-col>
 
@@ -436,9 +438,17 @@ export default {
     // 行政区划列表
     async getList() {
       const {
+        code,
         data: { list, total }
       } = await listDIVISION(this.formData);
-      this.tableList.data = list;
+      console.log(code, "code");
+      if (code !== 200) {
+        this.tableList.data = [];
+      } else {
+        this.tableList.data = list;
+        this.tableList.dataLength = total;
+      }
+
       // this.tabList.dataLength = total;
       // console.log(list, total, "列表++++++++++++++++++++++");
     },
@@ -467,7 +477,7 @@ export default {
     // 搜索按钮
     handleQuery() {
       this.getList();
-      // this.formData = {};
+      this.formData = {};
     },
     handleSelectionChange(val) {
       this.selectList = val;
@@ -658,5 +668,8 @@ span {
   height: 20px;
   background-color: blue;
   margin: 0 10px;
+}
+.text-ident {
+  margin-right: 5px;
 }
 </style>
