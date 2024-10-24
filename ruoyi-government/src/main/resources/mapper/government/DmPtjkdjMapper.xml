@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.DmPtjkdjMapper">
+
+    <resultMap type="DmPtjkdj" id="DmPtjkdjResult">
+        <result property="ID"    column="ID"    />
+        <result property="URL"    column="URL"    />
+        <result property="requestMethod"    column="REQUEST_METHOD"    />
+        <result property="PARAMETERS"    column="PARAMETERS"    />
+        <result property="expectedResponse"    column="EXPECTED_RESPONSE"    />
+        <result property="syncStatus"    column="SYNC_STATUS"    />
+        <result property="interfaceType"    column="INTERFACE_TYPE"    />
+        <result property="deleteMark"    column="DELETE_MARK"    />
+    </resultMap>
+
+    <sql id="selectDmPtjkdjVo">
+        select ID, URL, REQUEST_METHOD, PARAMETERS, EXPECTED_RESPONSE, SYNC_STATUS, INTERFACE_TYPE, DELETE_MARK from DM_PTJKDJ
+    </sql>
+
+    <select id="selectDmPtjkdjList" parameterType="DmPtjkdj" resultMap="DmPtjkdjResult">
+        <include refid="selectDmPtjkdjVo"/>
+        <where>
+            <if test="ID != null "> and ID = #{ID}</if>
+            <if test="URL != null  and URL != ''"> and URL = #{URL}</if>
+            <if test="requestMethod != null  and requestMethod != ''"> and REQUEST_METHOD = #{requestMethod}</if>
+            <if test="PARAMETERS != null  and PARAMETERS != ''"> and PARAMETERS = #{PARAMETERS}</if>
+            <if test="expectedResponse != null  and expectedResponse != ''"> and EXPECTED_RESPONSE = #{expectedResponse}</if>
+            <if test="syncStatus != null  and syncStatus != ''"> and SYNC_STATUS = #{syncStatus}</if>
+            <if test="interfaceType != null  and interfaceType != ''"> and INTERFACE_TYPE = #{interfaceType}</if>
+            <if test="deleteMark != null "> and DELETE_MARK = #{deleteMark}</if>
+        </where>
+    </select>
+
+    <select id="selectDmPtjkdjByID" parameterType="Integer" resultMap="DmPtjkdjResult">
+        <include refid="selectDmPtjkdjVo"/>
+        where ID = #{ID}
+    </select>
+
+    <insert id="insertDmPtjkdj" parameterType="DmPtjkdj" useGeneratedKeys="true" keyProperty="ID">
+        insert into DM_PTJKDJ
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="URL != null and URL != ''">URL,</if>
+            <if test="requestMethod != null and requestMethod != ''">REQUEST_METHOD,</if>
+            <if test="PARAMETERS != null">PARAMETERS,</if>
+            <if test="expectedResponse != null">EXPECTED_RESPONSE,</if>
+            <if test="syncStatus != null and syncStatus != ''">SYNC_STATUS,</if>
+            <if test="interfaceType != null">INTERFACE_TYPE,</if>
+            <if test="deleteMark != null">DELETE_MARK,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="URL != null and URL != ''">#{URL},</if>
+            <if test="requestMethod != null and requestMethod != ''">#{requestMethod},</if>
+            <if test="PARAMETERS != null">#{PARAMETERS},</if>
+            <if test="expectedResponse != null">#{expectedResponse},</if>
+            <if test="syncStatus != null and syncStatus != ''">#{syncStatus},</if>
+            <if test="interfaceType != null">#{interfaceType},</if>
+            <if test="deleteMark != null">#{deleteMark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmPtjkdj" parameterType="DmPtjkdj">
+        update DM_PTJKDJ
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="URL != null and URL != ''">URL = #{URL},</if>
+            <if test="requestMethod != null and requestMethod != ''">REQUEST_METHOD = #{requestMethod},</if>
+            <if test="PARAMETERS != null">PARAMETERS = #{PARAMETERS},</if>
+            <if test="expectedResponse != null">EXPECTED_RESPONSE = #{expectedResponse},</if>
+            <if test="syncStatus != null and syncStatus != ''">SYNC_STATUS = #{syncStatus},</if>
+            <if test="interfaceType != null">INTERFACE_TYPE = #{interfaceType},</if>
+            <if test="deleteMark != null">DELETE_MARK = #{deleteMark},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteDmPtjkdjByID" parameterType="Integer">
+        delete from DM_PTJKDJ where ID = #{ID}
+    </delete>
+
+    <delete id="deleteDmPtjkdjByIDs" parameterType="String">
+        delete from DM_PTJKDJ where ID in
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+</mapper>

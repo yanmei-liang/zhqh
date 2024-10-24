@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.government.mapper.DmTsjlMapper">
+
+    <resultMap type="DmTsjl" id="DmTsjlResult">
+        <result property="tsjlId"    column="TSJL_ID"    />
+        <result property="tsName"    column="TS_NAME"    />
+        <result property="tsType"    column="TS_TYPE"    />
+        <result property="tsRegion"    column="TS_REGION"    />
+        <result property="tsStreet"    column="TS_STREET"    />
+        <result property="initiatingDepartment"    column="INITIATING_DEPARTMENT"    />
+        <result property="tsDepartment"    column="TS_DEPARTMENT"    />
+        <result property="pushTime"    column="PUSH_TIME"    />
+        <result property="reviewStatus"    column="REVIEW_STATUS"    />
+    </resultMap>
+
+    <sql id="selectDmTsjlVo">
+        select TSJL_ID, TS_NAME, TS_TYPE, TS_REGION, TS_STREET, INITIATING_DEPARTMENT, TS_DEPARTMENT, PUSH_TIME, REVIEW_STATUS from DM_TSJL
+    </sql>
+
+    <select id="selectDmTsjlList" parameterType="DmTsjl" resultMap="DmTsjlResult">
+        <include refid="selectDmTsjlVo"/>
+        <where>
+            <if test="tsjlId != null "> and TSJL_ID = #{tsjlId}</if>
+            <if test="tsName != null  and tsName != ''"> and TS_NAME like concat('%', #{tsName}, '%')</if>
+            <if test="tsType != null  and tsType != ''"> and TS_TYPE = #{tsType}</if>
+            <if test="tsRegion != null  and tsRegion != ''"> and TS_REGION = #{tsRegion}</if>
+            <if test="tsStreet != null  and tsStreet != ''"> and TS_STREET = #{tsStreet}</if>
+            <if test="initiatingDepartment != null  and initiatingDepartment != ''"> and INITIATING_DEPARTMENT = #{initiatingDepartment}</if>
+            <if test="tsDepartment != null  and tsDepartment != ''"> and TS_DEPARTMENT = #{tsDepartment}</if>
+            <if test="pushTime != null "> and PUSH_TIME = #{pushTime}</if>
+            <if test="reviewStatus != null  and reviewStatus != ''"> and REVIEW_STATUS = #{reviewStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectDmTsjlByTsjlId" parameterType="Integer" resultMap="DmTsjlResult">
+        <include refid="selectDmTsjlVo"/>
+        where TSJL_ID = #{tsjlId}
+    </select>
+
+    <insert id="insertDmTsjl" parameterType="DmTsjl">
+        insert into DM_TSJL
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tsjlId != null">TSJL_ID,</if>
+            <if test="tsName != null">TS_NAME,</if>
+            <if test="tsType != null">TS_TYPE,</if>
+            <if test="tsRegion != null">TS_REGION,</if>
+            <if test="tsStreet != null">TS_STREET,</if>
+            <if test="initiatingDepartment != null">INITIATING_DEPARTMENT,</if>
+            <if test="tsDepartment != null">TS_DEPARTMENT,</if>
+            <if test="pushTime != null">PUSH_TIME,</if>
+            <if test="reviewStatus != null">REVIEW_STATUS,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tsjlId != null">#{tsjlId},</if>
+            <if test="tsName != null">#{tsName},</if>
+            <if test="tsType != null">#{tsType},</if>
+            <if test="tsRegion != null">#{tsRegion},</if>
+            <if test="tsStreet != null">#{tsStreet},</if>
+            <if test="initiatingDepartment != null">#{initiatingDepartment},</if>
+            <if test="tsDepartment != null">#{tsDepartment},</if>
+            <if test="pushTime != null">#{pushTime},</if>
+            <if test="reviewStatus != null">#{reviewStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmTsjl" parameterType="DmTsjl">
+        update DM_TSJL
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tsName != null">TS_NAME = #{tsName},</if>
+            <if test="tsType != null">TS_TYPE = #{tsType},</if>
+            <if test="tsRegion != null">TS_REGION = #{tsRegion},</if>
+            <if test="tsStreet != null">TS_STREET = #{tsStreet},</if>
+            <if test="initiatingDepartment != null">INITIATING_DEPARTMENT = #{initiatingDepartment},</if>
+            <if test="tsDepartment != null">TS_DEPARTMENT = #{tsDepartment},</if>
+            <if test="pushTime != null">PUSH_TIME = #{pushTime},</if>
+            <if test="reviewStatus != null">REVIEW_STATUS = #{reviewStatus},</if>
+        </trim>
+        where TSJL_ID = #{tsjlId}
+    </update>
+
+    <delete id="deleteDmTsjlByTsjlId" parameterType="Integer">
+        delete from DM_TSJL where TSJL_ID = #{tsjlId}
+    </delete>
+
+    <delete id="deleteDmTsjlByTsjlIds" parameterType="String">
+        delete from DM_TSJL where TSJL_ID in
+        <foreach item="tsjlId" collection="array" open="(" separator="," close=")">
+            #{tsjlId}
+        </foreach>
+    </delete>
+</mapper>
