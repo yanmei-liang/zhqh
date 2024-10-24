@@ -62,7 +62,11 @@
           <el-divider></el-divider>
           <!-- 表格 -->
           <div>
-            <Table :tableData="tableList" @selection-change="handleSelectionChange">
+            <Table
+              :tableData="tableList"
+              @selection-change="handleSelectionChange"
+              @rowClick="handRowClick"
+            >
               <template #selection>
                 <el-table-column type="selection" width="55"></el-table-column>
               </template>
@@ -256,8 +260,8 @@ import {
   mapStatistics,
   levelTypes,
   delDIVISION,
+  selArea,
   selLevel,
-  aelArea,
   optionsList,
   addDivision
 } from "@/api/government/DIVISION";
@@ -448,7 +452,6 @@ export default {
         this.tableList.data = list;
         this.tableList.dataLength = total;
       }
-
       // this.tabList.dataLength = total;
       // console.log(list, total, "列表++++++++++++++++++++++");
     },
@@ -465,6 +468,12 @@ export default {
     // // 删除行政区域
     // async delDIVISION() {},
     // 筛选重置按钮
+    // 图标联动   统计面积及统计级别
+    async handRowClick(row) {
+      const res = await selArea(row.administrativeDivisionCode);
+      const res1 = await selLevel(row.administrativeDivisionCode);
+      console.log(res.data, res1.data, "被点击列表");
+    },
     reset() {
       this.formData = {
         administrativeDivisionName: null, //行政区划
@@ -530,6 +539,8 @@ export default {
             type: "info",
             message: "已取消删除"
           });
+          this.ids = [];
+          this.selectList = [];
         });
       this.getList();
     },

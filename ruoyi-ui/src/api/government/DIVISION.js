@@ -25,27 +25,19 @@ export function levelTypes(data) {
         data
     })
 }
-
+// 导出行政区划列表  /government/DIVISIONS/export
+export function listExport(data) {
+    return request({
+        url: '/government/DIVISIONS/export',
+        method: 'post',
+        data
+    })
+}
 // 删除行政区划
 export function delDIVISION(divisionID) {
     return request({
         url: '/government/DIVISIONS/remove/' + divisionID,
         method: 'delete'
-    })
-}
-// 统计级别  
-export function selLevel(administrativeDivisionCode) {
-    return request({
-        url: '/government/DIVISIONS/selAdministrativeLevel/' + { administrativeDivisionCode },
-        method: 'get'
-    })
-}
-
-// 统计面积
-export function selArea(administrativeDivisionCode) {
-    return request({
-        url: '/government/DIVISIONS/selAreaRadius/' + { administrativeDivisionCode },
-        method: 'get'
     })
 }
 
@@ -57,11 +49,27 @@ export function optionsList() {
     })
 }
 
-// 新增行政级别
+// 新增行政区划
 export function addDivision(data) {
     return request({
         url: "/government/DIVISIONS/addAdministrativeDivisions",
         method: "post",
         data
+    })
+}
+
+// 统计级别  
+export function selLevel(administrativeDivisionCode) {
+    return request({
+        url: '/government/DIVISIONS/selAdministrativeLevel/' + administrativeDivisionCode,
+        method: 'get'
+    })
+}
+
+// 统计面积
+export function selArea(administrativeDivisionCode) {
+    return request({
+        url: '/government/DIVISIONS/selAreaRadius/' + administrativeDivisionCode,
+        method: 'get'
     })
 }
