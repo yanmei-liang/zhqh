@@ -11,8 +11,7 @@
       icon="el-icon-download"
       size="mini"
       @click="handleExport"
-      >导出</el-button
-    >
+    >导出</el-button>
   </div>
 </template>
 <script>
@@ -21,109 +20,101 @@ export default {
   props: ["data"],
   data() {
     return {
-      arrYData:[
-              120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70, 110, 130,
-              120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70, 110, 130,
-              120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70, 110, 130,
-              120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70, 110, 130,
-              120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70, 110, 130,
-              120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70, 110, 130,
-            ],
-arrXData:[
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-          ]
+      arrYData: [
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130,
+        120,
+        200,
+        150,
+        80,
+        70,
+        110,
+        130
+      ],
+      arrXData: ["乡", "镇", "街道"]
     };
   },
-    created() {
+  created() {
     this.$nextTick(() => {
       this.SetChart("main");
     });
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     handleExport() {},
     SetChart(value) {
@@ -144,18 +135,18 @@ arrXData:[
       var option;
       option = {
         tooltip: {
-          trigger: "axis",
+          trigger: "axis"
         },
         xAxis: {
           type: "category",
-          data:this.arrXData ,
+          data: this.arrXData,
           axisLabel: {
             interval: 0,
-            rotate: -45,
-          },
+            rotate: -45
+          }
         },
         yAxis: {
-          type: "value",
+          type: "value"
         },
         dataZoom: [
           {
@@ -179,7 +170,7 @@ arrXData:[
             startValue: 0, // 从头开始。
             endValue: 20, // 最多六个
             minValueSpan: 20, // 放大到最少几个
-            maxValueSpan: 10, //  缩小到最多几个
+            maxValueSpan: 10 //  缩小到最多几个
           },
           {
             type: "inside", // 支持内部鼠标滚动平移
@@ -187,22 +178,22 @@ arrXData:[
             end: nameNum,
             zoomOnMouseWheel: false, // 关闭滚轮缩放
             moveOnMouseWheel: true, // 开启滚轮平移
-            moveOnMouseMove: true, // 鼠标移动能触发数据窗口平移
-          },
+            moveOnMouseMove: true // 鼠标移动能触发数据窗口平移
+          }
         ],
         series: [
           {
             barWidth: 10,
             barCategoryGap: 10,
-            data:this.arrYData ,
+            data: this.arrYData,
             type: "bar",
-            color: "#409EFF",
-          },
-        ],
+            color: "#409EFF"
+          }
+        ]
       };
       myChart.setOption(option);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

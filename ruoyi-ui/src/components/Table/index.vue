@@ -42,7 +42,7 @@ export default {
       this.$emit("rowClick", row);
     },
     handSelect(row) {
-      console.log(row);
+      // console.log(row);
       this.$emit("selection-change", row);
     }
   }

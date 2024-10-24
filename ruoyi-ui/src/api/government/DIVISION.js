@@ -33,21 +33,6 @@ export function delDIVISION(divisionID) {
         method: 'delete'
     })
 }
-// 统计级别  
-export function selLevel(administrativeDivisionCode) {
-    return request({
-        url: '/government/DIVISIONS/selAdministrativeLevel/' + { administrativeDivisionCode },
-        method: 'get'
-    })
-}
-
-// 统计面积
-export function selArea(administrativeDivisionCode) {
-    return request({
-        url: '/government/DIVISIONS/selAreaRadius/' + { administrativeDivisionCode },
-        method: 'get'
-    })
-}
 
 // 行政级别下拉框  
 export function optionsList() {
@@ -63,5 +48,21 @@ export function addDivision(data) {
         url: "/government/DIVISIONS/addAdministrativeDivisions",
         method: "post",
         data
+    })
+}
+
+// 统计级别  
+export function selLevel(administrativeDivisionCode) {
+    return request({
+        url: '/government/DIVISIONS/selAdministrativeLevel/' + administrativeDivisionCode,
+        method: 'get'
+    })
+}
+
+// 统计面积
+export function selArea(administrativeDivisionCode) {
+    return request({
+        url: '/government/DIVISIONS/selAreaRadius/' + administrativeDivisionCode,
+        method: 'get'
     })
 }
