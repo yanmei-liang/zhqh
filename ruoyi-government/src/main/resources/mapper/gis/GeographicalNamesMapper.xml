@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="queryByXZQHCode" resultType="com.ruoyi.gis.domain.GeographicalNames">
         <include refid="selectGeographicalNamesVo"/>
-        WHERE code
+        WHERE is_deleted = 0 and code
         IN (
         SELECT GEOM_CODE FROM GEO_GRAPHICAL_REF WHERE GRAP_CODE LIKE concat(#{code}, '%')
         )
